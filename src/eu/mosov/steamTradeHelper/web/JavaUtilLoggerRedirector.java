@@ -9,6 +9,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class JavaUtilLoggerRedirector implements ServletContextListener {
+	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		// remove default handlers
 		Logger rootLogger = LogManager.getLogManager().getLogger("");
