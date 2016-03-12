@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="ant-2" module="pojo"/>
+
+    <configurations>
+        <conf name="default" description="for runtime"/>
+        <conf name="test"/>
+    </configurations>
+
+    <dependencies defaultconf="default->default">
+
+        <dependency org="org.eclipse.jetty" name="jetty-server" rev="9.3+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-webapp" rev="9.3+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-plus" rev="9.3+"/>
+
+        <dependency org="junit" name="junit" rev="4.12+" conf="test->default"/>
+        <dependency org="org.mockito" name="mockito-all" rev="1.10+" conf="test->default"/>
+
+    </dependencies>
+</ivy-module>
