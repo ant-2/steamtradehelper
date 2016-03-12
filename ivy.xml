@@ -21,5 +21,12 @@
         <dependency org="com.sun.jersey" name="jersey-json" rev="1.19+"/>
         <dependency org="com.sun.jersey" name="jersey-servlet" rev="1.19+"/>
 
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7+"/>
+        <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.7+"/>
+        <dependency org="org.slf4j" name="jul-to-slf4j" rev="1.7+"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.5"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.5"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-slf4j-impl" rev="2.5"/>
+
     </dependencies>
 </ivy-module>

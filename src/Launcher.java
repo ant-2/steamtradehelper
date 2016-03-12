@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 
 public class Launcher {
 	public static void main(String[] args) throws Exception {
-//		log4j2Config("config\\log4j2.xml");
+		log4j2Config("config\\log4j2.xml");
 
 		Server server = new Server();
 
