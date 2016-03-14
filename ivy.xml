@@ -12,14 +12,16 @@
         <dependency org="org.eclipse.jetty" name="jetty-server" rev="9.3+"/>
         <dependency org="org.eclipse.jetty" name="jetty-webapp" rev="9.3+"/>
         <dependency org="org.eclipse.jetty" name="jetty-plus" rev="9.3+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-annotations" rev="9.3+"/>
 
         <dependency org="junit" name="junit" rev="4.12+" conf="test->default"/>
         <dependency org="org.mockito" name="mockito-all" rev="1.10+" conf="test->default"/>
 
-        <dependency org="com.sun.jersey" name="jersey-core" rev="1.19+"/>
-        <dependency org="com.sun.jersey" name="jersey-server" rev="1.19+"/>
-        <dependency org="com.sun.jersey" name="jersey-json" rev="1.19+"/>
-        <dependency org="com.sun.jersey" name="jersey-servlet" rev="1.19+"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-server" rev="2.22+"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-common" rev="2.22+"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-client" rev="2.22+"/>
+        <dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet" rev="2.22+"/>
+        <!--<dependency org="org.glassfish.jersey.containers" name="jersey-container-jetty-servlet" rev="2.22+"/>-->
 
         <dependency org="org.slf4j" name="slf4j-api" rev="1.7+"/>
         <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.7+"/>

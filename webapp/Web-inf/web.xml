@@ -16,14 +16,10 @@
 
     <servlet>
         <servlet-name>jersey</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>eu.mosov.steamTradeHelper</param-value>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>JerseyApplication</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -32,5 +28,18 @@
         <servlet-name>jersey</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
+
+    <!--
+        <servlet>
+            <servlet-name>javax.ws.rs.core.Application</servlet-name>
+            &lt;!&ndash;No need to <servlet-class>&ndash;&gt;
+            &lt;!&ndash;Jersey will implicitly add an instance of core Jersey Application sub class as a servlet class&ndash;&gt;
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>javax.ws.rs.core.Application</servlet-name>
+            <url-pattern>/rest/*</url-pattern>
+        </servlet-mapping>
+    -->
 
 </web-app>
