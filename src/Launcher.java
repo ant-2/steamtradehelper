@@ -1,4 +1,3 @@
-import eu.mosov.steamTradeHelper.client.RequestSender;
 import org.eclipse.jetty.server.NetworkTrafficServerConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -24,9 +23,6 @@ public class Launcher {
 
 		server.setHandler(context);
 		server.start();
-
-		RequestSender sender = new RequestSender();
-		sender.sendRequest();
 	}
 
 	static void log4j2Config(String path) throws URISyntaxException {
