@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Steam trade helper</title>
+    <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+
+<body>
+<div id="interface">
+    <form>
+        <input type="radio" id="currencies"><label for="currencies">currencies</label>
+        <input type="radio" id="prices"><label for="prices">prices</label>
+    </form>
+    <button id="btnSend">Get currencies</button>
+</div><br>
+<div id="view">
+    Response text
+</div>
+
+<script>
+    var baseUrl = "rest/data/";
+    var currencyUrl = baseUrl+"curr";
+    var view = $("#view");
+
+    function renderResponse(data) {
+        view.text(data);
+    }
+
+    $("#btnSend").click(function() {
+        var url = currencyUrl;
+        console.log("currencyUrl: "+currencyUrl);
+        var xhr  = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status != 200) {
+                    renderResponse(xhr.status + ": " + xhr.statusText);
+                } else {
+                    renderResponse(xhr.responseText);
+                }
+            }
+        };
+        xhr.send();
+    });
+</script>
+</body>
+</html>
