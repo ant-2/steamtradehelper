@@ -1,23 +1,23 @@
 package eu.mosov.steamTradeHelper.rest;
 
 import eu.mosov.steamTradeHelper.model.PricesRepository;
-import eu.mosov.steamTradeHelper.model.WebPricesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 @Path("data") @Produces("text/json")
-public class BackpackResource {
-	PricesRepository repository = new WebPricesRepository();
+public class BackpackResource extends SpringAwareResource {
+	@Autowired PricesRepository pricesRepository;
 
 	@GET @Path("curr")
 	public String getCurrency() {
-		return repository.getCurrencies();
+		return pricesRepository.getCurrencies();
 	}
 
 	@GET @Path("prices")
 	public String getPrices() {
-		return repository.getPrices();
+		return pricesRepository.getPrices();
 	}
 }
