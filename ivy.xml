@@ -30,5 +30,9 @@
         <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.5"/>
         <dependency org="org.apache.logging.log4j" name="log4j-slf4j-impl" rev="2.5"/>
 
+        <dependency org="org.springframework" name="spring-beans" rev="4.2+"/>
+        <dependency org="org.springframework" name="spring-web" rev="4.2+"/>
+        <dependency org="org.springframework" name="spring-orm" rev="4.2+"/>
+        <dependency org="org.springframework" name="spring-jdbc" rev="4.2+"/>
     </dependencies>
 </ivy-module>

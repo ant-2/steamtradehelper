@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/spring.xml</param-value>
+    </context-param>
+
+    <!--Spring bootstrap listener-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <listener>
         <listener-class>eu.mosov.steamTradeHelper.web.JavaUtilLoggerRedirector</listener-class>
     </listener>
@@ -28,18 +37,5 @@
         <servlet-name>jersey</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
-
-    <!--
-        <servlet>
-            <servlet-name>javax.ws.rs.core.Application</servlet-name>
-            &lt;!&ndash;No need to <servlet-class>&ndash;&gt;
-            &lt;!&ndash;Jersey will implicitly add an instance of core Jersey Application sub class as a servlet class&ndash;&gt;
-        </servlet>
-
-        <servlet-mapping>
-            <servlet-name>javax.ws.rs.core.Application</servlet-name>
-            <url-pattern>/rest/*</url-pattern>
-        </servlet-mapping>
-    -->
 
 </web-app>
