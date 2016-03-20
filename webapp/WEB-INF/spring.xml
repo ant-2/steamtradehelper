@@ -10,5 +10,5 @@
     <context:annotation-config/>
     <context:component-scan base-package="eu.mosov.steamTradeHelper"/>
 
-    <bean id="pricesRepository" class="eu.mosov.steamTradeHelper.model.WebPricesRepository" />
+    <bean id="pricesRepository" class="eu.mosov.steamTradeHelper.model.InMemoryDataRepository" />
 </beans>
