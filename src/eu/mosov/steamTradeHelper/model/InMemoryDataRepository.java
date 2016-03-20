@@ -1,10 +1,12 @@
 package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.client.BackpackApiClient;
+import org.springframework.stereotype.Repository;
 
 import javax.json.JsonObject;
 import java.util.Date;
 
+@Repository
 public class InMemoryDataRepository implements DataRepository {
 
 	BackpackApiClient client = new BackpackApiClient();
