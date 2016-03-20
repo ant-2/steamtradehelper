@@ -1,23 +1,27 @@
 package eu.mosov.steamTradeHelper.rest;
 
-import eu.mosov.steamTradeHelper.model.PricesRepository;
+import eu.mosov.steamTradeHelper.model.BackpackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-@Path("data") @Produces("text/json")
+/**
+ * Resource to access backpack.tf developer API
+ * */
+@Path("data") @Produces("application/json")
 public class BackpackResource extends SpringAwareResource {
-	@Autowired PricesRepository pricesRepository;
+	@Autowired BackpackRepository backpackRepository;
 
 	@GET @Path("curr")
-	public String getCurrency() {
-		return pricesRepository.getCurrencies();
+	public JsonObject getCurrency() {
+		return backpackRepository.getCurrencies();
 	}
 
 	@GET @Path("prices")
-	public String getPrices() {
-		return pricesRepository.getPrices();
+	public JsonObject getPrices() {
+		return backpackRepository.getPrices();
 	}
 }
