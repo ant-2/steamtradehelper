@@ -21,7 +21,7 @@
         <dependency org="org.glassfish.jersey.core" name="jersey-common" rev="2.22+"/>
         <dependency org="org.glassfish.jersey.core" name="jersey-client" rev="2.22+"/>
         <dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet" rev="2.22+"/>
-        <!--<dependency org="org.glassfish.jersey.containers" name="jersey-container-jetty-servlet" rev="2.22+"/>-->
+        <dependency org="org.glassfish.jersey.media" name="jersey-media-json-processing" rev="2.22.2"/>
 
         <dependency org="org.slf4j" name="slf4j-api" rev="1.7+"/>
         <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.7+"/>
