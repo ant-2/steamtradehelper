@@ -13,16 +13,15 @@ import javax.ws.rs.Produces;
  * */
 @Path("data") @Produces("application/json")
 public class RawDataResource extends SpringAwareResource {
-	@Autowired
-	DataRepository backpackRepository;
+	@Autowired DataRepository dataRepository;
 
 	@GET @Path("curr")
 	public JsonObject getCurrency() {
-		return backpackRepository.getCurrencies();
+		return dataRepository.getCurrencies();
 	}
 
 	@GET @Path("prices")
 	public JsonObject getPrices() {
-		return backpackRepository.getPrices();
+		return dataRepository.getPrices();
 	}
 }
