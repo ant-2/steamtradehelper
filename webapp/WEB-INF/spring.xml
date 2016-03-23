@@ -10,8 +10,14 @@
     <context:annotation-config/>
     <context:component-scan base-package="eu.mosov.steamTradeHelper"/>
 
-    <!--Datasource from jetty's jndi-->
+    <!--datasource from jetty's jndi-->
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="jdbc/ds"/>
+    </bean>
+
+    <!--production changeSet-->
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="file:config/db/liquibase.xml"/>
     </bean>
 </beans>
