@@ -9,4 +9,9 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="eu.mosov.steamTradeHelper"/>
+
+    <!--Datasource from jetty's jndi-->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="jdbc/ds"/>
+    </bean>
 </beans>

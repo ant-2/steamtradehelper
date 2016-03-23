@@ -35,5 +35,8 @@
         <dependency org="org.springframework" name="spring-web" rev="4.2+"/>
         <dependency org="org.springframework" name="spring-orm" rev="4.2+"/>
         <dependency org="org.springframework" name="spring-jdbc" rev="4.2+"/>
+
+        <dependency org="com.h2database" name="h2" rev="1.4+"/>
+        <dependency org="org.apache.commons" name="commons-dbcp2" rev="2.1+"/>
     </dependencies>
 </ivy-module>
