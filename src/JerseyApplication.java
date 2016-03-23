@@ -1,5 +1,7 @@
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.json.stream.JsonGenerator;
 import javax.ws.rs.ApplicationPath;
 
 /**
@@ -10,5 +12,7 @@ public class JerseyApplication extends ResourceConfig {
 	static String basePackage = "eu.mosov.steamTradeHelper";
 	public JerseyApplication() {
 		packages(basePackage);
+		register(JacksonFeature.class)
+			 .property(JsonGenerator.PRETTY_PRINTING, true);	//todo JSON-P works only for returned JsonObjects, not for Entities
 	}
 }
