@@ -19,14 +19,14 @@ public class ParserImplIntegrationTest {
 
 	@Test
 	public void allCurrenciesParsed() {
-		JsonObject curr = repo.getCurrencies();
+		JsonObject curr = repo.getCurrenciesAsJson();
 		List<Item> list = parser.parseCurrencies(curr);
 		assertThat(list.size(), is(4));
 	}
 
 	@Test
 	public void parseAllPrices() {
-		JsonObject prices = repo.getPrices();
+		JsonObject prices = repo.getPricesAsJson();
 		List<Item> list = parser.parsePrices(prices);
 		assertTrue(list.size() > 10);
 	}
