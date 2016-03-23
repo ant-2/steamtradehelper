@@ -9,23 +9,21 @@ import java.util.Date;
 @Repository
 public class InMemoryDataRepository implements DataRepository {
 
-	BackpackApiClient client;
-	Date lastUpdateTime;
+	BackpackApiClient client = new BackpackApiClient();
+	Date lastTimeUpdated;
 	int updateInterval = 60 * 60 * 6 * 1000;	// updates data each 6 hours
 	JsonObject currencies;
 	JsonObject prices;
-	int updateCount;
 
 	public InMemoryDataRepository() {
-		client = new BackpackApiClient();
-		lastUpdateTime = new Date();
+		lastTimeUpdated = new Date();
 	}
 
 	@Override
 	public JsonObject getCurrencies() {
 		if (currencies == null || isTimeToUpdate()) {
 			currencies = client.getCurrencies();
-			setLastTimeUpdated();
+			setLastTimeUdated();
 		}
 		return currencies;
 	}
@@ -34,14 +32,9 @@ public class InMemoryDataRepository implements DataRepository {
 	public JsonObject getPrices() {
 		if (prices == null || isTimeToUpdate()) {
 			prices = client.getPrices();
-			setLastTimeUpdated();
+			setLastTimeUdated();
 		}
 		return prices;
-	}
-
-	@Override
-	public void dropRefreshTimer() {
-		lastUpdateTime.setTime(lastUpdateTime.getTime() - (updateInterval * 2));
 	}
 
 	/**
@@ -49,12 +42,11 @@ public class InMemoryDataRepository implements DataRepository {
 	 * @return true if it is
 	 * */
 	boolean isTimeToUpdate() {
-		return System.currentTimeMillis() - lastUpdateTime.getTime() > (updateInterval);
+		return System.currentTimeMillis() - lastTimeUpdated.getTime() > (updateInterval);
 	}
 
-	Date setLastTimeUpdated() {
-		updateCount++;
-		lastUpdateTime.setTime(System.currentTimeMillis());
-		return lastUpdateTime;
+	Date setLastTimeUdated() {
+		lastTimeUpdated.setTime(System.currentTimeMillis());
+		return lastTimeUpdated;
 	}
 }

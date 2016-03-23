@@ -9,6 +9,6 @@ public interface DataRepository {
 	JsonObject getCurrencies();
 
 	JsonObject getPrices();
-	
+
 	void dropRefreshTimer();
 }
