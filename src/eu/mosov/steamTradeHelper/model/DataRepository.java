@@ -10,5 +10,5 @@ public interface DataRepository {
 
 	JsonObject getPrices();
 
-	void dropRefreshTimer();
+	DataRepository dropRefreshTimer();
 }

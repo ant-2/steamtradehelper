@@ -14,6 +14,7 @@ public class InMemoryDataRepository implements DataRepository {
 	int updateInterval = 60 * 60 * 6 * 1000;	// updates data each 6 hours
 	JsonObject currencies;
 	JsonObject prices;
+	int updateCount;
 
 	public InMemoryDataRepository() {
 		lastTimeUpdated = new Date();
@@ -23,7 +24,7 @@ public class InMemoryDataRepository implements DataRepository {
 	public JsonObject getCurrencies() {
 		if (currencies == null || isTimeToUpdate()) {
 			currencies = client.getCurrencies();
-			setLastTimeUdated();
+			setLastTimeUpdated();
 		}
 		return currencies;
 	}
@@ -32,9 +33,15 @@ public class InMemoryDataRepository implements DataRepository {
 	public JsonObject getPrices() {
 		if (prices == null || isTimeToUpdate()) {
 			prices = client.getPrices();
-			setLastTimeUdated();
+			setLastTimeUpdated();
 		}
 		return prices;
+	}
+
+	@Override
+	public DataRepository dropRefreshTimer() {
+		lastTimeUpdated.setTime(lastTimeUpdated.getTime() - updateInterval * 2);
+		return this;
 	}
 
 	/**
@@ -45,7 +52,8 @@ public class InMemoryDataRepository implements DataRepository {
 		return System.currentTimeMillis() - lastTimeUpdated.getTime() > (updateInterval);
 	}
 
-	Date setLastTimeUdated() {
+	Date setLastTimeUpdated() {
+		updateCount++;
 		lastTimeUpdated.setTime(System.currentTimeMillis());
 		return lastTimeUpdated;
 	}
