@@ -2,7 +2,7 @@ package eu.mosov.steamTradeHelper.client;
 
 import eu.mosov.steamTradeHelper.entity.Item;
 import eu.mosov.steamTradeHelper.entity.parser.Parser;
-import org.springframework.beans.factory.annotation.Autowired;
+import eu.mosov.steamTradeHelper.entity.parser.ParserImpl;
 import org.springframework.stereotype.Repository;
 
 import javax.json.JsonObject;
@@ -19,10 +19,11 @@ public class BackpackApiClient {
 	String PRICES = "http://backpack.tf/api/IGetPrices/v4/?key=56e4698ddea9e91a45b9de12";
 
 	Client client;
-	@Autowired Parser<Item> parser;
+	Parser<Item> parser;
 
 	public BackpackApiClient() {
 		client = ClientBuilder.newClient();
+		parser = new ParserImpl<>();
 	}
 
 	public JsonObject getCurrenciesAsJson() {

@@ -2,7 +2,6 @@ package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.client.BackpackApiClient;
 import eu.mosov.steamTradeHelper.entity.Item;
-import eu.mosov.steamTradeHelper.entity.parser.ParserImpl;
 import org.hibernate.dialect.H2Dialect;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,8 +31,8 @@ public class HibernateDataRepositoryIntegrationTest {
 		sessionFactory.afterPropertiesSet();
 
 		repo.hibernate = new HibernateTemplate(sessionFactory.getObject());
-		repo.parser = new ParserImpl<>();
 		repo.client = new BackpackApiClient();
+
 	}
 
 	@Test

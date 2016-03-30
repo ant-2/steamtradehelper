@@ -24,7 +24,7 @@ public class HibernateDataRepository implements DataRepository {
 		return hibernate.loadAll(Item.class);
 	}
 
-	public void updateBase() {
+	void updateBase() {
 		if (getCurrencies().size() == 0) {
 			insertData();
 		} else {
