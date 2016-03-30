@@ -1,6 +1,7 @@
 package eu.mosov.steamTradeHelper.entity.parser;
 
 import eu.mosov.steamTradeHelper.entity.Item;
+import org.springframework.stereotype.Component;
 
 import javax.json.JsonObject;
 import javax.json.JsonValue;
@@ -8,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ParserImpl implements Parser<Item> {
+@Component
+public class ParserImpl<T extends Item> implements Parser<Item> {
 
 	@Override
 	public List<Item> parseCurrencies(JsonObject data) {
@@ -30,3 +32,4 @@ public class ParserImpl implements Parser<Item> {
 		return list;
 	}
 }
+
