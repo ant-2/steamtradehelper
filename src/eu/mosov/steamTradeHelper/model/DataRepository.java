@@ -2,7 +2,6 @@ package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.entity.Item;
 
-import javax.json.JsonObject;
 import java.util.List;
 
 /**
@@ -13,10 +12,4 @@ public interface DataRepository {
 	List<Item> getCurrencies();
 
 	List<Item> getPrices();
-
-	JsonObject getCurrenciesAsJson();
-
-	JsonObject getPricesAsJson();
-
-	DataRepository dropRefreshTimer();
 }
