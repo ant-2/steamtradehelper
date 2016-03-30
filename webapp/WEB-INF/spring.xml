@@ -26,7 +26,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <value>eu.mosov.pojo.model.Product</value>
+                <value>eu.mosov.steamTradeHelper.entity.Item</value>
             </list>
         </property>
     </bean>
