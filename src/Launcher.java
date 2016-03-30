@@ -2,8 +2,6 @@ import org.eclipse.jetty.server.NetworkTrafficServerConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import java.net.URISyntaxException;
-
 public class Launcher {
 	public static void main(String[] args) throws Exception {
 		log4j2Config("config\\log4j2.xml");
@@ -25,7 +23,7 @@ public class Launcher {
 		server.start();
 	}
 
-	static void log4j2Config(String path) throws URISyntaxException {
+	static void log4j2Config(String path) {
 		System.setProperty("log4j.configurationFile", path);
 	}
 }
