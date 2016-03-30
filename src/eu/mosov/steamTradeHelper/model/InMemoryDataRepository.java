@@ -4,45 +4,45 @@ import eu.mosov.steamTradeHelper.client.BackpackApiClient;
 import eu.mosov.steamTradeHelper.entity.Item;
 import eu.mosov.steamTradeHelper.entity.parser.Parser;
 import eu.mosov.steamTradeHelper.entity.parser.ParserImpl;
-import org.springframework.stereotype.Repository;
 
 import javax.json.JsonObject;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public class InMemoryDataRepository implements DataRepository {
 	Parser<Item> parser;
 	BackpackApiClient client;
 	Date lastTimeUpdated;
-	int updateInterval = 60 * 60 * 6 * 1000;	// updates data each 6 hours
+	int updateInterval = 1000 * 60 * 60 * 6;	// updates data each 6 hours
 	JsonObject currencies;
+	List<Item> listCurr;
 	JsonObject prices;
-	int updateCount;
+	List<Item> listPrices;
 
 	public InMemoryDataRepository() {
 		client = new BackpackApiClient();
 		lastTimeUpdated = new Date();
-		parser = new ParserImpl();
+		parser = new ParserImpl<>();
 	}
 
 	@Override
 	public List<Item> getCurrencies() {
-		if (currencies == null) {
-			getCurrenciesAsJson();
+		if (listCurr == null || isTimeToUpdate()) {
+			listCurr = parser.parseCurrencies(client.getCurrencies());
+			setLastTimeUpdated();
 		}
-		return parser.parseCurrencies(this.currencies);
+		return listCurr;
 	}
 
 	@Override
 	public List<Item> getPrices() {
-		if (prices == null) {
-			getPricesAsJson();
+		if (listPrices == null || isTimeToUpdate()) {
+			listPrices = parser.parsePrices(client.getPrices());
+			setLastTimeUpdated();
 		}
-		return parser.parsePrices(this.prices);
+		return listPrices;
 	}
 
-	@Override
 	public JsonObject getCurrenciesAsJson() {
 		if (currencies == null || isTimeToUpdate()) {
 			currencies = client.getCurrencies();
@@ -51,7 +51,6 @@ public class InMemoryDataRepository implements DataRepository {
 		return currencies;
 	}
 
-	@Override
 	public JsonObject getPricesAsJson() {
 		if (prices == null || isTimeToUpdate()) {
 			prices = client.getPrices();
@@ -60,10 +59,21 @@ public class InMemoryDataRepository implements DataRepository {
 		return prices;
 	}
 
-	@Override
 	public DataRepository dropRefreshTimer() {
 		lastTimeUpdated.setTime(lastTimeUpdated.getTime() - updateInterval * 2);
 		return this;
+	}
+
+	public void updateBase() {
+		dropRefreshTimer();
+		getCurrenciesAsJson();
+		dropRefreshTimer();
+		getCurrencies();
+
+		dropRefreshTimer();
+		getPricesAsJson();
+		dropRefreshTimer();
+		getPrices();
 	}
 
 	/**
@@ -75,7 +85,6 @@ public class InMemoryDataRepository implements DataRepository {
 	}
 
 	Date setLastTimeUpdated() {
-		updateCount++;
 		lastTimeUpdated.setTime(System.currentTimeMillis());
 		return lastTimeUpdated;
 	}
