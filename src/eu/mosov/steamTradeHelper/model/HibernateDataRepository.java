@@ -7,6 +7,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateOperations;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
@@ -24,6 +25,7 @@ public class HibernateDataRepository implements DataRepository {
 		return hibernate.loadAll(Item.class);
 	}
 
+	@PostConstruct
 	void updateBase() {
 		if (getCurrencies().size() == 0) {
 			insertData();
