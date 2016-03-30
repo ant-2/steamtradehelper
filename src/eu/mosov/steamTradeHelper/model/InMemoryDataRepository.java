@@ -28,7 +28,7 @@ public class InMemoryDataRepository implements DataRepository {
 	@Override
 	public List<Item> getCurrencies() {
 		if (listCurr == null || isTimeToUpdate()) {
-			listCurr = parser.parseCurrencies(client.getCurrencies());
+			listCurr = parser.parseCurrencies(client.getCurrenciesAsJson());
 			setLastTimeUpdated();
 		}
 		return listCurr;
@@ -37,7 +37,7 @@ public class InMemoryDataRepository implements DataRepository {
 	@Override
 	public List<Item> getPrices() {
 		if (listPrices == null || isTimeToUpdate()) {
-			listPrices = parser.parsePrices(client.getPrices());
+			listPrices = parser.parsePrices(client.getPricesAsJson());
 			setLastTimeUpdated();
 		}
 		return listPrices;
@@ -45,7 +45,7 @@ public class InMemoryDataRepository implements DataRepository {
 
 	public JsonObject getCurrenciesAsJson() {
 		if (currencies == null || isTimeToUpdate()) {
-			currencies = client.getCurrencies();
+			currencies = client.getCurrenciesAsJson();
 			setLastTimeUpdated();
 		}
 		return currencies;
@@ -53,7 +53,7 @@ public class InMemoryDataRepository implements DataRepository {
 
 	public JsonObject getPricesAsJson() {
 		if (prices == null || isTimeToUpdate()) {
-			prices = client.getPrices();
+			prices = client.getPricesAsJson();
 			setLastTimeUpdated();
 		}
 		return prices;

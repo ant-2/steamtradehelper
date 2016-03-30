@@ -2,7 +2,6 @@ package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.client.BackpackApiClient;
 import eu.mosov.steamTradeHelper.entity.Item;
-import eu.mosov.steamTradeHelper.entity.parser.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateOperations;
@@ -13,7 +12,6 @@ import java.util.List;
 @Repository
 public class HibernateDataRepository implements DataRepository {
 	@Autowired HibernateOperations hibernate;
-	@Autowired Parser<Item> parser;
 	@Autowired BackpackApiClient client;
 
 	@Override
@@ -35,7 +33,7 @@ public class HibernateDataRepository implements DataRepository {
 	}
 
 	List<Item> updateCurrencies() {
-		List<Item> itemsFromBackpack = parser.parseCurrencies(client.getCurrencies());
+		List<Item> itemsFromBackpack = client.getCurrencies();
 		List<Item> itemsFromDb = hibernate.loadAll(Item.class);
 		if (itemsFromDb.size() == 0) {
 			itemsFromBackpack.forEach(hibernate::save);
@@ -54,7 +52,7 @@ public class HibernateDataRepository implements DataRepository {
 	}
 
 	void insertData() {
-		List<Item> items = parser.parseCurrencies(client.getCurrencies());
+		List<Item> items = client.getCurrencies();
 		items.forEach(hibernate::persist);
 	}
 }

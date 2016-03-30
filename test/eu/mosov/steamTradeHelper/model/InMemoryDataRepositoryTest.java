@@ -49,7 +49,7 @@ public class InMemoryDataRepositoryTest {
 	public void dataUpdatesOnlyAfterCertainAmountOfTime() {
 		repo.getCurrencies();
 		repo.getCurrencies();
-		verify(repo.client, times(1)).getCurrencies();
+		verify(repo.client, times(1)).getCurrenciesAsJson();
 	}
 	
 	@Test
@@ -57,6 +57,6 @@ public class InMemoryDataRepositoryTest {
 		repo.getCurrencies();
 		repo.dropRefreshTimer();
 		repo.getCurrencies();
-		verify(repo.client, times(2)).getCurrencies();
+		verify(repo.client, times(2)).getCurrenciesAsJson();
 	}
 }

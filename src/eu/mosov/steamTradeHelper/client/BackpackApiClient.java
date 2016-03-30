@@ -1,10 +1,14 @@
 package eu.mosov.steamTradeHelper.client;
 
+import eu.mosov.steamTradeHelper.entity.Item;
+import eu.mosov.steamTradeHelper.entity.parser.Parser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import java.util.List;
 
 /**
  * Makes requests to backpack.tf API
@@ -15,16 +19,34 @@ public class BackpackApiClient {
 	String PRICES = "http://backpack.tf/api/IGetPrices/v4/?key=56e4698ddea9e91a45b9de12";
 
 	Client client;
+	@Autowired Parser<Item> parser;
 
 	public BackpackApiClient() {
 		client = ClientBuilder.newClient();
 	}
 
-	public JsonObject getCurrencies() {
+	public JsonObject getCurrenciesAsJson() {
+		return _getCurrenciesAsJson();
+	}
+
+	public JsonObject getPricesAsJson() {
+		return _getPricesAsJson();
+	}
+
+	public List<Item> getCurrencies() {
+		return parser.parseCurrencies(_getCurrenciesAsJson());
+	}
+
+	public List<Item> getPrices() {
+		return parser.parsePrices(_getPricesAsJson());
+	}
+
+	/*private methods for remove code duplication*/
+	private JsonObject _getCurrenciesAsJson() {
 		return client.target(CURRENCY).request().get().readEntity(JsonObject.class);
 	}
 
-	public JsonObject getPrices() {
+	private JsonObject _getPricesAsJson() {
 		return client.target(PRICES).request().get().readEntity(JsonObject.class);
 	}
 }
