@@ -2,18 +2,16 @@ package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.client.BackpackApiClient;
 import eu.mosov.steamTradeHelper.entity.Item;
-import eu.mosov.steamTradeHelper.entity.parser.Parser;
-import eu.mosov.steamTradeHelper.entity.parser.ParserImpl;
 
 import javax.json.JsonObject;
 import java.util.Date;
 import java.util.List;
 
 public class InMemoryDataRepository implements DataRepository {
-	Parser<Item> parser;
 	BackpackApiClient client;
 	Date lastTimeUpdated;
 	int updateInterval = 1000 * 60 * 60 * 6;	// updates data each 6 hours
+
 	JsonObject currencies;
 	List<Item> listCurr;
 	JsonObject prices;
@@ -22,13 +20,12 @@ public class InMemoryDataRepository implements DataRepository {
 	public InMemoryDataRepository() {
 		client = new BackpackApiClient();
 		lastTimeUpdated = new Date();
-		parser = new ParserImpl<>();
 	}
 
 	@Override
 	public List<Item> getCurrencies() {
 		if (listCurr == null || isTimeToUpdate()) {
-			listCurr = parser.parseCurrencies(client.getCurrenciesAsJson());
+			listCurr = client.getCurrencies();
 			setLastTimeUpdated();
 		}
 		return listCurr;
@@ -37,7 +34,7 @@ public class InMemoryDataRepository implements DataRepository {
 	@Override
 	public List<Item> getPrices() {
 		if (listPrices == null || isTimeToUpdate()) {
-			listPrices = parser.parsePrices(client.getPricesAsJson());
+			listPrices = client.getPrices();
 			setLastTimeUpdated();
 		}
 		return listPrices;

@@ -2,7 +2,6 @@ package eu.mosov.steamTradeHelper.model;
 
 import eu.mosov.steamTradeHelper.client.BackpackApiClient;
 import eu.mosov.steamTradeHelper.entity.Item;
-import eu.mosov.steamTradeHelper.entity.parser.Parser;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,13 +20,11 @@ public class InMemoryDataRepositoryTest {
 	@Before
 	public void initMocks() {
 		repo.client = mock(BackpackApiClient.class);
-		//noinspection unchecked
-		repo.parser = (Parser<Item>) mock(Parser.class);
 	}
 
 	@Test
 	public void actuallyGetCurrencies() {
-		when(repo.parser.parseCurrencies(null)).thenReturn(singletonList(new Item("metal")));
+		when(repo.client.getCurrencies()).thenReturn(singletonList(new Item("metal")));
 
 		List<Item> curr = repo.getCurrencies();
 		assertTrue(repo.listCurr != null);
@@ -37,7 +34,7 @@ public class InMemoryDataRepositoryTest {
 
 	@Test
 	public void actuallyGetPrice() {
-		when(repo.parser.parsePrices(null)).thenReturn(singletonList(new Item("metal")));
+		when(repo.client.getPrices()).thenReturn(singletonList(new Item("metal")));
 
 		List<Item> prices = repo.getPrices();
 		assertTrue(repo.listPrices != null);
@@ -49,7 +46,7 @@ public class InMemoryDataRepositoryTest {
 	public void dataUpdatesOnlyAfterCertainAmountOfTime() {
 		repo.getCurrencies();
 		repo.getCurrencies();
-		verify(repo.client, times(1)).getCurrenciesAsJson();
+		verify(repo.client, times(1)).getCurrencies();
 	}
 	
 	@Test
@@ -57,6 +54,6 @@ public class InMemoryDataRepositoryTest {
 		repo.getCurrencies();
 		repo.dropRefreshTimer();
 		repo.getCurrencies();
-		verify(repo.client, times(2)).getCurrenciesAsJson();
+		verify(repo.client, times(2)).getCurrencies();
 	}
 }
