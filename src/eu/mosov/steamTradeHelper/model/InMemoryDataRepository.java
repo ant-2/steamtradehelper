@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class InMemoryDataRepository implements DataRepository {
-	BackpackApiClient client;
+	public BackpackApiClient client;
 	Date lastTimeUpdated;
 	int updateInterval = 1000 * 60 * 60 * 6;	// updates data each 6 hours
 
