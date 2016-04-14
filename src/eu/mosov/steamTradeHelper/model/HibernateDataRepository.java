@@ -25,7 +25,7 @@ public class HibernateDataRepository implements DataRepository {
 		return hibernate.loadAll(Item.class);
 	}
 
-	@PostConstruct
+	@PostConstruct //todo убрать иницализацию базы и найти куда ее запихнуть
 	void updateBase() {
 		if (getCurrencies().size() == 0) {
 			insertData();
@@ -34,6 +34,7 @@ public class HibernateDataRepository implements DataRepository {
 		}
 	}
 
+	//todo потупить как оптимизировать апдейт итемов
 	List<Item> updateCurrencies() {
 		List<Item> itemsFromBackpack = client.getCurrencies();
 		List<Item> itemsFromDb = hibernate.loadAll(Item.class);

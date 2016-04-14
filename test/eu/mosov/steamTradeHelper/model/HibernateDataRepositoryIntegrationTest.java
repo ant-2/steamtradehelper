@@ -32,7 +32,6 @@ public class HibernateDataRepositoryIntegrationTest {
 
 		repo.hibernate = new HibernateTemplate(sessionFactory.getObject());
 		repo.client = new BackpackApiClient();
-
 	}
 
 	@Test
