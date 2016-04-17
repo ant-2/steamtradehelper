@@ -1,15 +1,19 @@
-package eu.mosov.steamTradeHelper.model;
+package eu.mosov.steamtradehelper.model;
 
-import eu.mosov.steamTradeHelper.entity.Item;
+import eu.mosov.steamtradehelper.model.entity.Item;
 
 import java.util.List;
 
 /**
  * Repository to encapsulate data that retrieved via backpack.tf API
- * */
+ */
 public interface DataRepository {
 
-	List<Item> getCurrencies();
+  Item saveOrUpdate(Item item);
 
-	List<Item> getPrices();
+  List<Item> saveOrUpdateAll(List<Item> list);
+
+  List<Item> getAllItems();
+
+  Item find(String itemName);
 }

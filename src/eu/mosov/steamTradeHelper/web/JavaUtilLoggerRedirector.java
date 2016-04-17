@@ -9,18 +9,18 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class JavaUtilLoggerRedirector implements ServletContextListener {
-	@Override
-	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		// remove default handlers
-		Logger rootLogger = LogManager.getLogManager().getLogger("");
-		for (Handler handler : rootLogger.getHandlers()) {
-			rootLogger.removeHandler(handler);
-		}
-		// install redirecting handler
-		SLF4JBridgeHandler.install();
-	}
+  @Override
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+    // remove default handlers
+    Logger rootLogger = LogManager.getLogManager().getLogger("");
+    for (Handler handler : rootLogger.getHandlers()) {
+      rootLogger.removeHandler(handler);
+    }
+    // install redirecting handler
+    SLF4JBridgeHandler.install();
+  }
 
-	@Override
-	public void contextDestroyed(ServletContextEvent servletContextEvent) {
-	}
+  @Override
+  public void contextDestroyed(ServletContextEvent servletContextEvent) {
+  }
 }

@@ -1,7 +1,7 @@
-package eu.mosov.steamTradeHelper.model;
+package eu.mosov.steamtradehelper.model;
 
-import eu.mosov.steamTradeHelper.client.BackpackApiClient;
-import eu.mosov.steamTradeHelper.entity.Item;
+import eu.mosov.steamtradehelper.client.BackpackApiClient;
+import eu.mosov.steamtradehelper.model.entity.Item;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,20 +23,10 @@ public class InMemoryDataRepositoryTest {
 	}
 
 	@Test
-	public void actuallyGetCurrencies() {
-		when(repo.client.getCurrencies()).thenReturn(singletonList(new Item("metal")));
+	public void worksWell() {
+		when(repo.getAllItems()).thenReturn(singletonList(new Item("metal")));
 
-		List<Item> curr = repo.getCurrencies();
-		assertTrue(repo.listCurr != null);
-		assertThat(curr.size(), is (1));
-		assertThat(curr.get(0).getName(), is("metal"));
-	}
-
-	@Test
-	public void actuallyGetPrice() {
-		when(repo.client.getPrices()).thenReturn(singletonList(new Item("metal")));
-
-		List<Item> prices = repo.getPrices();
+		List<Item> prices = repo.getAllItems();
 		assertTrue(repo.listPrices != null);
 		assertThat(prices.size(), is(1));
 		assertThat(prices.get(0).getName(), is("metal"));
@@ -44,16 +34,16 @@ public class InMemoryDataRepositoryTest {
 
 	@Test
 	public void dataUpdatesOnlyAfterCertainAmountOfTime() {
-		repo.getCurrencies();
-		repo.getCurrencies();
+		repo.getAllItems();
+		repo.getAllItems();
 		verify(repo.client, times(1)).getCurrencies();
 	}
 	
 	@Test
 	public void actuallyUpdatesOnDemand() {
-		repo.getCurrencies();
+		repo.getAllItems();
 		repo.dropRefreshTimer();
-		repo.getCurrencies();
+		repo.getAllItems();
 		verify(repo.client, times(2)).getCurrencies();
 	}
 }

@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface Parser<T> {
 
-	List<T> parse(JsonObject data);
+  List<T> parse(JsonObject data);
 }

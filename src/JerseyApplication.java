@@ -6,13 +6,14 @@ import javax.ws.rs.ApplicationPath;
 
 /**
  * Jersey application subclass, needs for Jersey v2 configuration
- * */
+ */
 @ApplicationPath("rest")
 public class JerseyApplication extends ResourceConfig {
-	static String basePackage = "eu.mosov.steamTradeHelper";
-	public JerseyApplication() {
-		packages(basePackage);
-		register(JacksonFeature.class)
-			 .property(JsonGenerator.PRETTY_PRINTING, true);	//todo JSON-P works only for returned JsonObjects, not for Entities
-	}
+  static String basePackage = "eu.mosov.steamTradeHelper";
+
+  public JerseyApplication() {
+    packages(basePackage);
+    register(JacksonFeature.class)
+        .property(JsonGenerator.PRETTY_PRINTING, true);    //todo JSON-P works only for returned JsonObjects, not for Entities
+  }
 }

@@ -1,31 +1,44 @@
-package eu.mosov.steamTradeHelper.model;
+package eu.mosov.steamtradehelper.model;
 
-import eu.mosov.steamTradeHelper.client.BackpackApiClient;
-import eu.mosov.steamTradeHelper.entity.Item;
+import eu.mosov.steamtradehelper.model.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateOperations;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
 public class HibernateDataRepository implements DataRepository {
-	@Autowired HibernateOperations hibernate;
-	@Autowired BackpackApiClient client;
+  @Autowired
+  HibernateOperations hibernate;
 
-	@Override
-	public List<Item> getCurrencies() {
-		return hibernate.loadAll(Item.class);
-	}
+  @Override
+  public Item saveOrUpdate(Item item) {
+    hibernate.saveOrUpdate(item);
+    return item;
+  }
 
-	@Override
-	public List<Item> getPrices() {
-		return hibernate.loadAll(Item.class);
-	}
+  @Override
+  public List<Item> saveOrUpdateAll(List<Item> list) {
+    for (Item item : list) {
+      hibernate.saveOrUpdate(item);
+    }
+    return list;
+  }
 
-	@PostConstruct //todo убрать иницализацию базы и найти куда ее запихнуть
+  @Override
+  public List<Item> getAllItems() {
+    return hibernate.loadAll(Item.class);
+  }
+
+  @Override
+  public Item find(String itemName) {
+    return null;
+  }
+}
+
+/*	//todo убрать вставку данных в базу, и найти куда ее запихнуть
+    @PostConstruct
 	void updateBase() {
 		if (getCurrencies().size() == 0) {
 			insertData();
@@ -34,12 +47,12 @@ public class HibernateDataRepository implements DataRepository {
 		}
 	}
 
-	//todo потупить как оптимизировать апдейт итемов
+	//todo потупить на тему как оптимизировать апдейт итемов
 	List<Item> updateCurrencies() {
 		List<Item> itemsFromBackpack = client.getCurrencies();
 		List<Item> itemsFromDb = hibernate.loadAll(Item.class);
 		if (itemsFromDb.size() == 0) {
-			itemsFromBackpack.forEach(hibernate::save);
+			itemsFromBackpack.forEach(hibernate::saveOrUpdate);
 		} else {
 			for (Item e : itemsFromBackpack) {
 				hibernate.execute((HibernateCallback<Item>) session -> {
@@ -56,6 +69,5 @@ public class HibernateDataRepository implements DataRepository {
 
 	void insertData() {
 		List<Item> items = client.getCurrencies();
-		items.forEach(hibernate::persist);
-	}
-}
+		items.forEach(hibernate::saveOrUpdate);
+	}*/

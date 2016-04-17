@@ -1,88 +1,79 @@
-package eu.mosov.steamTradeHelper.model;
+package eu.mosov.steamtradehelper.model;
 
-import eu.mosov.steamTradeHelper.client.BackpackApiClient;
-import eu.mosov.steamTradeHelper.entity.Item;
+import eu.mosov.steamtradehelper.client.BackpackApiClient;
+import eu.mosov.steamtradehelper.model.entity.Item;
+import eu.mosov.steamtradehelper.model.entity.parser.Parser;
+import eu.mosov.steamtradehelper.model.entity.parser.ItemParser;
 
 import javax.json.JsonObject;
 import java.util.Date;
 import java.util.List;
 
+//todo написать реализацию методов
 public class InMemoryDataRepository implements DataRepository {
-	public BackpackApiClient client;
-	Date lastTimeUpdated;
-	int updateInterval = 1000 * 60 * 60 * 6;	// updates data each 6 hours
+  BackpackApiClient client;
+  Parser<Item> parser;
 
-	JsonObject currencies;
-	List<Item> listCurr;
-	JsonObject prices;
-	List<Item> listPrices;
+  Date lastTimeUpdated;
+  int updateInterval = 1000 * 60 * 60 * 6;    // updates data each 6 hours
 
-	public InMemoryDataRepository() {
-		client = new BackpackApiClient();
-		lastTimeUpdated = new Date();
-	}
+  JsonObject currencies;
+  List<Item> listCurr;
+  JsonObject prices;
+  List<Item> listPrices;
 
-	@Override
-	public List<Item> getCurrencies() {
-		if (listCurr == null || isTimeToUpdate()) {
-			listCurr = client.getCurrencies();
-			setLastTimeUpdated();
-		}
-		return listCurr;
-	}
+  public InMemoryDataRepository() {
+    client = new BackpackApiClient();
+    parser = new ItemParser<>();
+    lastTimeUpdated = new Date();
+  }
 
-	@Override
-	public List<Item> getPrices() {
-		if (listPrices == null || isTimeToUpdate()) {
-			listPrices = client.getPrices();
-			setLastTimeUpdated();
-		}
-		return listPrices;
-	}
+  @Override
+  public Item saveOrUpdate(Item item) {
+    return null;
+  }
 
-	public JsonObject getCurrenciesAsJson() {
-		if (currencies == null || isTimeToUpdate()) {
-			currencies = client.getCurrenciesAsJson();
-			setLastTimeUpdated();
-		}
-		return currencies;
-	}
+  @Override
+  public List<Item> saveOrUpdateAll(List<Item> list) {
+    return null;
+  }
 
-	public JsonObject getPricesAsJson() {
-		if (prices == null || isTimeToUpdate()) {
-			prices = client.getPricesAsJson();
-			setLastTimeUpdated();
-		}
-		return prices;
-	}
+  @Override
+  public List<Item> getAllItems() {
+    if (listPrices == null || isTimeToUpdate()) {
+      listPrices = parser.parse(client.getPrices());
+      setLastTimeUpdated();
+    }
+    return listPrices;
+  }
 
-	public DataRepository dropRefreshTimer() {
-		lastTimeUpdated.setTime(lastTimeUpdated.getTime() - updateInterval * 2);
-		return this;
-	}
+  @Override
+  public Item find(String itemName) {
+    return null;
+  }
 
-	public void updateBase() {
-		dropRefreshTimer();
-		getCurrenciesAsJson();
-		dropRefreshTimer();
-		getCurrencies();
+  public DataRepository dropRefreshTimer() {
+    lastTimeUpdated.setTime(lastTimeUpdated.getTime() - updateInterval * 2);
+    return this;
+  }
 
-		dropRefreshTimer();
-		getPricesAsJson();
-		dropRefreshTimer();
-		getPrices();
-	}
+  public void updateBase() {
+    dropRefreshTimer();
 
-	/**
-	 * Checks that were at least one day since last refresh
-	 * @return true if it is
-	 * */
-	boolean isTimeToUpdate() {
-		return System.currentTimeMillis() - lastTimeUpdated.getTime() > (updateInterval);
-	}
+    dropRefreshTimer();
+  }
 
-	Date setLastTimeUpdated() {
-		lastTimeUpdated.setTime(System.currentTimeMillis());
-		return lastTimeUpdated;
-	}
+  /**
+   * Checks that were at least one day since last refresh
+   *
+   * @return true if it is
+   */
+  boolean isTimeToUpdate() {
+    return System.currentTimeMillis() - lastTimeUpdated.getTime() > (updateInterval);
+  }
+
+  Date setLastTimeUpdated() {
+    lastTimeUpdated.setTime(System.currentTimeMillis());
+    return lastTimeUpdated;
+  }
 }

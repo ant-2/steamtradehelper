@@ -1,7 +1,7 @@
-package eu.mosov.steamTradeHelper.rest;
+package eu.mosov.steamtradehelper.rest;
 
-import eu.mosov.steamTradeHelper.entity.Item;
-import eu.mosov.steamTradeHelper.model.DataRepository;
+import eu.mosov.steamtradehelper.model.entity.Item;
+import eu.mosov.steamtradehelper.model.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.GET;
@@ -11,22 +11,16 @@ import java.util.List;
 
 /**
  * Resource to access backpack.tf developer API
- * */
+ */
 @Path("data")
 @Produces({"application/json", "application/javascript"})
 public class DataResource extends SpringAwareResource {
-	@SuppressWarnings("SpringJavaAutowiredMembersInspection")
-	@Autowired DataRepository repo;
+  @Autowired
+  DataRepository repo;
 
-	@GET
-	@Path("curr")
-	public List<Item> getCurrencies() {
-		return repo.getCurrencies();
-	}
-
-	@GET
-	@Path("prices")
-	public List<Item> getPrices() {
-		return repo.getPrices();
-	}
+  @GET
+  @Path("items")
+  public List<Item> getItems() {
+    return repo.getAllItems();
+  }
 }

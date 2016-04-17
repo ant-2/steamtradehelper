@@ -14,10 +14,12 @@ import static javax.persistence.GenerationType.AUTO;
 @Entity
 @Access(FIELD)
 public class Item {
-  @Id @GeneratedValue(strategy = AUTO)
+  @Id
+  @GeneratedValue(strategy = AUTO)
   private Integer id;
 
-  @NaturalId public String name;
+  @NaturalId
+  public String name;
   public String description;
 
   @ManyToMany(fetch = EAGER)

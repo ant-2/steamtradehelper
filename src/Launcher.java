@@ -3,27 +3,27 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Launcher {
-	public static void main(String[] args) throws Exception {
-		log4j2Config("config\\log4j2.xml");
+  public static void main(String[] args) throws Exception {
+    log4j2Config("config\\log4j2.xml");
 
-		Server server = new Server();
+    Server server = new Server();
 
-		NetworkTrafficServerConnector connector = new NetworkTrafficServerConnector(server);
-		connector.setPort(8080);
-		server.addConnector(connector);
+    NetworkTrafficServerConnector connector = new NetworkTrafficServerConnector(server);
+    connector.setPort(8080);
+    server.addConnector(connector);
 
-		WebAppContext context = new WebAppContext("webapp", "/");
+    WebAppContext context = new WebAppContext("webapp", "/");
 
-		if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-			// fix for Windows, so Jetty doesn't lock files
-			context.getInitParams().put("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
-		}
+    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+      // fix for Windows, so Jetty doesn't lock files
+      context.getInitParams().put("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
+    }
 
-		server.setHandler(context);
-		server.start();
-	}
+    server.setHandler(context);
+    server.start();
+  }
 
-	static void log4j2Config(String path) {
-		System.setProperty("log4j.configurationFile", path);
-	}
+  static void log4j2Config(String path) {
+    System.setProperty("log4j.configurationFile", path);
+  }
 }
