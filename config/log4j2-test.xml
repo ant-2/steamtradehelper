@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration name="dev" status="error">
+    <appenders>
+        <console name="general-console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5p %c{1} - %m%n"/>
+        </console>
+
+    </appenders>
+    <loggers>
+        <logger name="org.hibernate.SQL" level="debug" />
+
+        <root level="info">
+            <appender-ref ref="general-console"/>
+        </root>
+    </loggers>
+</configuration>
