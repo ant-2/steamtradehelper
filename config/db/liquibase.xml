@@ -8,8 +8,24 @@
     <changeSet id="initial-scheme" author="ant" dbms="h2">
         <createTable tableName="Item">
             <column name="id" type="int" autoIncrement="true"><constraints primaryKey="true" /></column>
-            <column name="name" type="varchar(100)" />
-            <column name="description" type="varchar(1000)" />
+            <column name="name" type="varchar(100)" ><constraints nullable="false"/></column>
+            <column name="description" type="varchar(1000)"/>
         </createTable>
     </changeSet>
+
+    <!-- adds table for Quality entity and mapping of Set<Quality> field in Item entity -->
+    <changeSet id="quality-table" author="ant" dbms="h2">
+        <createTable tableName="Quality">
+            <column name="quality" type="varchar(100)"><constraints primaryKey="true"/></column>
+            <column name="gameId" type="int" />
+        </createTable>
+
+        <sqlFile path="quality_data.sql" relativeToChangelogFile="true" />
+
+        <createTable tableName="item_quality">
+            <column name="item_id" type="int"><constraints primaryKey="true" referencedTableName="item" foreignKeyName="id"/></column>
+            <column name="quality_quality" type="varchar(100)"><constraints primaryKey="true" referencedTableName="quality" foreignKeyName="quality"/></column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
