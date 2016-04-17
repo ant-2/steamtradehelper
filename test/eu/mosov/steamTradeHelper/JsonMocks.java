@@ -1,4 +1,4 @@
-package eu.mosov.steamTradeHelper;
+package eu.mosov.steamtradehelper;
 
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;

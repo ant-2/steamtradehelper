@@ -1,4 +1,4 @@
-package eu.mosov.steamTradeHelper.rest;
+package eu.mosov.steamtradehelper.rest;
 
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;

@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="eu.mosov.steamTradeHelper"/>
+    <context:component-scan base-package="eu.mosov.steamtradehelper"/>
 
     <!--datasource from jetty's jndi-->
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -24,11 +24,7 @@
     <!--Spring factory to produce Hibernate Session objects-->
     <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" depends-on="liquibase">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>eu.mosov.steamTradeHelper.entity.Item</value>
-            </list>
-        </property>
+        <property name="annotatedPackages" value="eu.mosov.steamtradehelper.model.entity" />
     </bean>
 
     <!--Spring wrapper over Hibernate.Session-->
