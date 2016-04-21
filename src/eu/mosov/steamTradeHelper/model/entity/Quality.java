@@ -9,14 +9,21 @@ import static javax.persistence.AccessType.FIELD;
 @Entity
 @Access(FIELD)
 public class Quality {
+
   @Id String quality;
-  int gameId;
+  int gameID;
 
   protected Quality() {
-  }    // constructor for Hibernate
+  } // constructor for Hibernate
 
-  public Quality(String name) {
+  public Quality(String quality) {
+    this.quality = quality;
+    this.gameID = -1; // cause 0 it's game id of 'Normal' quality
+  }
+
+  public Quality(String name, int gameID) {
     this.quality = name;
+    this.gameID = gameID;
   }
 
   @Override
@@ -32,5 +39,30 @@ public class Quality {
   @Override
   public int hashCode() {
     return quality != null ? quality.hashCode() : 0;
+  }
+
+  @Override
+  public String toString() {
+    return "{" +
+        "quality='" + quality + '\'' +
+        ", gameID=" + gameID +
+        '}';
+  }
+
+  // getters & setters
+  public String getQuality() {
+    return quality;
+  }
+
+  public void setQuality(String quality) {
+    this.quality = quality;
+  }
+
+  public int getGameID() {
+    return gameID;
+  }
+
+  public void setGameID(int gameID) {
+    this.gameID = gameID;
   }
 }
