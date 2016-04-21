@@ -7,42 +7,28 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 //todo написать реализацию методов
-public class JdbcDataRepository implements DataRepository {
-  @Autowired
-  DataSource dataSource;
+public class JdbcDataRepository implements DataRepository<Item> {
+  @Autowired DataSource dataSource;
 
   @Override
-  public Item saveOrUpdate(Item item) {
-    Connection conn;
+  public List<Item> loadAll() {
+    Connection conn = null;
+    List<Item> list = new ArrayList<>();
+
     try {
       conn = dataSource.getConnection();
-      Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery("");
+      ResultSet rs = conn.createStatement().executeQuery("select * from Item");
       while (rs.next()) {
-
+        list.add(new Item(rs.getString("name")));
       }
-      return new Item("");
     } catch (SQLException e) {
-      throw new RuntimeException("Couldn't execute SQL query", e);
+      throw new RuntimeException("Couldn't load items from database.", e);
     }
-  }
 
-  @Override
-  public List<Item> saveOrUpdateAll(List<Item> list) {
-    return null;
-  }
-
-  @Override
-  public List<Item> getAllItems() {
-    return null;
-  }
-
-  @Override
-  public Item find(String itemName) {
-    return null;
+    return list;
   }
 }

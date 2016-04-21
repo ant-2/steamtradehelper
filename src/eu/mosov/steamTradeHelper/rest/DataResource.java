@@ -21,6 +21,6 @@ public class DataResource extends SpringAwareResource {
   @GET
   @Path("items")
   public List<Item> getItems() {
-    return repo.getAllItems();
+    return repo.loadAll();
   }
 }
