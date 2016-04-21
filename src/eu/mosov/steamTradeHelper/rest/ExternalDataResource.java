@@ -1,5 +1,6 @@
 package eu.mosov.steamtradehelper.rest;
 
+import eu.mosov.steamtradehelper.client.BackpackApiClient;
 import eu.mosov.steamtradehelper.model.InMemoryDataRepository;
 
 import javax.json.JsonObject;
@@ -14,28 +15,17 @@ import javax.ws.rs.Produces;
 @Produces({"application/json", "application/javascript"})
 public class ExternalDataResource extends SpringAwareResource {
   InMemoryDataRepository repo = new InMemoryDataRepository();
+  BackpackApiClient client = new BackpackApiClient();
 
   @GET
-  @Path("parsed/curr")
-  public JsonObject getCurrencies() {
-    return null;
+  @Path("prices")
+  public JsonObject getRawPrices() {
+    return client.getPrices();
   }
 
   @GET
-  @Path("parsed/prices")
-  public JsonObject getPrices() {
-    return null;
-  }
-
-  @GET
-  @Path("full/prices")
-  public JsonObject getFullPricesResponse() {
-    return null;
-  }
-
-  @GET
-  @Path("full/curr")
-  public JsonObject getFullCurrenciesResponse() {
-    return null;
+  @Path("curr")
+  public JsonObject getRawCurrencies() {
+    return client.getCurrencies();
   }
 }
