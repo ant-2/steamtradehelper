@@ -5,45 +5,66 @@
     <title>Steam trade helper</title>
     <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
     <script src="js/common.js"></script>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body>
-<div id="interface">
-    <form>
-        <input type="radio" id="currencies"><label for="currencies">currencies</label>
-        <input type="radio" id="prices"><label for="prices">prices</label>
-    </form>
-    <button id="btnSend">Get currencies</button>
-</div><br>
-<div id="view">
-    Response text
-</div>
+<button id="btnSend">Send</button>
+<table id="view">
+    <thead id="header">
+        <tr>
+            <th>Item name</th>
+            <th>Description</th>
+            <th>Qualities</th>
+        </tr>
+    </thead>
+
+    <tbody>Body</tbody>
+</table>
 
 <script>
-    var baseUrl = "rest/data/";
-    var currencyUrl = baseUrl+"curr";
-    var view = $("#view");
+    var repoUrl = "rest/data/items";
+    var view = $("tbody");
+    var response;
 
-    function renderResponse(data) {
-        view.text(data);
+    $("#btnSend").click(function () {
+//        renderResponse(getResource(repoUrl));
+        renderResponse(null);
+    });
+
+    function getResource(resourceUrl) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", resourceUrl, false);
+        xhr.send();
+        if (xhr.status != 200) {
+            return xhr.status + ": " + xhr.statusText;
+        } else {
+            return xhr.responseText;
+        }
     }
 
-    $("#btnSend").click(function() {
-        var url = currencyUrl;
-        console.log("currencyUrl: "+currencyUrl);
-        var xhr  = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                if (xhr.status != 200) {
-                    renderResponse(xhr.status + ": " + xhr.statusText);
-                } else {
-                    renderResponse(xhr.responseText);
-                }
-            }
-        };
-        xhr.send();
-    });
+    function renderResponse(json) {
+        view.empty();
+
+        var mockItem = '{"name": "Name of the item", "description":"Description of the item", ' +
+                '"qualities": [{"quality": "Unique"}, {"quality": "Strange"}]' +
+                '}';
+        var item = JSON.parse(mockItem);
+
+        var tableRow = view.append("<tr>");
+        tableRow.append("<td>"+item.name+"</td>");
+        tableRow.append("<td>"+item.description+"</td>");
+
+        var qualities = "";
+        for (var n = 0; n < item.qualities.length; n++) {
+            qualities = (n != item.qualities.length - 1) ? qualities+item.qualities[n].quality+", " : qualities+item.qualities[n].quality;
+        }
+        tableRow.append("<td>"+qualities+"</td>");
+    }
 </script>
 </body>
 </html>
