@@ -2,48 +2,46 @@ package eu.mosov.steamtradehelper.model;
 
 import eu.mosov.steamtradehelper.client.BackpackApiClient;
 import eu.mosov.steamtradehelper.model.entity.Item;
+import eu.mosov.steamtradehelper.model.entity.Quality;
+import eu.mosov.steamtradehelper.model.entity.parser.Parser;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
 
-import static java.util.Collections.singletonList;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("ALL")
 public class InMemoryDataRepositoryTest {
 
-	InMemoryDataRepository repo = new InMemoryDataRepository();
+  InMemoryDataRepository repo = new InMemoryDataRepository();
 
-	@Before
-	public void initMocks() {
-		repo.client = mock(BackpackApiClient.class);
-	}
+  @Before
+  public void initMocks() {
+    repo.client = mock(BackpackApiClient.class);
+    repo.parser = mock(Parser.class);
 
-	@Test
-	public void worksWell() {
-		when(repo.getAllItems()).thenReturn(singletonList(new Item("metal")));
+    Item item = new Item(e -> {
+      e.name = "metal";
+      e.qualities = new HashSet<>();
+      e.qualities.add(new Quality("Unique"));
+    });
+    when(repo.parser.parse(null)).thenReturn(Arrays.asList(item));
+  }
 
-		List<Item> prices = repo.getAllItems();
-		assertTrue(repo.listPrices != null);
-		assertThat(prices.size(), is(1));
-		assertThat(prices.get(0).getName(), is("metal"));
-	}
+  @Test
+  public void dataUpdatesOnlyAfterCertainAmountOfTime() {
+    repo.loadAll();
+    repo.loadAll();
+    verify(repo.client, times(1)).getPrices();
+  }
 
-	@Test
-	public void dataUpdatesOnlyAfterCertainAmountOfTime() {
-		repo.getAllItems();
-		repo.getAllItems();
-		verify(repo.client, times(1)).getCurrencies();
-	}
-	
-	@Test
-	public void actuallyUpdatesOnDemand() {
-		repo.getAllItems();
-		repo.dropRefreshTimer();
-		repo.getAllItems();
-		verify(repo.client, times(2)).getCurrencies();
-	}
+  @Test
+  public void actuallyUpdatesOnDemand() {
+    repo.loadAll();
+    repo.dropRefreshTimer();
+    repo.loadAll();
+    verify(repo.client, times(2)).getPrices();
+  }
 }

@@ -33,7 +33,7 @@ public class HibernateDataRepositoryTest {
     });
     when(repo.hibernate.loadAll(Item.class)).thenReturn(asList(item));
 
-    List<Item> items = repo.getAllItems();
+    List<Item> items = repo.loadAll();
     assertThat(items.size(), is(1));
     assertThat(items.get(0).name, is("metal"));
     assertTrue(items.get(0).qualities.contains(new Quality("Unique")));
