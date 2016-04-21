@@ -58,7 +58,7 @@ public class HibernateDataRepository implements DataRepository {
 				hibernate.execute((HibernateCallback<Item>) session -> {
 					session.createQuery("update Item set description = :desk where name = :name")
 						 .setParameter("desk", "desk")
-						 .setParameter("name", e.getName())
+						 .setParameter("name", e.getQualityName())
 						 .executeUpdate();
 					return null;
 				});

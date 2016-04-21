@@ -65,4 +65,53 @@ public class Quality {
   public void setGameID(int gameID) {
     this.gameID = gameID;
   }
+
+  // Enum
+  public enum Qualities {
+    NORMAL("Normal", 0),
+    GENUINE("Genuine", 1),
+    VINTAGE("Vintage", 3),
+    UNUSUAL("Unusual", 5),
+    UNIQUE("Unique", 6),
+    SELF_MADE("Self-Made", 9),
+    STRANGE("Strange", 11),
+    HAUNTED("Haunted", 13),
+    COLLECTORS("Collector's", 14);
+
+    Qualities(String name, Integer gameId) {
+      this.name = name;
+      this.gameId = gameId;
+      this.quality = new Quality(name, gameId);
+    }
+
+    private final String name;
+    private final Integer gameId;
+    private final Quality quality;
+
+    public String getQualityName() {
+      return name;
+    }
+
+    public Integer getGameId() {
+      return gameId;
+    }
+
+    public Quality getQuality() {
+      return quality;
+    }
+
+    public static Quality getQualityByGameId(int gameId) {
+      Qualities[] values = Qualities.values();
+      for (Qualities q : values) {
+        if (q.getGameId() == gameId) {
+          return q.getQuality();
+        }
+      }
+      return null;
+    }
+
+    public static Quality getQualityFromEnum(Qualities enumEntry) {
+      return enumEntry.getQuality();
+    }
+  }
 }
