@@ -1,70 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Steam trade helper</title>
-    <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
-    <script src="js/common.js"></script>
-    <style>
-        table {
-            border: 1px solid black;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Steam trade helper</title>
+  <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+  <script src="js/common.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-left: 1px;
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    td.nominal {
+      text-align: right;
+    }
+
+    td, th {
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      padding: 5px;
+    }
+  </style>
 </head>
 
 <body>
 <button id="btnSend">Send</button>
 <table id="view">
-    <thead id="header">
-        <tr>
-            <th>Item name</th>
-            <th>Description</th>
-            <th>Qualities</th>
-        </tr>
-    </thead>
+  <thead id="header">
+  <tr>
+    <th>#</th>
+    <th>Item name</th>
+    <th>Description</th>
+    <th>Qualities</th>
+  </tr>
+  </thead>
 
-    <tbody>Body</tbody>
+  <tbody>Body</tbody>
 </table>
 
 <script>
-    var repoUrl = "rest/data/items";
-    var view = $("tbody");
-    var response;
+  var repoUrl = "rest/data/items";
+  var view = $("tbody");
+  var response;
 
-    $("#btnSend").click(function () {
-//        renderResponse(getResource(repoUrl));
-        renderResponse(null);
-    });
+  $("#btnSend").click(function () {
+    renderResponse(getResource(repoUrl));
+  });
 
-    function getResource(resourceUrl) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", resourceUrl, false);
-        xhr.send();
-        if (xhr.status != 200) {
-            return xhr.status + ": " + xhr.statusText;
-        } else {
-            return xhr.responseText;
-        }
+  function getResource(resourceUrl) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", resourceUrl, false);
+    xhr.send();
+    if (xhr.status != 200) {
+      alert(xhr.status + ": " + xhr.statusText);
+    } else {
+      return xhr.responseText;
     }
+  }
 
-    function renderResponse(json) {
-        view.empty();
+  function renderResponse(json) {
+    view.empty();
 
-        var mockItem = '{"name": "Name of the item", "description":"Description of the item", ' +
-                '"qualities": [{"quality": "Unique"}, {"quality": "Strange"}]' +
-                '}';
-        var item = JSON.parse(mockItem);
+    var mockItem = '{"name": "Name of the item", "description":"Description of the item", ' +
+      '"qualities": [{"quality": "Unique"}, {"quality": "Strange"}]' +
+      '}';
+    var items = JSON.parse(json);
+    for (var n = 0; n < items.length; n++) {
+      var item = items[n];
+      var tableRow = view.append("<tr>");
 
-        var tableRow = view.append("<tr>");
-        tableRow.append("<td>"+item.name+"</td>");
-        tableRow.append("<td>"+item.description+"</td>");
+      tableRow.append("<td class='nominal'>"+n+"</td>");
+      tableRow.append("<td>" + item.name + "</td>");
+      tableRow.append("<td>" + item.description + "</td>");
 
-        var qualities = "";
-        for (var n = 0; n < item.qualities.length; n++) {
-            qualities = (n != item.qualities.length - 1) ? qualities+item.qualities[n].quality+", " : qualities+item.qualities[n].quality;
-        }
-        tableRow.append("<td>"+qualities+"</td>");
+      var qualities = "";
+      for (var q = 0; q < item.qualities.length; q++) {
+        qualities = (q != item.qualities.length - 1) ? qualities + item.qualities[q].quality + ", " : qualities + item.qualities[q].quality;
+      }
+      tableRow.append("<td>" + qualities + "</td>");
+      tableRow.append("</tr>");
     }
+  }
 </script>
 </body>
 </html>
