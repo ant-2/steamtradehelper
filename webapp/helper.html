@@ -27,6 +27,9 @@
 
 <body>
 <button id="btnSend">Send</button>
+<input id="in" type="text"/>
+<button id="btnSearch">Search</button>
+
 <table id="view">
   <thead id="header">
   <tr>
@@ -49,6 +52,13 @@
     renderResponse(getResource(repoUrl));
   });
 
+  $("#btnSearch").click(function () {
+    var str = $("#in").val();
+    renderResponse(
+      searchSubString(getResource(repoUrl), str)
+    );
+  });
+
   function getResource(resourceUrl) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", resourceUrl, false);
@@ -69,9 +79,9 @@
     var items = JSON.parse(json);
     for (var n = 0; n < items.length; n++) {
       var item = items[n];
-      var tableRow = view.append("<tr>");
 
-      tableRow.append("<td class='nominal'>"+n+"</td>");
+      var tableRow = view.append("<tr>");
+      tableRow.append("<td class='nominal'>" + n + "</td>");
       tableRow.append("<td>" + item.name + "</td>");
       tableRow.append("<td>" + item.description + "</td>");
 
@@ -82,6 +92,18 @@
       tableRow.append("<td>" + qualities + "</td>");
       tableRow.append("</tr>");
     }
+  }
+
+  function searchSubString(dataArray, string) {
+    var matches = [];
+
+    for (var i = 0; i < dataArray.length; i++) {
+      if (-1 < dataArray[i].indexOf(string)) {
+        matches.push(string);
+      }
+    }
+
+    return matches;
   }
 </script>
 </body>
