@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo написать реализацию методов
 public class JdbcDataRepository implements DataRepository<Item> {
   @Autowired DataSource dataSource;
 

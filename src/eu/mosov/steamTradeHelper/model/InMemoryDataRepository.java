@@ -8,7 +8,6 @@ import eu.mosov.steamtradehelper.model.entity.parser.Parser;
 import java.util.Date;
 import java.util.List;
 
-//todo написать реализацию методов
 public class InMemoryDataRepository implements DataRepository {
   BackpackApiClient client;
   Parser<Item> parser;

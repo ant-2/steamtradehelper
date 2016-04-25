@@ -15,8 +15,7 @@ import java.util.List;
 @Path("data")
 @Produces({"application/json", "application/javascript"})
 public class DataResource extends SpringAwareResource {
-  @Autowired
-  DataRepository<Item> repo;
+  @Autowired DataRepository<Item> repo;
 
   @GET
   @Path("items")

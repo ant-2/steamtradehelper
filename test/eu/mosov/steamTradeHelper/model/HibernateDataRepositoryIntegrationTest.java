@@ -44,7 +44,7 @@ public class HibernateDataRepositoryIntegrationTest {
   }
 
   @Test
-  public void itemFieldsAreCorrectMappedToDbColumns() throws Exception {
+  public void itemFieldsAreCorrectlyMappedToDbColumns() throws Exception {
     Connection conn = dataSource.getConnection();
     conn.createStatement().execute("insert into Quality values('Unique', 6);");
     conn.createStatement().execute("insert into Item(id, name, description) values (0, 'metal', 'description')");

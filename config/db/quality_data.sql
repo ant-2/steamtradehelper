@@ -3,6 +3,7 @@ insert into quality values
 ('Strange', 11),
 -- ('Decorated Weapon'),
 ('Vintage', 3),
+('Unusual', 5),
 ('Genuine', 1),
 ('Haunted', 13),
 ('Collector''s', 14),

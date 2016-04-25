@@ -32,4 +32,6 @@
         <property name="sessionFactory" ref="hibernateSessionFactory"/>
         <property name="flushModeName" value="FLUSH_EAGER"/>
     </bean>
+
+    <bean id="dataRepository" class="eu.mosov.steamtradehelper.model.InMemoryDataRepository" />
 </beans>
