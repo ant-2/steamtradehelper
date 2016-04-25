@@ -1,0 +1,16 @@
+table {
+    border-collapse: collapse;
+    margin-left: 1px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+td.nominal {
+    text-align: right;
+}
+
+td, th {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    padding: 5px;
+}
