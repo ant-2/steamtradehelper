@@ -1,11 +1,18 @@
 insert into quality values
-('Unique', 6),
-('Strange', 11),
--- ('Decorated Weapon'),
+('Normal', 0),
+('Genuine', 1),
 ('Vintage', 3),
 ('Unusual', 5),
-('Genuine', 1),
+('Unique', 6),
+('Community ', 7),
+('Developer  ', 8),
+('Self-Made', 9);
+('Strange', 11),
 ('Haunted', 13),
 ('Collector''s', 14),
-('Normal', 0),
-('Self-Made', 9);
+('Decorated Weapon', 15);
+
+/*
+Possible quality values of TF2 items.
+The values taken from https://wiki.teamfortress.com/wiki/WebAPI/GetSchema
+*/
