@@ -27,7 +27,7 @@
 </head>
 
 <body>
-  <input id="in" type="text"/>
+  <input id="in" type="text" title="input for text query"/>
   <button id="btnSearch">Search</button>
 
   <table id="view">
@@ -48,36 +48,52 @@
   </table>
 
   <script>
-    var repoUrl = "rest/data/items";
+    var repoUrl = 'rest/data/items';
     var view = $("tbody");
-    var itemsArr;
-    var qualitiesRowsIndexes = [1, 3, 6, 11, 13, 14]; // indexes of genuine, vintage, unique, strange, haunted, collector's
+    var qualitiesRowsIndexes = [1, 3, 6, 11, 13, 14]; // indexes of genuine, vintage, unique, strange, haunted, collector's items
+    var items;
 
-    renderResponse(getItems());
+    (function () {
+      items = getItems();
+      renderResponse(items);
+    })();
 
     function getItems() {
-      if (itemsArr == undefined || itemsArr == null) {
-        itemsArr = JSON.parse(getResource(repoUrl));
-      }
-      return itemsArr;
+      return JSON.parse(getResource(repoUrl));
     }
 
     $("#btnSearch").click(function () {
       var strToSearch = $("#in").val();
       if (strToSearch.length > 0) {
-        renderResponse(searchSubString(getItems(), strToSearch));
+        renderResponse(searchSubString(items, strToSearch));
       }
     });
 
     function getResource(resourceUrl) {
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", resourceUrl, false);
+      xhr.open('get', resourceUrl, false);
       xhr.send();
+
       if (xhr.status != 200) {
-        alert(xhr.status + ": " + xhr.statusText);
+        console.log("Can't get resource: " + resourceUrl + ". " + xhr.status + ": " + xhr.statusText);
       } else {
         return xhr.responseText;
       }
+    }
+
+    function getResourceAsync(resourceUrl) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('get', resourceUrl, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status != 200) {
+            console.log("Can't get resource: " + resourceUrl + ". " + xhr.status + ": " + xhr.statusText);
+          } else {
+            return xhr.responseText;
+          }
+        }
+      };
+      xhr.send();
     }
 
     function renderResponse(itemsArr) {
@@ -86,30 +102,12 @@
         var item = itemsArr[n];
 
         var tableRow = view.append("<tr>");
-        tableRow.append("<td class='nominal'>" + n + "</td>");
+        tableRow.append("<td class='nominal'>" + (n + 1) + "</td>");
         tableRow.append("<td>" + item.name + "</td>");
 
         appendQualities(tableRow, item.qualities, qualitiesRowsIndexes);
       }
     }
-
-    /*    function renderResponse(itemsArr) {
-     view.empty();
-     for (var n = 0; n < itemsArr.length; n++) {
-     var item = itemsArr[n];
-
-     var tableRow = view.append("<tr>");
-     tableRow.append("<td class='nominal'>" + n + "</td>");
-     tableRow.append("<td>" + item.name + "</td>");
-
-     var qualities = "";
-     for (var q = 0; q < item.qualities.length; q++) {
-     qualities = (q != item.qualities.length - 1) ? qualities + item.qualities[q].quality + ", " : qualities + item.qualities[q].quality;
-     }
-     tableRow.append("<td>" + qualities + "</td>");
-     tableRow.append("</tr>");
-     }
-     }*/
 
     function appendQualities(tr, qualities, rows) {
       var indexes = [];
@@ -120,7 +118,7 @@
       for (var n = 0; n < rows.length; n++) {
         var positionInQualities = jQuery.inArray(rows[n], indexes);
         if (positionInQualities >= 0) {
-          tr.append("<td>"+qualities[positionInQualities].quality+"</td>")
+          tr.append("<td>" + qualities[positionInQualities].quality + "</td>")
         } else {
           tr.append("<td></td>")
         }
