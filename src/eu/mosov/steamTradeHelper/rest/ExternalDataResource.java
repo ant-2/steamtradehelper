@@ -1,12 +1,9 @@
 package eu.mosov.steamtradehelper.rest;
 
-import eu.mosov.steamtradehelper.client.BackpackApiClient;
-import eu.mosov.steamtradehelper.model.InMemoryDataRepository;
+import eu.mosov.steamtradehelper.model.InMemoryDataHolder;
 
 import javax.json.JsonObject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
 /**
  * Provides direct access to data from backpack.tf site
@@ -14,18 +11,50 @@ import javax.ws.rs.Produces;
 @Path("raw")
 @Produces({"application/json", "application/javascript"})
 public class ExternalDataResource extends SpringAwareResource {
-  InMemoryDataRepository repo = new InMemoryDataRepository();
-  BackpackApiClient client = new BackpackApiClient();
+  InMemoryDataHolder repo = InMemoryDataHolder.getInstance();
+  private static String API_KEY = "56e4698ddea9e91a45b9de12";
+  private static String PRICES = "http://backpack.tf/api/IGetPrices/v4?key="+API_KEY;
+  private static String CURRENCIES = "http://backpack.tf/api/IGetCurrencies/v1?key="+API_KEY;
+  private static String MARKET = "http://backpack.tf/api/IGetMarketPrices/v1?key="+API_KEY;
 
   @GET
   @Path("prices")
-  public JsonObject getRawPrices() {
-    return client.getPrices();
+  public JsonObject getItemPrices(@DefaultValue("false") @QueryParam("update") boolean update) {
+    if (update) {
+      return repo.updateAndGetResource(PRICES);
+    }
+    return repo.getResource(PRICES);
   }
 
   @GET
   @Path("curr")
-  public JsonObject getRawCurrencies() {
-    return client.getCurrencies();
+  public JsonObject getCurrencies(@DefaultValue("false") @QueryParam("update") boolean update) {
+    if (update) {
+      return repo.updateAndGetResource(CURRENCIES);
+    }
+    return repo.getResource(CURRENCIES);
+  }
+
+  @GET
+  @Path("market")
+  public JsonObject getSteamMarketPrice(@DefaultValue("false") @QueryParam("update") boolean update) {
+    if (update) {
+      return repo.updateAndGetResource(MARKET);
+    }
+    return repo.getResource(MARKET);
+  }
+
+  @GET
+  @Path("resource")
+  public JsonObject getResource(
+                                     @DefaultValue("undefined") @QueryParam("uri") String uri,
+                                     @DefaultValue("false") @QueryParam("update") boolean update) {
+    if (uri.equals("undefined")) {
+      return null;
+    }
+    if (update) {
+      return repo.updateAndGetResource(uri);
+    }
+    return repo.getResource(uri);
   }
 }
