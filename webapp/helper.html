@@ -3,32 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <title>Steam trade helper</title>
+  <style type="text/css">@import url(css/main.css);</style>
+
   <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
   <script src="js/common.js"></script>
+  <script src="js/objects.js"></script>
+  <script>
+    var repoUrl = 'rest/raw/prices';
+    var QUALITIES = ["1", "3", "6", "11", "13", "14"]; // indexes of genuine, vintage, unique, strange, haunted, collector's items
+    var items;
 
-  <style>
-    table {
-      border-collapse: collapse;
-      margin-left: 1px;
-      border-right: 1px solid black;
-      border-bottom: 1px solid black;
+    document.addEventListener("DOMContentLoaded", doTheJob);
+
+    function doTheJob() {
+      try {
+        if (items == null) {
+          items = getItems();
+        }
+
+        renderTableRows(items);
+      } catch (Error) {
+        console.log(Error.message);
+      }
     }
 
-    td.nominal {
-      text-align: right;
+    function getItems() {
+      return JSON.parse(getResource(repoUrl)).response.items;
     }
 
-    td, th {
-      border-top: 1px solid black;
-      border-left: 1px solid black;
-      padding: 5px;
+    function renderTableRows(items) {
+      var view = $("tbody");
+      view.empty();
+
+      var count = 1;
+      for (var item in items) {
+        if (!items.hasOwnProperty(item)) {
+          continue;
+        }
+
+        var tableRow = view.append("<tr>");
+        tableRow.append("<td class='nominal'>" + (count++) + "</td>");
+        tableRow.append("<td>" + item + "</td>");
+
+        var qualities = items[item].prices;
+
+        var keys = Object.keys(qualities); // returns an array of strings
+        for (var i = 0; i < QUALITIES.length; i++) {
+          var pos = keys.indexOf(QUALITIES[i]);
+
+          if (pos >= 0) {
+            console.log(keys[pos]);
+            tableRow.append("<td>" + keys[pos] + "</td>");
+          } else {
+            tableRow.append("<td></td>");
+          }
+        }
+      }
     }
-  </style>
+  </script>
 </head>
 
 <body>
   <input id="in" type="text" title="input for text query"/>
-  <button id="btnSearch">Search</button>
+  <button id="btnSearch" onclick="doTheJob()">doTheJob</button>
 
   <table id="view">
     <thead id="header">
@@ -44,100 +81,8 @@
       </tr>
     </thead>
 
-    <tbody>Body</tbody>
+    <tbody></tbody>
   </table>
 
-  <script>
-    var repoUrl = 'rest/data/items';
-    var view = $("tbody");
-    var qualitiesRowsIndexes = [1, 3, 6, 11, 13, 14]; // indexes of genuine, vintage, unique, strange, haunted, collector's items
-    var items;
-
-    (function () {
-      items = getItems();
-      renderResponse(items);
-    })();
-
-    function getItems() {
-      return JSON.parse(getResource(repoUrl));
-    }
-
-    $("#btnSearch").click(function () {
-      var strToSearch = $("#in").val();
-      if (strToSearch.length > 0) {
-        renderResponse(searchSubString(items, strToSearch));
-      }
-    });
-
-    function getResource(resourceUrl) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('get', resourceUrl, false);
-      xhr.send();
-
-      if (xhr.status != 200) {
-        console.log("Can't get resource: " + resourceUrl + ". " + xhr.status + ": " + xhr.statusText);
-      } else {
-        return xhr.responseText;
-      }
-    }
-
-    function getResourceAsync(resourceUrl) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('get', resourceUrl, true);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-          if (xhr.status != 200) {
-            console.log("Can't get resource: " + resourceUrl + ". " + xhr.status + ": " + xhr.statusText);
-          } else {
-            return xhr.responseText;
-          }
-        }
-      };
-      xhr.send();
-    }
-
-    function renderResponse(itemsArr) {
-      view.empty();
-      for (var n = 0; n < itemsArr.length; n++) {
-        var item = itemsArr[n];
-
-        var tableRow = view.append("<tr>");
-        tableRow.append("<td class='nominal'>" + (n + 1) + "</td>");
-        tableRow.append("<td>" + item.name + "</td>");
-
-        appendQualities(tableRow, item.qualities, qualitiesRowsIndexes);
-      }
-    }
-
-    function appendQualities(tr, qualities, rows) {
-      var indexes = [];
-      for (var i = 0; i < qualities.length; i++) {
-        indexes.push(qualities[i].gameID);
-      }
-
-      for (var n = 0; n < rows.length; n++) {
-        var positionInQualities = jQuery.inArray(rows[n], indexes);
-        if (positionInQualities >= 0) {
-          tr.append("<td>" + qualities[positionInQualities].quality + "</td>")
-        } else {
-          tr.append("<td></td>")
-        }
-      }
-    }
-
-    // ignores letter case
-    function searchSubString(dataArray, string) {
-      var matches = [];
-      for (var i = 0; i < dataArray.length; i++) {
-        if (~dataArray[i]
-            .name.toLowerCase()
-            .indexOf(string.toLowerCase())
-        ) {
-          matches.push(dataArray[i]);
-        }
-      }
-      return matches;
-    }
-  </script>
 </body>
 </html>
