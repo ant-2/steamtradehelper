@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
 @WebFilter("/*")
 public class RequestLogFilter implements Filter {
   private Logger logger = LoggerFactory.getLogger("requestLogger");
   private String nodeId = Integer.toHexString((int) (Math.random() * 256)) + "-";
   private AtomicInteger requestId = new AtomicInteger(0);
+  static final Pattern noNeedToLogPattern = Pattern.compile("(.+\\.js)|(.+\\.css)"); // doesn't loq request for javascript files and etc
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,9 +26,14 @@ public class RequestLogFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
     HttpServletRequest http = (HttpServletRequest) request;
+
     try {
-      Thread.currentThread().setName(nodeId + requestId.incrementAndGet());
-      logger.info(request.getRemoteAddr() + " " + http.getMethod() + " " + http.getRequestURI() + " " + serializeParams(request));
+      String uri = http.getRequestURI();
+      if (!noNeedToLogPattern.matcher(uri).matches()) {
+        Thread.currentThread().setName(nodeId + requestId.incrementAndGet());
+        logger.info(request.getRemoteAddr() + " " + http.getMethod() + " " + uri + " " + serializeParams(request));
+      }
+
       filterChain.doFilter(request, response);
     } catch (Throwable e) {
       logger.error("", e);
