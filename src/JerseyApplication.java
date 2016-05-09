@@ -13,7 +13,8 @@ public class JerseyApplication extends ResourceConfig {
 
   public JerseyApplication() {
     packages(basePackage);
+    register(PojoJsonMapperProvider.class);
     register(JacksonFeature.class)
-        .property(JsonGenerator.PRETTY_PRINTING, true);    //todo JSON-P works only for returned JsonObjects, not for Entities
+        .property(JsonGenerator.PRETTY_PRINTING, true);
   }
 }

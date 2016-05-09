@@ -1,27 +1,25 @@
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import javax.ws.rs.ext.ContextResolver;
-import javax.ws.rs.ext.Provider;
 
-/**
- * Enables transfer entities to Json for returning by methods in Resource classes
- */
-@Provider
 public class PojoJsonMapperProvider implements ContextResolver<ObjectMapper> {
 
-  ObjectMapper defaultObjectMapper;
+  final ObjectMapper defaultObjectMapper;
 
-  public PojoJsonMapperProvider(ObjectMapper defaultObjectMapper) {
-    this.defaultObjectMapper = defaultObjectMapper;
+  public PojoJsonMapperProvider() {
+    this.defaultObjectMapper = createDefaultMapper();
   }
 
   @Override
-  public ObjectMapper getContext(Class<?> type) {
-    return null;
+  public ObjectMapper getContext(final Class<?> type) {
+    return defaultObjectMapper;
   }
 
   private static ObjectMapper createDefaultMapper() {
-    return new ObjectMapper();
+    final ObjectMapper result = new ObjectMapper();
+    result.enable(SerializationFeature.INDENT_OUTPUT);
+
+    return result;
   }
 }
