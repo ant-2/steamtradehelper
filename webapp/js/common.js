@@ -35,7 +35,7 @@ function getResourceAsync(resourceUrl) {
   xhr.send();
 }
 
-// Filters arr entries by string
+// Filters array of entries by given string
 // ignores letter case
 function filterArrayBySubstring(arr, string) {
   var matches = [];

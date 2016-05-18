@@ -1,11 +1,9 @@
-package eu.mosov.steamtradehelper.model;
+package eu.mosov.steamtradehelper.old.model;
 
 import eu.mosov.steamtradehelper.client.RestClient;
 
-import javax.json.JsonObject;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import javax.json.*;
+import java.util.*;
 import java.util.function.Function;
 
 public class InMemoryDataHolder {
@@ -32,26 +30,26 @@ public class InMemoryDataHolder {
 
   public JsonObject getResource(String uri) {
     if (!mem.containsKey(uri)) {
-      mem.put(uri, client.getResourceAsJson(uri));
+      mem.put(uri, client.getResourceAsType(uri, JsonObject.class));
     }
     return mem.get(uri);
   }
 
   public JsonObject getResource(String uri, Function<JsonObject, JsonObject> function) {
     if (!mem.containsKey(uri)) {
-      JsonObject value = function.apply(client.getResourceAsJson(uri));
+      JsonObject value = function.apply(client.getResourceAsType(uri, JsonObject.class));
       mem.put(uri, value);
     }
     return mem.get(uri);
   }
 
   public JsonObject updateAndGetResource(String uri) {
-    JsonObject result = client.getResourceAsJson(uri);
+    JsonObject result = client.getResourceAsType(uri, JsonObject.class);
     mem.put(uri, result);
     return result;
   }
 
-  // private utility methods
+  /*----------private utility methods-----------*/
   private void dropRefreshTimer() {
     lastTimeUpdated.setTime(lastTimeUpdated.getTime() - updateInterval * 2);
   }
@@ -63,5 +61,38 @@ public class InMemoryDataHolder {
   private Date setLastTimeUpdated() {
     lastTimeUpdated.setTime(System.currentTimeMillis());
     return lastTimeUpdated;
+  }
+
+  /*--------------Item ItemPostProcessor class---------------*/
+  private static class ItemParser {
+
+    private static Set<JsonObject> getTypes(JsonObject item) {
+      Set<JsonObject> set = new HashSet<>();
+      item.entrySet()
+          .stream()
+          .filter(e -> {
+            JsonValue.ValueType type = e.getValue().getValueType();
+            return type.equals(JsonValue.ValueType.OBJECT);
+          })
+          .map(e -> {
+            return Json.createObjectBuilder()
+                       .add(e.getKey(), e.getValue())
+                       .build();
+          })
+          .forEach(set::add);
+
+      return set;
+    }
+
+    private static JsonArray getKeysAsJsonArray(JsonObject json) {
+      JsonArrayBuilder builder = Json.createArrayBuilder();
+
+      json
+          .entrySet()
+          .stream()
+          .forEach(e -> builder.add(e.getKey()));
+
+      return builder.build();
+    }
   }
 }

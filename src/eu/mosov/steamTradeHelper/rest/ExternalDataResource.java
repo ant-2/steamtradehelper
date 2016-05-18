@@ -1,6 +1,6 @@
 package eu.mosov.steamtradehelper.rest;
 
-import eu.mosov.steamtradehelper.model.InMemoryDataHolder;
+import eu.mosov.steamtradehelper.old.model.InMemoryDataHolder;
 
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -42,19 +42,5 @@ public class ExternalDataResource extends SpringAwareResource {
       return repo.updateAndGetResource(MARKET);
     }
     return repo.getResource(MARKET);
-  }
-
-  @GET
-  @Path("resource")
-  public JsonObject getResource(
-                                     @DefaultValue("undefined") @QueryParam("uri") String uri,
-                                     @DefaultValue("false") @QueryParam("update") boolean update) {
-    if (uri.equals("undefined")) {
-      return null;
-    }
-    if (update) {
-      return repo.updateAndGetResource(uri);
-    }
-    return repo.getResource(uri);
   }
 }
