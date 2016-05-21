@@ -1,109 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Steam trade helper</title>
-  <style type="text/css">@import url(css/main.css);</style>
-  <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
-  <script src="js/common.js"></script>
-
-  <script>
-    var spreadsheet = {};
-    var QUALITIES = ["1", "3", "6", "11", "13", "14"]; // indexes of genuine, vintage, unique, strange, haunted, collector's items
-    var possibleTypes = ["Tradable", "Non-Tradable", "Craftable", "Non-Craftable"];
-
-    document.addEventListener("DOMContentLoaded", renderPageContent);
-
-    function renderPageContent() {
-      var rawItemsFromServer = getDataFromServer();
-      renderTableRows(rawItemsFromServer)
-    }
-
-    function getDataFromServer() {
-      var repoUrl = 'rest/raw/prices';
-      return JSON.parse(getResource(repoUrl)).response.items;
-    }
-
-    /**
-     * Renders table rows
-     * @param {Array} items
-     * */
-    function renderTableRows(items) {
-      var tbody = $("tbody");
-      tbody.empty();
-      /*var tbody = document.getElementById("view").getElementsByTagName("tbody")[0];  // selects <tbody>
-      tbody.innerHTML = "";*/
-
-      var count = 1;  // number of item
-      for (var item in items) {
-        if (!items.hasOwnProperty(item)) {
-          continue;
+    <meta charset="UTF-8">
+    <title>Steam trade helper</title>
+    <style type="text/css">@import url(css/main.css);</style>
+    <!--<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>-->
+    <!--<script src="js/common.js"></script>-->
+    <script>
+        function makeDiv(item) {
+            var result = document.createElement('div');
+            result.innerHTML = item.name;
+            return result;
         }
-        var tableRow = tbody.append("<tr>");
-        tableRow.append("<td class='nominal'>" + (count++) + "</td>");
-        tableRow.append("<td>" + item + "</td>");
-      }
-    }
 
-    /**
-     * Renders all possible item variations, like Tradable & Craftable and Tradable & Non-Craftable
-     * @param {Object} item
-     * @return {Array} of possible items variants
-     * */
-    function parseItemNames(item) {
-      var result = [];
-
-      var prices = item["prices"];
-      for (var quality in prices) {
-        if (!prices.hasOwnProperty(quality))  continue;
-
-        var arr = getTypesForQuality(quality);
-      }
-    }
-
-    /**
-     * @param {Object} quality for what need to get types
-     * @return {Object} that describes all possible types of an item with given quality
-     * */
-    function getTypesForQuality(quality) {
-      var tradableType;
-      var craftableType;
-      var types = {};
-
-      for (tradableType in quality) {
-        if (!quality.hasOwnProperty(tradableType))  continue;
-        types[tradableType] = {};
-
-        for (craftableType in quality[tradableType]) {
-          if (!quality[tradableType].hasOwnProperty(craftableType))  continue;
-          types[tradableType][craftableType] = true;
+        function appendDiv(parrent, div) {
+            parrent.appendChild(div);
         }
-      }
 
-      return types;
-    }
-  </script>
+        function doTheJob() {
+            var input = document.forms[0].elements[0].value;
+            if (input.length == 0)  return;
+            var item = {name: input};
+            appendDiv(
+                    document.getElementById('view'),
+                    makeDiv(item));
+            console.log("Item {name: "+item.name+"} appended");
+        }
+
+    </script>
 </head>
 
 <body>
-  <input id="in" type="text" title="input for text query"/>
-  <button id="btnSearch" onclick="renderPageContent()">doTheJob</button>
-
-  <table id="view">
-    <thead id="header">
-      <tr>
-        <th>#</th>
-        <th>Item name</th>
-        <th>Genuine</th>
-        <th>Vintage</th>
-        <th>Unique</th>
-        <th>Strange</th>
-        <th>Haunted</th>
-        <th>Collector's</th>
-      </tr>
-    </thead>
-
-    <tbody></tbody>
-  </table>
+<form>
+    <input id="in" type="text" title="input for text query"/><label>Item name</label><br>
+</form>
+<button id="btnSearch" onclick="doTheJob()">doTheJob</button>
+<div id="view"></div>
 </body>
 </html>
