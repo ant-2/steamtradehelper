@@ -1,30 +1,68 @@
 package eu.mosov.steamtradehelper.model;
 
-import javax.json.JsonObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Item {
-  public String name;
-  public Map<String, List<JsonObject>> attributes;
+  private String name;
+  private Map<String, List<String>> properties;
+  public int propertiesGroupsCount;
 
   public Item(String name) {
     this.name = name;
-    this.attributes = new HashMap<>();
+    this.properties = new HashMap<>();
+    propertiesGroupsCount = 0;
   }
 
   public String getName() {
     return name;
   }
 
-  public Map<String, List<JsonObject>> getAttributes() {
-    return attributes;
+  public void addProperty(String group, String... attr) {
+    String gr = group.toLowerCase();
+    if (!properties.containsKey(gr)) {
+      properties.put(gr, new ArrayList<>());
+    }
+
+    if (attr.length != 0) {
+      Collections.addAll(properties.get(gr), attr);
+    }
+
+    propertiesGroupsCount = properties.size();
   }
 
-  public boolean hasOwnProperty(String group, String property) {
-    if (!attributes.containsKey(group)) return false;
+  public void clearPropertyGroup(String group) {
+    properties.remove(group.toLowerCase());
+  }
 
-    return false;
+  public boolean hasOwnProperty(String group, String... property) {
+    String gr = group.toLowerCase();
+    if (!properties.containsKey(gr)) return false;
+
+    List<String> attr = properties.get(gr);
+
+    for (String p : property) {
+      if(!attr.contains(p.toLowerCase()))  return false;
+    }
+    return true;
+  }
+
+  /*------Override------*/
+  @Override
+  public String toString() {
+    return name;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Item)) return false;
+
+    Item item = (Item) o;
+    return name.equals(item.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode();
   }
 }
