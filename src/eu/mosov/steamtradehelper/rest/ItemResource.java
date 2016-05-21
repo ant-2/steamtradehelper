@@ -4,23 +4,26 @@ import eu.mosov.steamtradehelper.data.InMemoryItemRepo;
 import eu.mosov.steamtradehelper.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.json.JsonObject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
+import java.util.List;
 
 /**
  * Provides direct access to data from backpack.tf site
  */
-@Path("parsed")
+@Path("prices")
 @Produces({"application/json", "application/javascript"})
 public class ItemResource extends SpringAwareResource {
-  @Autowired InMemoryItemRepo<String, Item, JsonObject> repo;
+  @Autowired InMemoryItemRepo repo;
 
   @GET
-  @Path("resource")
+  @Path("item")
   public Item getItemPrices(@QueryParam("Name") String name) {
-    return repo.get(name);
+    return repo.getItem(name);
+  }
+
+  @GET
+  @Path("item")
+  public List<Item> getItemsWithAttributes(@FormParam("quality") String quality) {
+    return null;
   }
 }

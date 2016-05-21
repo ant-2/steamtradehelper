@@ -1,27 +1,55 @@
 package eu.mosov.steamtradehelper.data;
 
-import eu.mosov.steamtradehelper.model.DataPostProcessor;
-import org.springframework.stereotype.Component;
+import eu.mosov.steamtradehelper.model.Item;
+import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.json.JsonObject;
+import java.util.*;
+import java.util.stream.Collectors;
 
-@Component
-public class InMemoryItemRepo<K, V, D> {
-  private Map<K, V> mem;
-  private DataPostProcessor<K, V, D> dataPostProcessor;
+@Repository
+public class InMemoryItemRepo implements ItemRepository {
+  private static final Map<String, Item> mem = new HashMap<>();
 
-  public InMemoryItemRepo(DataPostProcessor<K, V, D> dataPostProcessor) {
-    this.mem = new HashMap<>();
-    this.dataPostProcessor = dataPostProcessor;
+  @Override
+  public Item getItem(String name) {
+    return mem.get(name);
   }
 
-  public void processData(D data) {
-    Map<K, V> parsed = dataPostProcessor.parse(data);
-    mem.putAll(parsed);
+  @Override
+  public List<Item> getAllItems() {
+    return mem
+               .entrySet()
+               .stream()
+               .map(Map.Entry::getValue)
+               .collect(Collectors.toList());
   }
 
-  public V get(K key) {
-    return mem.get(key);
+  /**
+   * Ключи мапы - имя группы аттрибутов (quality, craftable, etc)
+   * Велью - значения по которым ищем.
+   * */
+  @Override
+  public List<Item> getItemsWithAttribute(String attributeGroupName, List<String> attributes) {
+    List<Item> result = new ArrayList<>();
+
+    processElements(
+        mem.entrySet(),
+        e -> {
+          Map<String, List<JsonObject>> itemAttr = e.getValue().getAttributes();
+
+          if (itemAttr.containsKey(attributeGroupName)) return false; // item hasn't attributes of such group
+          List<JsonObject> jsonObjects = itemAttr.get(attributeGroupName);
+          for (String a : attributes) {
+
+          }
+
+          return true;
+        },
+        Map.Entry::getValue,
+        result::add
+        );
+
+    return result;
   }
 }
