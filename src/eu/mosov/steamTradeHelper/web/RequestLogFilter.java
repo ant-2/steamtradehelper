@@ -36,7 +36,7 @@ public class RequestLogFilter implements Filter {
 
       filterChain.doFilter(request, response);
     } catch (Throwable e) {
-      logger.error("", e);
+      logger.error("Some error in RequestLogFilter", e);
     }
   }
 

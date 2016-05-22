@@ -2,7 +2,7 @@ package eu.mosov.steamtradehelper.model;
 
 import java.util.*;
 
-public class Item {
+public class Item implements Comparable<Item> {
   private String name;
   private Map<String, List<String>> properties;
   public int propertiesGroupsCount;
@@ -64,5 +64,10 @@ public class Item {
   @Override
   public int hashCode() {
     return name.hashCode();
+  }
+
+  @Override
+  public int compareTo(Item o) {
+    return this.name.compareTo(o.name);
   }
 }

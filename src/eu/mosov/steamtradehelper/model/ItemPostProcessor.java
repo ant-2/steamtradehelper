@@ -6,13 +6,17 @@ import javax.json.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
-public class ItemPostProcessor implements DataPostProcessor<String, Item, JsonObject> {
+public class ItemPostProcessor {
 
-  @Override
   public Map<String, Item> parse(JsonObject json) {
-    return null;
+    return json
+        .entrySet()
+        .stream()
+        .map(e -> new Item(e.getKey()))
+        .collect(Collectors.toMap(Item::getName, item -> item));
   }
 
   /*-----------------private utility methods---------------*/

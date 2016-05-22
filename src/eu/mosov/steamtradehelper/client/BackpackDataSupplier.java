@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.json.JsonObject;
 
+//todo разобраться зачем я написал этот класс
 /**
  * Получает данные с сайта Backpack.tf
  * */
