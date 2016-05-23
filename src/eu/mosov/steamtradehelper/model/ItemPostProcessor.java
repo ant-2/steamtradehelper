@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static javax.json.JsonValue.ValueType;
+import static javax.json.JsonValue.ValueType.OBJECT;
+
 @Service
 public class ItemPostProcessor {
 
@@ -15,18 +18,41 @@ public class ItemPostProcessor {
     return json
         .entrySet()
         .stream()
-        .map(e -> new Item(e.getKey()))
+        .map(e -> {
+          Item item  =new Item(e.getKey());
+          JsonValue itemJsonValue = e.getValue();
+          item.addProperty("quality", getQualities(itemJsonValue));
+          return item;
+        })
         .collect(Collectors.toMap(Item::getName, item -> item));
   }
 
+  /*-------private methods for parsing specific properties-------*/
+  private static List<String> getQualities(JsonValue item) {
+    if (!item.getValueType().equals(OBJECT)) {
+      throw new RuntimeException("");
+    }
+    JsonObject itemAsObject = (JsonObject) item;
+
+    return getKeys(itemAsObject.getJsonObject("prices"));
+  }
+
   /*-----------------private utility methods---------------*/
+  private static List<String> getKeys(JsonObject json) {
+    return json
+        .entrySet()
+        .stream()
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toList());
+  }
+
   private static void getTypes(JsonObject item) {
     List<JsonObject> list = new ArrayList<>();
     item.entrySet()
         .stream()
         .filter(e -> {
-          JsonValue.ValueType type = e.getValue().getValueType();
-          return type.equals(JsonValue.ValueType.OBJECT);
+          ValueType type = e.getValue().getValueType();
+          return type.equals(OBJECT);
         })
         .map(e -> {
           return Json.createObjectBuilder()

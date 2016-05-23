@@ -30,6 +30,16 @@ public class Item implements Comparable<Item> {
     propertiesGroupsCount = properties.size();
   }
 
+  public void addProperty(String group, Collection<String> attr) {
+    String gr = group.toLowerCase();
+    if (!properties.containsKey(gr)) {
+      properties.put(gr, new ArrayList<>());
+    }
+
+    properties.get(gr).addAll(attr);
+    propertiesGroupsCount = properties.size();
+  }
+
   public void clearPropertyGroup(String group) {
     properties.remove(group.toLowerCase());
   }
@@ -69,5 +79,12 @@ public class Item implements Comparable<Item> {
   @Override
   public int compareTo(Item o) {
     return this.name.compareTo(o.name);
+  }
+
+  /*-------Getters-------*/
+
+  //getter for
+  public Map<String, List<String>> getProperties() {
+    return Collections.unmodifiableMap(properties);
   }
 }
