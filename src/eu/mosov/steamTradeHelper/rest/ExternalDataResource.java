@@ -28,4 +28,16 @@ public class ExternalDataResource extends SpringAwareResource {
   public JsonObject getCurrenciesBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
     return repo.getResource("curr", CURRENCIES.getURI(), update);
   }
+
+  @GET
+  @Path("market")
+  public JsonObject getMarketPricesFromBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
+    return repo.getResource("curr", MARKET.getURI(), update);
+  }
+
+  @GET
+  @Path("steam")
+  public JsonObject getSteam(@DefaultValue("false") @QueryParam("update") boolean update) {
+    return repo.getResource("curr", STEAM_SCHEMA.getURI(), update);
+  }
 }

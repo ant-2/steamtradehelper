@@ -3,7 +3,6 @@ package eu.mosov.steamtradehelper.model;
 import org.springframework.stereotype.Service;
 
 import javax.json.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,17 +36,8 @@ public class ItemPostProcessor {
     return getKeys(itemAsObject.getJsonObject("prices"));
   }
 
-  /*-----------------private utility methods---------------*/
-  private static List<String> getKeys(JsonObject json) {
-    return json
-        .entrySet()
-        .stream()
-        .map(Map.Entry::getKey)
-        .collect(Collectors.toList());
-  }
-
+  //todo поченить парсинг карфт\трейд статусов
   private static void getTypes(JsonObject item) {
-    List<JsonObject> list = new ArrayList<>();
     item.entrySet()
         .stream()
         .filter(e -> {
@@ -59,7 +49,16 @@ public class ItemPostProcessor {
                      .add(e.getKey(), e.getValue())
                      .build();
         })
-        .forEach(list::add);
+        .collect(Collectors.toList());
+  }
+
+  /*-----------------private utility methods---------------*/
+  private static List<String> getKeys(JsonObject json) {
+    return json
+        .entrySet()
+        .stream()
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toList());
   }
 
   private static JsonArray getKeysAsJsonArray(JsonObject json) {
