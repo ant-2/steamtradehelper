@@ -3,6 +3,7 @@ package eu.mosov.steamtradehelper.model;
 import org.springframework.stereotype.Service;
 
 import javax.json.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,25 +16,25 @@ public class ItemPostProcessor {
 
   public Map<String, Item> parse(JsonObject json) {
     return json
-        .entrySet()
-        .stream()
-        .map(e -> {
-          Item item  =new Item(e.getKey());
-          JsonValue itemJsonValue = e.getValue();
-          item.addProperty("quality", getQualities(itemJsonValue));
-          return item;
-        })
-        .collect(Collectors.toMap(Item::getName, item -> item));
+               .entrySet()
+               .stream()
+               .map(e -> {
+                 Item item = new Item(e.getKey());
+                 JsonValue itemJsonValue = e.getValue();
+                 item.addProperty("quality", getQualities(itemJsonValue));
+                 return item;
+               })
+               .collect(Collectors.toMap(Item::getName, item -> item));
   }
 
   /*-------private methods for parsing specific properties-------*/
-  private static List<String> getQualities(JsonValue item) {
+  private static List<JsonObject> getQualities(JsonValue item) {
     if (!item.getValueType().equals(OBJECT)) {
-      throw new RuntimeException("");
+      return Collections.emptyList();
     }
-    JsonObject itemAsObject = (JsonObject) item;
 
-    return getKeys(itemAsObject.getJsonObject("prices"));
+    JsonObject json = (JsonObject) item;
+    return getKeysAsJsonObjects(json.getJsonObject("prices"));
   }
 
   //todo поченить парсинг карфт\трейд статусов
@@ -55,10 +56,24 @@ public class ItemPostProcessor {
   /*-----------------private utility methods---------------*/
   private static List<String> getKeys(JsonObject json) {
     return json
-        .entrySet()
-        .stream()
-        .map(Map.Entry::getKey)
-        .collect(Collectors.toList());
+               .entrySet()
+               .stream()
+               .map(Map.Entry::getKey)
+               .collect(Collectors.toList());
+  }
+
+  private static List<JsonObject> getKeysAsJsonObjects(JsonObject json) {
+    return json
+               .entrySet()
+               .stream()
+               .map(e -> {
+                 return
+                     Json.createObjectBuilder()
+                         .add("key", e.getKey())
+                         .add("value", e.getValue())
+                         .build();
+               })
+               .collect(Collectors.toList());
   }
 
   private static JsonArray getKeysAsJsonArray(JsonObject json) {

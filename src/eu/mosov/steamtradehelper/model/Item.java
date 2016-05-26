@@ -1,58 +1,59 @@
 package eu.mosov.steamtradehelper.model;
 
+import javax.json.JsonObject;
 import java.util.*;
 
 public class Item implements Comparable<Item> {
   private String name;
-  private Map<String, List<String>> properties;
-  public int propertiesGroupsCount;
+  private Map<String, List<JsonObject>> properties;
 
   public Item(String name) {
     this.name = name;
     this.properties = new HashMap<>();
-    propertiesGroupsCount = 0;
   }
 
   public String getName() {
     return name;
   }
 
-  public void addProperty(String group, String... attr) {
-    String gr = group.toLowerCase();
-    if (!properties.containsKey(gr)) {
-      properties.put(gr, new ArrayList<>());
-    }
-
-    if (attr.length != 0) {
-      Collections.addAll(properties.get(gr), attr);
-    }
-
-    propertiesGroupsCount = properties.size();
+  public List<JsonObject> getGroup(String group) {
+    return properties.get(group.toLowerCase());
   }
 
-  public void addProperty(String group, Collection<String> attr) {
-    String gr = group.toLowerCase();
-    if (!properties.containsKey(gr)) {
-      properties.put(gr, new ArrayList<>());
+  public void addProperty(String key, JsonObject value) {
+    if (!this.hasGroup(key)) {
+      properties.put(key, new ArrayList<>());
     }
-
-    properties.get(gr).addAll(attr);
-    propertiesGroupsCount = properties.size();
+    this.getGroup(key).add(value);
   }
 
-  public void clearPropertyGroup(String group) {
+  public void addProperty(String key, List<JsonObject> values) {
+    if (!this.hasGroup(key)) {
+      properties.put(key, new ArrayList<>());
+    }
+    this.getGroup(key).addAll(values);
+  }
+
+  /*-------Public utility methods------*/
+  public boolean hasGroup(String group) {
+    return properties.containsKey(group.toLowerCase());
+  }
+
+/*  public boolean hasOwnProperty(String group, String property) {
+    if (!this.hasGroup(group)) return false;
+    List<JsonObject> attr = this.getGroup(group);
+
+    if (!attr.contains(p.toLowerCase())) return false;
+
+    return true;
+  }*/
+
+  public boolean clearPropertyGroup(String group) {
+    if (!this.hasGroup(group)) {
+      return false;
+    }
+
     properties.remove(group.toLowerCase());
-  }
-
-  public boolean hasOwnProperty(String group, String... property) {
-    String gr = group.toLowerCase();
-    if (!properties.containsKey(gr)) return false;
-
-    List<String> attr = properties.get(gr);
-
-    for (String p : property) {
-      if(!attr.contains(p.toLowerCase()))  return false;
-    }
     return true;
   }
 
@@ -82,9 +83,12 @@ public class Item implements Comparable<Item> {
   }
 
   /*-------Getters-------*/
-
   //getter for
-  public Map<String, List<String>> getProperties() {
+  public Map<String, List<JsonObject>> getProperties() {
     return Collections.unmodifiableMap(properties);
+  }
+
+  public int getPropertiesGroupsCount() {
+    return properties.size();
   }
 }
