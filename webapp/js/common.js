@@ -20,6 +20,7 @@ function getResource(resourceUrl) {
   }
 }
 
+//doesn't work //todo fix async getResource()
 function getResourceAsync(resourceUrl) {
   var xhr = new XMLHttpRequest();
   xhr.open('get', resourceUrl, true);

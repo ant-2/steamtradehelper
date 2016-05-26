@@ -1,0 +1,14 @@
+body {
+    font-family: sans-serif, "Helvetica Neue", Arial, Helvetica;
+    font-size: 10pt;
+}
+
+.trow {
+    height: 2em;
+    display: table-row;
+}
+
+.tcell {
+    vertical-align: middle;
+    display: table-cell;
+}

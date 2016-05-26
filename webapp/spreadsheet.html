@@ -3,30 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Steam trade helper</title>
-    <style type="text/css">@import url(css/main.css);</style>
-    <!--<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>-->
-    <!--<script src="js/common.js"></script>-->
+    <style type="text/css">@import url(css/spreadsheet.css);</style>
+    <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="js/common.js"></script>
     <script>
-        function makeDiv(item) {
-            var result = document.createElement('div');
-            result.innerHTML = item.name;
-            return result;
+        document.addEventListener("DOMContentLoaded", init);
+
+        var items;
+
+        function init() {
+            try {
+                items = getItems();
+            } catch (Error) {
+                console.log('Error in attempt to get items object from server');
+            }
+
+            var input = document.forms[0].elements[0].value;
+            document.getElementById('btnSearch').onclick = function () {
+               try {
+                   renderContent(items);
+               } catch (Error) {
+                   console.log(Error.message);
+               }
+            };
+
+            function renderContent(itemsArr) {
+//                if (input.length == 0)  return;
+
+                var i, div, view;
+                view = document.getElementById('view');
+                for (i = 0; i < itemsArr.length; i++) {
+                    div = makeDivFrItem(itemsArr[i]);
+                    appendDiv(view, div);
+                }
+                console.log('Done. '+ i+ ' items are rendered');
+            }
+        }
+
+        function makeDivFrItem(item) {
+            function createDiv(innerHTML, style) {
+                var div = document.createElement('div');
+                if (style !== undefined)    div.classList.add(style);
+                div.innerHTML = innerHTML;
+                return div;
+            }
+
+            var container = document.createElement('div');
+            container.classList.add("trow");
+
+            //  adds an Item name
+            container.appendChild(createDiv(item.name, 'tcell'));
+
+            // adds qualities for the item
+            var qualities = item.properties.quality;
+            var q;
+            for (q in qualities) {
+                if (!qualities.hasOwnProperty(q))   continue;
+                container.appendChild(createDiv(qualities[q], 'tcell'));
+            }
+            return container;
         }
 
         function appendDiv(parrent, div) {
             parrent.appendChild(div);
         }
 
+        function getItems() {
+            var uri = 'rest/item/all';
+            var json, result;
+            json = getResource(uri);
+
+            try {
+                if (json === undefined) throw new TypeError("items object are undefined");
+                result= JSON.parse(json);
+            } catch (Error) {
+                console.log("Can't parse items from server. "+e.name+": "+e.message);
+            }
+            return result;
+        }
+
         function doTheJob() {
             var input = document.forms[0].elements[0].value;
             if (input.length == 0)  return;
             var item = {name: input};
+
             appendDiv(
                     document.getElementById('view'),
-                    makeDiv(item));
-            console.log("Item {name: "+item.name+"} appended");
+                    makeDivFrItem(item));
+            console.log("Item {name: " + item.name + "} appended");
         }
-
     </script>
 </head>
 
@@ -34,7 +99,7 @@
 <form>
     <input id="in" type="text" title="input for text query"/><label>Item name</label><br>
 </form>
-<button id="btnSearch" onclick="doTheJob()">doTheJob</button>
+<button id="btnSearch">doTheJob</button>
 <div id="view"></div>
 </body>
 </html>
