@@ -41,10 +41,5 @@
         <dependency org="org.liquibase" name="liquibase-core" rev="3.4+"/>
         <dependency org="org.hibernate" name="hibernate-core" rev="3.6+"/>
         <dependency org="org.hibernate" name="hibernate-validator" rev="4.3+"/>
-
-        <!--<dependency org="org.kopitubruk.util" name="JSONUtil" rev="1.5-java7"/>-->
-        <!--<dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1.1"/>-->
-        <!--<dependency org="com.google.code.gson" name="gson" rev="2.6.2"/>-->
-        <!--<dependency org="org.json" name="json" rev="20160212"/>-->
     </dependencies>
 </ivy-module>

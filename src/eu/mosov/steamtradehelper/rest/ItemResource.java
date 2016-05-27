@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides direct access to data from backpack.tf site
@@ -19,13 +20,13 @@ public class ItemResource extends SpringAwareResource {
   @Autowired ItemRepo itemRepo;
 
   @GET
-  public Item getItem(@QueryParam("Name") String name) {
+  public List<Item> getItem(@QueryParam("Name") String name) {
     return itemRepo.getItem(name);
   }
 
   @GET
   @Path("all")
-  public List<Item> getAllItems(@QueryParam("Name") String name) {
+  public Map<String, List<Item>> getAllItems(@QueryParam("Name") String name) {
     return itemRepo.getAllItems();
   }
 }

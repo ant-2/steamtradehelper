@@ -9,28 +9,29 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="eu.mosov.steamtradehelper"/>
-
-    <!--datasource from jetty's jndi-->
+    <!--Database support now are disabled, cause no need-->
+    <!--
+    &lt;!&ndash;datasource from jetty's jndi&ndash;&gt;
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="jdbc/ds"/>
     </bean>
 
-    <!--production changeSet-->
+    &lt;!&ndash;production changeSet&ndash;&gt;
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
         <property name="dataSource" ref="dataSource"/>
         <property name="changeLog" value="file:config/db/liquibase.xml"/>
     </bean>
 
-    <!--Spring factory to produce Hibernate Session objects-->
+    &lt;!&ndash;Spring factory to produce Hibernate Session objects&ndash;&gt;
     <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" depends-on="liquibase">
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedPackages" value="eu.mosov.steamtradehelper.model.entity" />
     </bean>
 
-    <!--Spring wrapper over Hibernate.Session-->
+    &lt;!&ndash;Spring wrapper over Hibernate.Session&ndash;&gt;
     <bean id="hibernate" class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory" ref="hibernateSessionFactory"/>
         <property name="flushModeName" value="FLUSH_EAGER"/>
-    </bean>
+    </bean>-->
 
 </beans>

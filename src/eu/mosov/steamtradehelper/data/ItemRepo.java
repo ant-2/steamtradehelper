@@ -1,52 +1,58 @@
 package eu.mosov.steamtradehelper.data;
 
 import eu.mosov.steamtradehelper.model.Item;
-import eu.mosov.steamtradehelper.model.ItemPostProcessor;
+import eu.mosov.steamtradehelper.model.PricesParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.json.JsonObject;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static eu.mosov.steamtradehelper.rest.DataResourcesEnum.PRICES;
 
 @Repository
 @Scope("singleton")
 public class ItemRepo {
-  private static final Map<String, Item> mem = new HashMap<>();
-  @Autowired private ItemPostProcessor dataConverter;
+  private static final Map<String, List<Item>> mem = new HashMap<>();
+  @Autowired private PricesParser dataConverter;
   @Autowired private RawDataRepo repo;
-  private boolean isInitialized;
+  private volatile boolean isInitialized;
 
-  @PostConstruct
-  private void init() {
-      JsonObject prices = repo.getResource("prices", PRICES.getURI(), true);
-      mem.putAll(dataConverter.parse(prices.getJsonObject("response").getJsonObject("items")));
-      isInitialized = true;
+  private void checkInitStatus() {
+    if (!isInitialized) init();
   }
 
-  public boolean isInitialized() {return isInitialized;}
-
-  public Item getItem(String name) {
-    return mem.get(name);
+  private synchronized void init() {
+    JsonObject prices = repo.getResource("prices", PRICES.getURI(), true);
+    mem.putAll(dataConverter.parse(prices.getJsonObject("response").getJsonObject("items")));
+    isInitialized = true;
   }
 
-  public List<Item> getAllItems() {
-    List<Item> result = new ArrayList<>(1800);
-    try {
-      result = mem
-                   .entrySet()
-                   .stream()
-                   .map(Map.Entry::getValue)
-                   .collect(Collectors.toList());
+  public boolean isInitialized() {
+    return isInitialized;
+  }
 
-      result.sort((a, b) -> a.getName().compareTo(b.getName()));
-    } catch (Exception e) {
-      e.printStackTrace();
+  public List<Item> getItem(String name) {
+    checkInitStatus();
+    return Collections.unmodifiableList(mem.get(name));
+  }
+
+  public Map<String, List<Item>> getAllItems() {
+    checkInitStatus();
+    return Collections.unmodifiableMap(mem);
+  }
+
+  public Map<String, List<Item>> getItemsWithProperty(String propertyName, String propertyValue) {
+    for (Map.Entry<String, List<Item>> e : mem.entrySet()) {
+      List<Item> list = e.getValue();
+      for (Item item : list) {
+
+      }
     }
-    return result;
+    return null;
   }
 }
