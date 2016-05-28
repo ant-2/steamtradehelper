@@ -1,7 +1,6 @@
 package eu.mosov.steamtradehelper.rest;
 
-import eu.mosov.steamtradehelper.model.PropertiesImpl;
-import eu.mosov.steamtradehelper.model.TestEntity;
+import eu.mosov.steamtradehelper.model.Price;
 
 import javax.ws.rs.*;
 import java.util.ArrayList;
@@ -14,18 +13,15 @@ public class TestResource {
 
   @GET
   @Path("all")
-  public List<TestEntity> getPricesBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
-    List<TestEntity> mem = new ArrayList<>();
-    PropertiesImpl properties = new PropertiesImpl(e -> {
-      e.quality = 6;
-      e.tradable = "Tradable";
-      e.craftable = "Craftable";
-    });
+  public List<Price> getPricesBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
+    List<Price> list = new ArrayList<>();
+    list.add(new Price("keys", 1)
+                 .addProperty("Tradable", "1")
+                 .addProperty("Craftable", "1"));
 
-    mem.add(new TestEntity("item 1").setProperties(properties));
-    mem.add(new TestEntity("item 2").setProperties(properties));
-    mem.add(new TestEntity("item 3").setProperties(properties));
-
-    return Collections.unmodifiableList(mem);
+    list.add(new Price("metal", 19.33)
+                 .addProperty("Tradable", "1")
+                 .addProperty("Craftable", "1"));
+    return Collections.unmodifiableList(list);
   }
 }

@@ -1,7 +1,6 @@
 package eu.mosov.steamtradehelper.data;
 
 import eu.mosov.steamtradehelper.model.Item;
-import eu.mosov.steamtradehelper.model.PricesParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -18,7 +17,7 @@ import static eu.mosov.steamtradehelper.rest.DataResourcesEnum.PRICES;
 @Scope("singleton")
 public class ItemRepo {
   private static final Map<String, List<Item>> mem = new HashMap<>();
-  @Autowired private PricesParser dataConverter;
+  @Autowired private OldPricesParser dataConverter;
   @Autowired private RawDataRepo repo;
   private volatile boolean isInitialized;
 
@@ -44,15 +43,5 @@ public class ItemRepo {
   public Map<String, List<Item>> getAllItems() {
     checkInitStatus();
     return Collections.unmodifiableMap(mem);
-  }
-
-  public Map<String, List<Item>> getItemsWithProperty(String propertyName, String propertyValue) {
-    for (Map.Entry<String, List<Item>> e : mem.entrySet()) {
-      List<Item> list = e.getValue();
-      for (Item item : list) {
-
-      }
-    }
-    return null;
   }
 }
