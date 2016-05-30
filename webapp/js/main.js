@@ -4,20 +4,20 @@ function Collection() {
 }
 
 Collection.prototype.addProperty = function (key, value) {
-    this.properties[key] = value;
+    this[key] = value;
 };
 
 Collection.prototype.removeProperty = function (key) {
-    delete this.properties[key];
+    delete this[key];
 };
 
 Collection.prototype.getProperty = function (key) {
-    return this.properties[key];
+    return this[key];
 };
 
 Collection.prototype.hasProperty = function (key, value) {
-    if (!this.properties.hasOwnProperty(key)) return false;
-    return (this.properties[key] === value);
+    if (!this.hasOwnProperty(key)) return false;
+    return (this[key] === value);
 };
 
 // Constructor for price objects
@@ -112,6 +112,16 @@ function PricesApiParser(prices) {
                 priceArr[i].addProperty("qualityID", qualityID);
             }
             arr = arr.concat(priceArr);
+        }
+
+        return arr;
+    };
+
+    this.getAllPrices = function () {
+        var item, arr = [];
+        for (item in items) {
+            if (!items.hasOwnProperty(item))    continue;
+            arr = arr.concat(this.getItemPrices(item));
         }
 
         return arr;

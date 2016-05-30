@@ -34,8 +34,15 @@
             console.timeEnd("getItemPrices");
         }
 
+        function testGetItemPricesPerf() {
+            console.time("testGetItemPricesPerf");
+            var allPrices = pricesHolder.getAllPrices();
+            console.timeEnd("testGetItemPricesPerf");
+        }
+
         testGetQualitiesNames();
         testGetItemPrices();
+        testGetItemPricesPerf();
     }
 
     test();
