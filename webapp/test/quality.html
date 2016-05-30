@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="../js/pricesExtractor.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/common.js"></script>
+</head>
+<body>
+<script>
+    (function () {
+        var rawItems = getResource('http://127.0.0.1:8080/rest/raw/prices');
+        var items = JSON.parse(rawItems);
+
+        try {
+            var item = items["response"]["items"]["A Brush with Death"];
+            var qualities = getQualitiesNames(item);
+        } catch (e) {
+            console.log(e.message);
+        }
+
+        for (var q in qualities) {
+            if (!qualities.hasOwnProperty(qualityID)) continue;
+
+            console.log(qualityID +": "+ qualities[qualityID]);
+        }
+    })();
+
+</script>
+</body>
+</html>

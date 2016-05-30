@@ -57,9 +57,9 @@
             // adds qualities for the item
             var qualities = item.properties.quality;
             var q;
-            for (q in qualities) {
-                if (!qualities.hasOwnProperty(q))   continue;
-                container.appendChild(createDiv(qualities[q], 'tcell'));
+            for (qualityID in qualities) {
+                if (!qualities.hasOwnProperty(qualityID))   continue;
+                container.appendChild(createDiv(qualities[qualityID], 'tcell'));
             }
             return container;
         }

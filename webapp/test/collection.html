@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/main.js"></script>
+    <script src="../js/utils.js"></script>
+</head>
+<body>
+<script>
+    function testCollection() {
+        var coll = new Collection();
+        coll.addProperty("qualityID", 6);
+        var error = new Error("Something wrong with collection");
+
+        if (!coll.hasOwnProperty("properties")) throw error;
+        if (coll.properties["qualityID"] === undefined) throw error;
+    }
+
+    function testPrice() {
+        var price = new Price("keys", 10);
+        price.addProperty("qualityID", 6);
+        var error = new Error("Something wrong with Price object");
+
+        if (price._currency !== "keys") throw error;
+        if (price._value !== 10) throw error;
+        if (price.properties["qualityID"] === undefined) throw error;
+    }
+
+    testCollection();
+    testPrice();
+</script>
+</body>
+</html>
