@@ -1,6 +1,6 @@
 // Constructor for a collection
 function Collection() {
-    this.properties = Object.create(null);
+    // this.properties = Object.create(null);
 }
 
 Collection.prototype.addProperty = function (key, value) {
@@ -168,17 +168,17 @@ function getPricesForQuality(quality) {
  * @return {object} key - qualityID, value{string} - quality name
  * */
 function getQualitiesNames(item) {
-    var qualityID, prices, arr, foo;
+    var qualityID, prices, result, foo;
     foo = fooConvertQualityIdToQualityName();
     prices = item["prices"];
-    arr = {};
+    result = {};
 
     for (qualityID in prices) {
         if (!prices.hasOwnProperty(qualityID))  continue;
-        arr[qualityID] = foo(qualityID);
+        result[qualityID] = foo(qualityID);
     }
 
-    return arr;
+    return result;
 }
 
 /**
