@@ -28,8 +28,7 @@
             if (prices.length != 20)    throw error;
         }
 
-        function testGetQualitiesNames() {
-            console.time("getQualitiesNames");
+        function testGetQualitiesNames()             console.time("getQualitiesNames");
             var names = getQualitiesNames(itemToTest);
             console.timeEnd("getQualitiesNames");
             if (!names.hasOwnProperty("6") || names["6"] != "unique")   throw error;

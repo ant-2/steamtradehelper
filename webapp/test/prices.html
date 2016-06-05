@@ -29,14 +29,14 @@
         }
 
         function testGetItemPrices() {
-            console.time("getItemPrices");
-            var itemPrices = pricesHolder.getItemPrices("A Hat to Kill For");
-            console.timeEnd("getItemPrices");
+            console.time("getItemsWithName");
+            var itemPrices = pricesHolder.getItemsWithName("A Hat to Kill For");
+            console.timeEnd("getItemsWithName");
         }
 
         function testGetItemPricesPerf() {
             console.time("testGetItemPricesPerf");
-            var allPrices = pricesHolder.getAllPrices();
+            var allPrices = pricesHolder.getAllItemsAsArray();
             console.timeEnd("testGetItemPricesPerf");
         }
 

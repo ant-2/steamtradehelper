@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../js/main.js"></script>
+    <script src="../js/prices.js"></script>
     <script src="../js/utils.js"></script>
 </head>
 <body>
@@ -18,7 +18,7 @@
     }
 
     function testPrice() {
-        var price = new Price("keys", 10);
+        var price = new Item("keys", 10);
         price.addProperty("qualityID", 6);
         var error = new Error("Something wrong with Price object");
 

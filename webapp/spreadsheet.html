@@ -1,105 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Steam trade helper</title>
-    <style type="text/css">@import url(css/spreadsheet.css);</style>
-    <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="js/common.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", init);
+  <meta charset="UTF-8">
+  <title>Trade helper</title>
+  <style type="text/css">@import url(css/spreadsheet.css);</style>
+  <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/prices.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", init);
 
-        var items;
+    function init() {
+      // retrieves data from a server
+      var items, dataSupplier, parser, rawPrices;
+      try {
+        dataSupplier = new BackpacktfDataSupplier();
+        rawPrices = dataSupplier.getPrices();
+        parser = new PricesApiParser(rawPrices);
+        items = parser.getAllItems();
+      } catch (e) {
+        console.log('Error in attempt to get data from server. '+e.name+": "+e.message);
+      }
 
-        function init() {
-            try {
-                items = getItems();
-            } catch (Error) {
-                console.log('Error in attempt to get items object from server');
-            }
+      // selects page elements
+      var input, btn, view;
+      try {
+        input = document.getElementById('in');
+        btn = document.getElementById('btnSearch');
+        view = document.getElementById('view');
+      } catch (e) {
+        console.log('Error during page variables initialization. '+e.name+": "+e.message);
+      }
 
-            var input = document.forms[0].elements[0].value;
-            document.getElementById('btnSearch').onclick = function () {
-               try {
-                   renderContent(items);
-               } catch (Error) {
-                   console.log(Error.message);
-               }
-            };
+      btn.onclick = doSearch();
+      // main search function
+      function doSearch() {
+        try {
+          // todo прикрутить фильтрацию по имени предметов
+          renderContent(items);
+        } catch (e) {
+          console.log("Can't make search. "+e.name+": "+e.message);
+        }
+      }
 
-            function renderContent(itemsArr) {
-//                if (input.length == 0)  return;
+      // functions to render page content
+      function renderContent(items) {
+        var itemName;
+        for (itemName in items) {
+          if(!items.hasOwnProperty(itemName))  continue;
 
-                var i, div, view;
-                view = document.getElementById('view');
-                for (i = 0; i < itemsArr.length; i++) {
-                    div = makeDivFrItem(itemsArr[i]);
-                    appendDiv(view, div);
-                }
-                console.log('Done. '+ i+ ' items are rendered');
-            }
+          appendDiv(view, makeRow(itemName, items[itemName]));
+        }
+      }
+
+      function makeRow(name, item) {
+        // each cell represents an item price
+        function createCell(price) {
+          var cell, text;
+          text = price.qualityName + " " + price.value + " "+ price.currency;
+          return createDiv('tcell', text);
         }
 
-        function makeDivFrItem(item) {
-            function createDiv(innerHTML, style) {
-                var div = document.createElement('div');
-                if (style !== undefined)    div.classList.add(style);
-                div.innerHTML = innerHTML;
-                return div;
-            }
+        var container;
+        try {
+          container = createDiv('trow');
+          appendDiv(container, createDiv('tcell', name));
 
-            var container = document.createElement('div');
-            container.classList.add("trow");
-
-            //  adds an Item name
-            container.appendChild(createDiv(item.name, 'tcell'));
-
-            // adds qualities for the item
-            var qualities = item.properties.quality;
-            var q;
-            for (qualityID in qualities) {
-                if (!qualities.hasOwnProperty(qualityID))   continue;
-                container.appendChild(createDiv(qualities[qualityID], 'tcell'));
-            }
-            return container;
+          var i;
+          for (i = 0; i < item.length; i++) {
+            if (item[i].priceID != 0)  continue;
+            appendDiv(container, createCell(item[i]));
+          }
+        } catch (e) {
+          console.log("Error trying to make div from Item. "+e.name+": "+e.message);
         }
+        return container;
+      }
 
-        function appendDiv(parrent, div) {
-            parrent.appendChild(div);
-        }
+      // util functions
+      function appendDiv(parrent, div) {
+        parrent.appendChild(div);
+      }
 
-        function getItems() {
-            var uri = 'rest/item/all';
-            var json, result;
-            json = getResource(uri);
-
-            try {
-                if (json === undefined) throw new TypeError("items object are undefined");
-                result= JSON.parse(json);
-            } catch (Error) {
-                console.log("Can't parse items from server. "+e.name+": "+e.message);
-            }
-            return result;
-        }
-
-        function doTheJob() {
-            var input = document.forms[0].elements[0].value;
-            if (input.length == 0)  return;
-            var item = {name: input};
-
-            appendDiv(
-                    document.getElementById('view'),
-                    makeDivFrItem(item));
-            console.log("Item {name: " + item.name + "} appended");
-        }
-    </script>
+      function createDiv(style, innerHTML) {
+        var div = document.createElement('div');
+        if (style !== undefined)    div.classList.add(style);
+        if (innerHTML !== undefined)  div.innerHTML = innerHTML;
+        return div;
+      }
+    }
+  </script>
 </head>
 
 <body>
 <form>
-    <input id="in" type="text" title="input for text query"/><label>Item name</label><br>
+  <input id="in" type="text" title="enter item name to search"/><label>Item name</label><br>
 </form>
-<button id="btnSearch">doTheJob</button>
+<button id="btnSearch" onclick="doSearch()">doTheJob</button>
 <div id="view"></div>
 </body>
 </html>
