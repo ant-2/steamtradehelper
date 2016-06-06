@@ -26,7 +26,7 @@ Item.prototype.constructor = Item;
  * */
 function PricesApiParser(prices) {
   var items = prices["response"]["items"];
-  var qualityConverter = qualityIdToqualityName();
+  var qualityConverter = qualityIdToQualityName();
   var self = this;
 
   /**
@@ -112,7 +112,7 @@ function PricesApiParser(prices) {
 
     var i, arr = [];
     for (i = 0; i < qualitiesIDs.length; i++) {
-      arr.push(qualityIdToqualityName(qualitiesIDs[i]));
+      arr.push(qualityIdToQualityName(qualitiesIDs[i]));
     }
 
     return arr;
@@ -156,7 +156,7 @@ function PricesApiParser(prices) {
     return resultArr;
   }
 
-  function qualityIdToqualityName() {
+  function qualityIdToQualityName() {
     var possibleQualities = {
       0: "normal",
       1: "rarity1",
@@ -185,16 +185,3 @@ function PricesApiParser(prices) {
     }
   }
 }
-
-/*===============================================*/
-function QueryMaker() {
-  var self = this;
-}
-
-QueryMaker.prototype.getItemsWithName = function (name) {
-
-};
-
-QueryMaker.prototype.getWithQuality = function (quality) {
-
-};

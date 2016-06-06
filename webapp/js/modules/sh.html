@@ -12,10 +12,6 @@
     <div class="sh-title"><%-itemName%></div>
   </script>
 
-  <!--    <% items.forEach(function(price) { %>
-    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
-    <% }) %>-->
-
   <script type="text/template" id="pricesTmpl">
     <% _.forIn(item, function(price) { %>
     <div class="sh-cell"><%-price.value+" "+price.currency%></div>

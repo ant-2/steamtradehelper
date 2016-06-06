@@ -3,11 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Trade helper</title>
-  <style type="text/css">@import url(css/spreadsheet.css);</style>
+  <style type="text/css">@import url(js/modules/sh.css);</style>
+  <style type="text/css">@import url(js/modules/input.css);</style>
+
+  <!-- External libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"></script>
   <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+
+  <!-- Internal libs -->
   <script src="js/common.js"></script>
   <script src="js/data.js"></script>
   <script src="js/prices.js"></script>
+  <script src="js/modules/sh.js"></script>
+  <script src="js/modules/input.js"></script>
+
+  <!-- Templates -->
+  <script type="text/template" id="titleTmpl">
+    <div class="sh-title"><%-itemName%></div>
+  </script>
+  <script type="text/template" id="pricesTmpl">
+    <% _.forIn(item, function(price) { %>
+    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
+    <%}) %>
+  </script>
+  <script type="text/template" id="inputTmpl">
+    <label><input type="text"/><%-labelText%></label>
+    <button><%-buttonText%></button>
+  </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", init);
 
@@ -20,84 +43,31 @@
         parser = new PricesApiParser(rawPrices);
         items = parser.getAllItems();
       } catch (e) {
-        console.log('Error in attempt to get data from server. '+e.name+": "+e.message);
+        console.log('Error in attempt to get data from server. ' + e.name + ": " + e.message);
       }
 
-      // selects page elements
-      var input, btn, view;
+      var input, spreadsheet;
       try {
-        input = document.getElementById('in');
-        btn = document.getElementById('btnSearch');
-        view = document.getElementById('view');
+        input = new Input({
+          inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
+          labelText: "label",
+          buttonText: "button"
+        });
+        spreadsheet = new Spreadsheet({
+          containerClass: "sh",
+          titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
+          pricesTmpl: _.template(document.getElementById('pricesTmpl').innerHTML, {sourceURL: '/pricesTmpl'}),
+          items: items
+        });
+        document.body.appendChild(input.getElem());
+        document.body.appendChild(spreadsheet.getElem());
       } catch (e) {
-        console.log('Error during page variables initialization. '+e.name+": "+e.message);
-      }
-
-      btn.onclick = doSearch();
-      // main search function
-      function doSearch() {
-        try {
-          // todo прикрутить фильтрацию по имени предметов
-          renderContent(items);
-        } catch (e) {
-          console.log("Can't make search. "+e.name+": "+e.message);
-        }
-      }
-
-      // functions to render page content
-      function renderContent(items) {
-        var itemName;
-        for (itemName in items) {
-          if(!items.hasOwnProperty(itemName))  continue;
-
-          appendDiv(view, makeRow(itemName, items[itemName]));
-        }
-      }
-
-      function makeRow(name, item) {
-        // each cell represents an item price
-        function createCell(price) {
-          var cell, text;
-          text = price.qualityName + " " + price.value + " "+ price.currency;
-          return createDiv('tcell', text);
-        }
-
-        var container;
-        try {
-          container = createDiv('trow');
-          appendDiv(container, createDiv('tcell', name));
-
-          var i;
-          for (i = 0; i < item.length; i++) {
-            if (item[i].priceID != 0)  continue;
-            appendDiv(container, createCell(item[i]));
-          }
-        } catch (e) {
-          console.log("Error trying to make div from Item. "+e.name+": "+e.message);
-        }
-        return container;
-      }
-
-      // util functions
-      function appendDiv(parrent, div) {
-        parrent.appendChild(div);
-      }
-
-      function createDiv(style, innerHTML) {
-        var div = document.createElement('div');
-        if (style !== undefined)    div.classList.add(style);
-        if (innerHTML !== undefined)  div.innerHTML = innerHTML;
-        return div;
+        console.log("Error in rendering page content. "+e.name+": "+e.message)
       }
     }
   </script>
 </head>
 
 <body>
-<form>
-  <input id="in" type="text" title="Enter item name to search"/><label>Item name</label><br>
-</form>
-<button id="btnSearch" onclick="doSearch()">doTheJob</button>
-<div id="items-spreadsheet" class="spreadsheet"></div>
 </body>
 </html>
