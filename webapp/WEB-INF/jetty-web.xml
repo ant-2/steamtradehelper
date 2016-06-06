@@ -3,7 +3,7 @@
 <Configure id="wac" class="org.eclipse.jetty.webapp.WebAppContext">
     <Set name="contextPath">/</Set>
 
-    <New id="dataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+<!--    <New id="dataSource" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg>jdbc/ds</Arg>
         <Arg>
             <New class="org.apache.commons.dbcp2.BasicDataSource">
@@ -14,5 +14,5 @@
                 <Set name="defaultAutoCommit">true</Set>
             </New>
         </Arg>
-    </New>
+    </New>-->
 </Configure>

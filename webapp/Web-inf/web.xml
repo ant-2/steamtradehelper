@@ -38,6 +38,7 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
+<!--
     <servlet>
         <servlet-name>H2Console</servlet-name>
         <servlet-class>org.h2.server.web.WebServlet</servlet-class>
@@ -47,5 +48,6 @@
         <servlet-name>H2Console</servlet-name>
         <url-pattern>/db/*</url-pattern>
     </servlet-mapping>
+-->
 
 </web-app>
