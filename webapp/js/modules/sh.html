@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">@import url(sh.css);</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"></script>
+  <script src="sh.js"></script>
+  <script src="input.js"></script>
+
+  <script type="text/template" id="titleTmpl">
+    <div class="sh-title"><%-itemName%></div>
+  </script>
+
+  <!--    <% items.forEach(function(price) { %>
+    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
+    <% }) %>-->
+
+  <script type="text/template" id="pricesTmpl">
+    <% _.forIn(item, function(price) { %>
+    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
+    <%}) %>
+  </script>
+
+  <script type="text/template" id="inputTmpl">
+    <label><input type="text"/><%-labelText%></label>
+    <button><%-buttonText%></button>
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      var input = new Input({
+        inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
+        labelText: "label",
+        buttonText: "button"
+      });
+
+      var sh = new Spreadsheet({
+        containerClass: "sh",
+        titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
+        pricesTmpl: _.template(document.getElementById('pricesTmpl').innerHTML, {sourceURL: '/pricesTmpl'}),
+        items: {
+          "A random craft hat": [
+            {value: 10, currency: "ref"},
+            {value: 2, currency: "keys"}
+          ],
+          "Anger": [
+            {value: 10, currency: "ref"},
+            {value: 2, currency: "keys"}
+          ]
+        }
+      });
+
+      document.body.appendChild(input.getElem());
+      document.body.appendChild(sh.getElem());
+    }
+  </script>
+  
+  <script>
+  </script>
+</head>
+
+<body>
+</body>
+</html>

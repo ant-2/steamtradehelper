@@ -69,7 +69,10 @@ function PricesApiParser(prices) {
 
     return resultArr;
   };
-  
+
+  /**
+   * @return {Collection} contains {Item} objects
+   * */
   this.getAllItems = function () {
     var item, tempArr, resultObj = new Collection();
     for (item in items) {

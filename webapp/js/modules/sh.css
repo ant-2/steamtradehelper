@@ -1,0 +1,13 @@
+.sh {
+     height: 2em;
+     display: table-row;
+    vertical-align: middle;
+}
+
+.sh-title {
+    display: inline-block;
+}
+
+.sh-cell {
+    display: inline-block;
+}
