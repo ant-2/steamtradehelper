@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <style type="text/css">@import url(/js/modules/spreadsheet.css);</style>
-  <style type="text/css">@import url(/js/modules/input.css);</style>
+  <style type="text/css">@import url(/js/modules/common.css);</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
   <script src="/js/modules/spreadsheet.js"></script>
-  <script src="/js/modules/input.js"></script>
 
   <script type="text/template" id="titleTmpl">
     <div class="sh-title"><%-itemName%></div>
@@ -19,21 +18,10 @@
     <%}) %>
   </script>
 
-  <script type="text/template" id="inputTmpl">
-    <label><input type="text"/><%-labelText%></label>
-    <button><%-buttonText%></button>
-  </script>
-
   <script>
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
-      var input = new Input({
-        inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
-        labelText: "label",
-        buttonText: "button"
-      });
-
       var sh = new Spreadsheet({
         containerClass: "sh",
         titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
@@ -49,9 +37,9 @@
           ]
         }
       });
-
-      document.body.appendChild(input.getElem());
       document.body.appendChild(sh.getElem());
+
+      document.getElementById('btnSearch').onclick = sh.filterColback;
     }
   </script>
   
@@ -60,5 +48,7 @@
 </head>
 
 <body>
+<label><input type="text">Имя предмета</label>
+<button id="btnSearch">Поиск</button>
 </body>
 </html>

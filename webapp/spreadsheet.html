@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Trade helper</title>
   <style type="text/css">@import url(js/modules/spreadsheet.css);</style>
-  <style type="text/css">@import url(js/modules/input.css);</style>
 
   <!-- External libs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
@@ -15,20 +14,15 @@
   <script src="js/data.js"></script>
   <script src="js/prices.js"></script>
   <script src="js/modules/spreadsheet.js"></script>
-  <script src="js/modules/input.js"></script>
 
   <!-- Templates -->
   <script type="text/template" id="titleTmpl">
-    <div class="sh-title"><%-itemName%></div>
+  <div class="sh-title"><%-itemName%></div>
   </script>
   <script type="text/template" id="pricesTmpl">
-    <% _.forIn(item, function(price) { %>
-    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
-    <%}) %>
-  </script>
-  <script type="text/template" id="inputTmpl">
-    <label><input type="text"/><%-labelText%></label>
-    <button><%-buttonText%></button>
+  <% _.forIn(item, function(price) { %>
+  <div class="sh-cell"><%-price.value+" "+price.currency%></div>
+  <%}) %>
   </script>
 
   <script>
@@ -48,17 +42,19 @@
 
       var input, spreadsheet;
       try {
-        input = new Input({
-          inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
-          labelText: "label",
-          buttonText: "button"
-        });
         spreadsheet = new Spreadsheet({
           containerClass: "sh",
           titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
           pricesTmpl: _.template(document.getElementById('pricesTmpl').innerHTML, {sourceURL: '/pricesTmpl'}),
           items: items
         });
+        input = new Input({
+          inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
+          labelText: "label",
+          buttonText: "button",
+          buttonFunc: spreadsheet.filter
+        });
+
         document.body.appendChild(input.getElem());
         document.body.appendChild(spreadsheet.getElem());
       } catch (e) {
