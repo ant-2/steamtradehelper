@@ -150,7 +150,7 @@ function PricesApiParser(prices) {
         }
       }
     } catch (e) {
-      throw new Error("Error during parsing a price object. " + getErrorInformation(e));
+      throw new Error("Error during parsing a rowCell object. " + getErrorInformation(e));
     }
 
     return resultArr;

@@ -4,14 +4,19 @@
     vertical-align: middle;
 }
 
-.sh-row {
+.sh__row {
 
 }
 
-.sh-title {
+.sh__row_hidden {
+    display: none;
+}
+
+.sh__row-title {
     display: inline-block;
 }
 
-.sh-cell {
+.sh__row-cell {
     display: inline-block;
 }
+

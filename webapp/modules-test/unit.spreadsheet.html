@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <style type="text/css">@import url(/js/modules/spreadsheet.css);</style>
-  <style type="text/css">@import url(/js/modules/common.css);</style>
+  <style type="text/css">@import url(/modules/spreadsheet.css);</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
-  <script src="/js/modules/spreadsheet.js"></script>
-
-  <script type="text/template" id="titleTmpl">
-    <div class="sh-title"><%-itemName%></div>
-  </script>
-
-  <script type="text/template" id="pricesTmpl">
-    <% _.forIn(item, function(price) { %>
-    <div class="sh-cell"><%-price.value+" "+price.currency%></div>
-    <%}) %>
-  </script>
+  <script src="/modules/spreadsheet.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
+      try {
+        var templates, title, price;
+        templates = new SpreadsheetTmpl();
+        title = _.template(templates.rowTitle);
+        price = _.template(templates.rowCell);
+      } catch(e) {
+        console.error("Something wrong with templates. "+e.name+": "+e.message);
+      }
+
       var sh = new Spreadsheet({
-        containerClass: "sh",
-        titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
-        pricesTmpl: _.template(document.getElementById('pricesTmpl').innerHTML, {sourceURL: '/pricesTmpl'}),
+        styles: {
+          container: "sh",
+          row: "sh__row"
+        },
+        title: title,
+        price: price,
         items: {
           "A random craft hat": [
             {value: 10, currency: "ref"},
@@ -38,7 +39,6 @@
         }
       });
       document.body.appendChild(sh.getElem());
-
       document.getElementById('btnSearch').onclick = sh.filterColback;
     }
   </script>
