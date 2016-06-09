@@ -1,10 +1,14 @@
 // Constructor for a collection
-function Collection() {}
+function Collection() {
+  this.length = 0;
+}
 Collection.prototype.addProperty = function (key, value) {
   this[key] = value;
+  this.length++;
 };
 Collection.prototype.removeProperty = function (key) {
   delete this[key];
+  this.length--;
 };
 Collection.prototype.getProperty = function (key) {
   return this[key];

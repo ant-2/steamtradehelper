@@ -39,7 +39,9 @@
         }
       });
       document.body.appendChild(sh.getElem());
-      document.getElementById('btnSearch').onclick = sh.filterColback;
+
+      var input = document.getElementById('in');
+      document.getElementById('btnSearch').onclick = sh.filterColback(input, sh["rows"]);
     }
   </script>
   
@@ -48,7 +50,7 @@
 </head>
 
 <body>
-<label><input type="text">Имя предмета</label>
+<label><input id="in" type="text">Имя предмета</label>
 <button id="btnSearch">Поиск</button>
 </body>
 </html>

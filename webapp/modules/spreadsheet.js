@@ -1,27 +1,41 @@
 function Spreadsheet(options) {
-  var spreadsheet;
+  var spreadsheetDiv, rows = {} /*{item name: {item}}*/;
 
   this.getElem = getElem;
-  this.filterColback = filter();
+  this.filterColback = filterByItemName;
 
   function getElem() {
-    if (!spreadsheet)  render();
-    return spreadsheet;
+    if (!spreadsheetDiv)  render();
+    return spreadsheetDiv;
   }
 
-  function filter() {
-    return function() {
-      var rows = spreadsheet.getElementsByClassName(options.styles.row);
-      for (var i = 0; i < rows.length; i++) {
-        rows[i].classList.toggle('sh__row_hidden');
+  function filterByItemName(inputDiv) {
+    function selectRowsToFilter(name) {
+      var arr = [], str = name.trim().toLowerCase();
+      for (var row in rows) {
+        if (!rows.hasOwnProperty(row))  continue;
+        if (row.indexOf(str) == -1) {
+          arr.push(row);
+        }
       }
+      return arr;
+    }
+
+    function toggleRowsVisibility(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        rows[arr[i]].classList.toggle('sh__row_hidden');
+      }
+    }
+
+    return function() {
+      toggleRowsVisibility(selectRowsToFilter(inputDiv.value));
     };
   }
 
   // render functions
   function render() {
-    spreadsheet = document.createElement('div');
-    spreadsheet.classList.add(options.styles.container);
+    spreadsheetDiv = document.createElement('div');
+    spreadsheetDiv.classList.add(options.styles.container);
     renderRows(options.items);
   }
 
@@ -29,7 +43,7 @@ function Spreadsheet(options) {
     var item;
     for (item in items) {
       if (!items.hasOwnProperty(item))  continue;
-      spreadsheet.appendChild(renderRow(item, items[item]));
+      spreadsheetDiv.appendChild(renderRow(item, items[item]));
     }
   }
 
@@ -41,6 +55,9 @@ function Spreadsheet(options) {
 
     row.insertAdjacentHTML('afterbegin', title);
     row.insertAdjacentHTML('beforeend', prices);
+
+    // saves pointer to row for make filter by item name in future
+    rows[name.toLowerCase()] = row;
 
     return row;
   }
