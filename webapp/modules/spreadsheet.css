@@ -1,22 +1,25 @@
 .sh {
-    height: 2em;
-    display: table-row;
-    vertical-align: middle;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
 }
 
 .sh__row {
-
+    height: 2em;
+    display: table-row;
 }
 
 .sh__row_hidden {
     display: none;
 }
 
-.sh__row-title {
-    display: inline-block;
-}
-
 .sh__row-cell {
-    display: inline-block;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3pt;
+    background-color: lightpink;
+    border-bottom: 1px solid black;
 }
 
+.sh__row-cell_title {
+    background-color: deepskyblue;
+}

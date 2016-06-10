@@ -34,7 +34,7 @@ function Spreadsheet(options) {
 
   // render functions
   function render() {
-    spreadsheetDiv = document.createElement('div');
+    spreadsheetDiv = document.createElement('article');
     spreadsheetDiv.classList.add(options.styles.container);
     renderRows(options.items);
   }
@@ -48,7 +48,7 @@ function Spreadsheet(options) {
   }
 
   function renderRow(name, item) {
-    var row = document.createElement('div');
+    var row = document.createElement('section');
     row.classList.add(options.styles.row);
     var title = templates.title(name);
     var prices = templates.price(item);
@@ -78,7 +78,7 @@ function Spreadsheet(options) {
 }
 
 function SpreadsheetTmpl() {
-  this.rowTitle = '<div class="sh__row-title"><%-itemName%></div>';
+  this.rowTitle = '<div class="sh__row-cell sh__row-cell_title"><%-itemName%></div>';
   this.rowCell =
       '<% _.forIn(item, function(price) { %>\n' +
       '<div class="sh__row-cell"><%-price.value+" "+price.currency%></div>\n' +
