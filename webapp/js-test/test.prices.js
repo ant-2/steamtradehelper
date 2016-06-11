@@ -1,7 +1,6 @@
 describe('prices.js', function () {
 
-  describe('Методы объекта PriceParser', function () {
-
+  describe('Parsing items from Backpack.tf API', function () {
     var prices = {
       "response": {
         "success": 1,
@@ -41,23 +40,43 @@ describe('prices.js', function () {
       }
     };
     var parser = new PricesApiParser(prices);
-
-    it('getItemsNames()', function () {
-      var names = parser.getItemsNames();
-      assert(names !== undefined && names !== null);
-      assert(names.length == 1);
-    });
-
-    it('getItemsWithName({string} name)', function () {
-      var items = parser.getItemsWithName('A Distinctive Lack of Hue');
-      assert(items !== undefined && items !== null);
-      assert(items.length == 2);
-    });
-
-    it('getAllItems()', function () {
+    
+    it("All items are parsed", function () {
       var items = parser.getAllItems();
-      assert(items !== undefined && items !== null);
-      assert(items.hasOwnProperty('A Distinctive Lack of Hue'));
+      assert(items.size() === 1, 'Size: '+items.size());
+      var arr = items.getProperty('A Distinctive Lack of Hue');
+      assert(arr.length === 2, 'items array length are not match with expected');
     });
+
+    it("Parsed items are in valid state, all properties are filled", function () {
+      var items = parser.getAllItems();
+      var arr = items.getProperty('A Distinctive Lack of Hue');
+
+      for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        var msg = 'one of the returned Items are not in valid state. arr[i]: '+i+', item name: '+arr[i].name();
+        assert(item.name != undefined);
+        assert(item.quality() != undefined);
+        assert(item.tradable() != undefined);
+        assert(item.craftable() != undefined);
+        assert(item.price() != undefined);
+      }
+    })
   });
+
+  describe('Методы класса Item', function () {
+    var item = new Item('anger');
+    item.quality(6);
+    item.tradable(true);
+    item.craftable(true);
+    item.price(new Price(0, 'refined', 4.66));
+
+    it('Генерация URI на Backpack.tf', function () {
+      var expected = 'http://backpack.tf/stats/Unique/Anger/Tradable/Craftable/0'.toLowerCase();
+      var uri = item.getBackpackUri();
+      console.log(uri);
+      assert(typeof uri === 'string', 'Generated uri is not type of string. Current type is: '+typeof uri);
+      assert(uri.toLowerCase() == expected, 'Returned URI doesn\'t match expected URI. Current URI: '+uri+'. Expected: '+expected);
+    })
+  })
 });
