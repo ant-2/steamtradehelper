@@ -1,12 +1,12 @@
 package eu.mosov.steamtradehelper.rest;
 
-import eu.mosov.steamtradehelper.data.RawDataRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import eu.mosov.steamtradehelper.client.BackpacktfApiAccessor;
+import eu.mosov.steamtradehelper.data.InMemoryDataRepo;
 
 import javax.json.JsonObject;
-import javax.ws.rs.*;
-
-import static eu.mosov.steamtradehelper.rest.DataResourcesEnum.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 /**
  * Provides direct access to data from backpack.tf site
@@ -15,29 +15,27 @@ import static eu.mosov.steamtradehelper.rest.DataResourcesEnum.*;
 @Path("raw")
 @Produces({"application/json", "application/javascript"})
 public class ExternalDataResource extends SpringAwareResource {
-  @Autowired RawDataRepo repo;
+  private static InMemoryDataRepo repo = Init.getRepoInstance();
 
   @GET
   @Path("prices")
-  public JsonObject getPricesBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
-    return repo.getResource("prices", PRICES.getURI(), update);
+  public JsonObject getPricesBackpacktf() {
+    return repo.getResource("prices");
   }
 
-  @GET
-  @Path("curr")
-  public JsonObject getCurrenciesBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
-    return repo.getResource("curr", CURRENCIES.getURI(), update);
-  }
+  private static class Init {
+    private static InMemoryDataRepo INSTANCE = null;
 
-  @GET
-  @Path("market")
-  public JsonObject getMarketPricesFromBackpacktf(@DefaultValue("false") @QueryParam("update") boolean update) {
-    return repo.getResource("curr", MARKET.getURI(), update);
-  }
+    private static InMemoryDataRepo createRepo() {
+      BackpacktfApiAccessor api = new BackpacktfApiAccessor();
+      InMemoryDataRepo repo = new InMemoryDataRepo();
+      repo.putResource("prices", api.getPrices());
+      return repo;
+    }
 
-  @GET
-  @Path("steam")
-  public JsonObject getSteam(@DefaultValue("false") @QueryParam("update") boolean update) {
-    return repo.getResource("curr", STEAM_SCHEMA.getURI(), update);
+    public static InMemoryDataRepo getRepoInstance() {
+      if (INSTANCE == null) INSTANCE = createRepo();
+      return INSTANCE;
+    }
   }
 }

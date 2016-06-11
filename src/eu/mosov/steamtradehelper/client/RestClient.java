@@ -1,18 +1,18 @@
 package eu.mosov.steamtradehelper.client;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
-@Service
-@Scope("singleton")
 public class RestClient {
-  Client client;
+  private Client client;
+  private static RestClient INSTANCE = null;
 
-  public RestClient() {
+  static {
+    INSTANCE = new RestClient();
+  }
+
+  private RestClient() {
     client = ClientBuilder.newClient();
   }
 
@@ -28,5 +28,10 @@ public class RestClient {
       throw new RuntimeException("Failure in attempt to access external data resource. Can't get resource: "+uri, e);
     }
     return result;
+  }
+
+  public static RestClient getInstance() {
+    if (INSTANCE == null) throw new IllegalStateException("Some how RestClient.INSTANCE field are null.");
+    return INSTANCE;
   }
 }

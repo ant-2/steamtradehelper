@@ -1,3 +1,5 @@
+package eu.mosov.steamtradehelper;
+
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
