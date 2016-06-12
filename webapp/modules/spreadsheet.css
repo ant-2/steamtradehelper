@@ -21,5 +21,11 @@
 }
 
 .sh__row-cell_title {
+    width: 150px;
     background-color: deepskyblue;
+}
+
+.sh__row-cell_price {
+    width: 100px;
+    /*NOP*/
 }

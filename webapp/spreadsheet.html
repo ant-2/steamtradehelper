@@ -30,19 +30,17 @@
         console.log('Error in attempt to get data from server. ' + e.name + ": " + e.message);
       }
 
-      var spreadsheet, templates = new SpreadsheetTmpl();
+      console.time("render");
+      var spreadsheet, templates;
+      templates = new Spreadsheet_tmpl(getSpreadsheetStyles());
       try {
         spreadsheet = new Spreadsheet({
-          styles: {
-            container: "sh",
-            row: "sh__row"
-          },
-          rowTitle: _.template(templates.rowTitle),
-          rowCell: _.template(templates.rowCell),
+          templates: templates,
           items: items
         });
 
         document.body.appendChild(spreadsheet.getElem());
+        console.timeEnd("render");
       } catch (e) {
         console.log("Error in rendering page content. "+e.name+": "+e.message)
       }

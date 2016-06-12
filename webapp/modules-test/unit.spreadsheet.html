@@ -12,35 +12,144 @@
   <script>
     document.addEventListener('DOMContentLoaded', init);
 
-    function init() {
-      try {
-        var templates, title, price;
-        templates = new SpreadsheetTmpl();
-        title = _.template(templates.rowTitle);
-        price = _.template(templates.rowCell);
-      } catch(e) {
-        console.error("Something wrong with templates. "+e.name+": "+e.message);
-      }
+    function getItems() {
+      var response, parser, items;
+      response = {
+        "response": {
+          "success": 1,
+          "current_time": 1465731120,
+          "raw_usd_value": 0.115,
+          "usd_currency": "metal",
+          "usd_currency_index": 5002,
+          "items": {
+            "A Brush with Death": {
+              "defindex": [
+                30186
+              ],
+              "prices": {
+                "6": {
+                  "Tradable": {
+                    "Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 4.33,
+                        "last_update": 1464820277,
+                        "difference": -0.33
+                      }
+                    }
+                  }
+                },
+                "14": {
+                  "Tradable": {
+                    "Craftable": {
+                      "0": {
+                        "currency": "keys",
+                        "value": 100,
+                        "last_update": 1459344639,
+                        "difference": 1800
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "A Color Similar to Slate": {
+              "defindex": [
+                5052
+              ],
+              "prices": {
+                "6": {
+                  "Tradable": {
+                    "Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 10,
+                        "last_update": 1461511357,
+                        "difference": 3
+                      }
+                    },
+                    "Non-Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 10,
+                        "last_update": 1462210286,
+                        "difference": 10
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "A Deep Commitment to Purple": {
+              "defindex": [
+                5031
+              ],
+              "prices": {
+                "6": {
+                  "Tradable": {
+                    "Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 8,
+                        "last_update": 1461581705,
+                        "difference": -0.165
+                      }
+                    },
+                    "Non-Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 7.66,
+                        "last_update": 1461801175,
+                        "difference": -0.34
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "A Distinctive Lack of Hue": {
+              "defindex": [
+                5040
+              ],
+              "prices": {
+                "6": {
+                  "Tradable": {
+                    "Craftable": {
+                      "0": {
+                        "currency": "keys",
+                        "value": 1,
+                        "last_update": 1455649142,
+                        "difference": -1.933
+                      }
+                    },
+                    "Non-Craftable": {
+                      "0": {
+                        "currency": "metal",
+                        "value": 16.66,
+                        "last_update": 1464371607,
+                        "difference": -1.865
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+      parser = new PricesApiParser(response);
+      items = parser.parseAllItems();
+      return items;
+    }
 
-      var collection = new Collection();
-      var arr = [];
-      arr.push(new Item({
-        name: "A random craft hat",
-        qualityID: 6,
-        tradable: true,
-        craftable: true,
-        price: new Price(0, "ref", 1.33)
-      }));
-      collection.addProperty('A random craft hat', arr);
+    function init() {
+      var items, templates;
+      items = getItems();
+      templates = new Spreadsheet_tmpl(getSpreadsheetStyles());
 
       var sh = new Spreadsheet({
-        styles: {
-          container: "sh",
-          row: "sh__row"
-        },
-        rowTitleTemplate: title,
-        rowPriceCellTemplate: price,
-        items: collection
+        templates: templates,
+        items: items
       });
       document.body.appendChild(sh.getElem());
 

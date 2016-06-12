@@ -1,12 +1,13 @@
 function Spreadsheet(options) {
-  var spreadsheetDiv, rows = {} /*{price name: {price}}*/;
+  var spreadsheet, templates, rows = {} /*{price name: {price}}*/;
+  templates = options.templates;
 
   this.getElem = getElem;
   this.filterColback = filterByItemName;
 
   function getElem() {
-    if (!spreadsheetDiv)  render();
-    return spreadsheetDiv;
+    if (!spreadsheet)  render();
+    return spreadsheet;
   }
 
   function filterByItemName(inputDiv) {
@@ -34,17 +35,16 @@ function Spreadsheet(options) {
 
   // render functions
   function render() {
-    spreadsheetDiv = document.createElement('article');
-    spreadsheetDiv.classList.add(options.styles.container);
-    renderRows(options.items);
+    spreadsheet = templates.generateContainer();
+    renderItems(options.items);
   }
 
-  function renderRows(items) {
+  function renderItems(items) {
     var item;
     try {
       for (item in items) {
         if (!items.hasOwnProperty(item))  continue;
-        spreadsheetDiv.appendChild(renderRow(item, items[item]));
+        spreadsheet.appendChild(renderRow(item, items[item]));
       }
     } catch (e) {
       console.log(e);
@@ -53,17 +53,13 @@ function Spreadsheet(options) {
 
   function renderRow(name, items) {
     try {
-      var row = document.createElement('section');
-      row.classList.add(options.styles.row);
-      var title = templates.title(name);
-      row.insertAdjacentHTML('afterbegin', title);
+      var row, i;
+      row = templates.generateRow();
+      row.appendChild(templates.generateRowTitle(name));
 
-      var cell;
-      for (var i = 0; i < items.length; i++) {
-        cell = templates.price(items[i]);
-        row.insertAdjacentHTML('beforeEnd', cell);
+      for (i = 0; i < items.length; i++) {
+        row.appendChild(templates.generatePriceCell(items[i]));
       }
-
       // saves pointer to row for make filter by price name in future
       rows[name.toLowerCase()] = row;
       return row;
@@ -71,27 +67,36 @@ function Spreadsheet(options) {
       console.log(e);
     }
   }
-
-  var templates = {
-    title: function (name) {
-      return options.rowTitle({itemName: name});
-    },
-
-    price: function (item) {
-      return options.rowCell({uri: item.getBackpackUri(), value: item.price().value(), currency: item.price().currency()});
-    }
-  }
 }
 
-function SpreadsheetTmpl(styles) {
-  this.rowTitle = '<div class="sh__row-cell sh__row-cell_title"><%-itemName%></div>';
-  this.rowCell = '<div class="sh__row-cell "><a href="<%-uri%>"><%-value+" "+currency%></a></div>';
+function getSpreadsheetStyles() {
+  return {
+    container: "sh",
+    row: "sh__row",
+    cell: "sh__row-cell",
+    title: "sh__row-cell_title",
+    price: "sh__row-cell_price"
+  };
+}
 
+function Spreadsheet_tmpl(styles) {
   function generateCell() {
     var div = document.createElement('div');
     div.classList.add(styles.cell);
     return div;
   }
+
+  this.generateContainer = function () {
+    var container = document.createElement('article');
+    container.classList.add(styles.container);
+    return container;
+  };
+
+  this.generateRow = function () {
+    var section = document.createElement('section');
+    section.classList.add(styles.row);
+    return section;
+  };
 
   this.generateRowTitle = function(itemName) {
     var div = generateCell();
@@ -100,11 +105,10 @@ function SpreadsheetTmpl(styles) {
     return div;
   };
 
-  this.generatePriceCell = function(itemName) {
-    var div = document.createElement('div');
-    div.classList.add(styles.cell);
-    div.classList.add(styles.title);
-    div.innerHTML = itemName;
+  this.generatePriceCell = function(item) {
+    var price = item.price(), div = generateCell();
+    div.classList.add(styles.price);
+    div.innerHTML = price.value() + " " + price.currency();
     return div;
   }
 }
