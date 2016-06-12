@@ -1,5 +1,5 @@
 function Spreadsheet(options) {
-  var spreadsheetDiv, rows = {} /*{item name: {item}}*/;
+  var spreadsheetDiv, rows = {} /*{price name: {price}}*/;
 
   this.getElem = getElem;
   this.filterColback = filterByItemName;
@@ -27,7 +27,7 @@ function Spreadsheet(options) {
       }
     }
 
-    return function() {
+    return function () {
       toggleRowsVisibility(selectRowsToFilter(inputDiv.value));
     };
   }
@@ -41,46 +41,70 @@ function Spreadsheet(options) {
 
   function renderRows(items) {
     var item;
-    for (item in items) {
-      if (!items.hasOwnProperty(item))  continue;
-      spreadsheetDiv.appendChild(renderRow(item, items[item]));
+    try {
+      for (item in items) {
+        if (!items.hasOwnProperty(item))  continue;
+        spreadsheetDiv.appendChild(renderRow(item, items[item]));
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
 
-  function renderRow(name, item) {
-    var row = document.createElement('section');
-    row.classList.add(options.styles.row);
-    var title = templates.title(name);
-    var prices = templates.price(item);
+  function renderRow(name, items) {
+    try {
+      var row = document.createElement('section');
+      row.classList.add(options.styles.row);
+      var title = templates.title(name);
+      row.insertAdjacentHTML('afterbegin', title);
 
-    row.insertAdjacentHTML('afterbegin', title);
-    row.insertAdjacentHTML('beforeend', prices);
+      var cell;
+      for (var i = 0; i < items.length; i++) {
+        cell = templates.price(items[i]);
+        row.insertAdjacentHTML('beforeEnd', cell);
+      }
 
-    // saves pointer to row for make filter by item name in future
-    rows[name.toLowerCase()] = row;
-
-    return row;
+      // saves pointer to row for make filter by price name in future
+      rows[name.toLowerCase()] = row;
+      return row;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   var templates = {
     title: function (name) {
-      return options.title({
-        itemName: name
-      });
+      return options.rowTitle({itemName: name});
     },
 
-    price: function (entry) {
-      return options.price({
-        item: entry
-      });
+    price: function (item) {
+      return options.rowCell({uri: item.getBackpackUri(), value: item.price().value(), currency: item.price().currency()});
     }
-  };
+  }
 }
 
-function SpreadsheetTmpl() {
+function SpreadsheetTmpl(styles) {
   this.rowTitle = '<div class="sh__row-cell sh__row-cell_title"><%-itemName%></div>';
-  this.rowCell =
-      '<% _.forIn(item, function(price) { %>\n' +
-      '<div class="sh__row-cell"><%-price.value+" "+price.currency%></div>\n' +
-      ' <%}) %>';
+  this.rowCell = '<div class="sh__row-cell "><a href="<%-uri%>"><%-value+" "+currency%></a></div>';
+
+  function generateCell() {
+    var div = document.createElement('div');
+    div.classList.add(styles.cell);
+    return div;
+  }
+
+  this.generateRowTitle = function(itemName) {
+    var div = generateCell();
+    div.classList.add(styles.title);
+    div.innerHTML = itemName;
+    return div;
+  };
+
+  this.generatePriceCell = function(itemName) {
+    var div = document.createElement('div');
+    div.classList.add(styles.cell);
+    div.classList.add(styles.title);
+    div.innerHTML = itemName;
+    return div;
+  }
 }

@@ -15,16 +15,6 @@
   <script src="js/prices.js"></script>
   <script src="modules/spreadsheet.js"></script>
 
-  <!-- Templates -->
-  <script type="text/template" id="titleTmpl">
-  <div class="sh-title"><%-itemName%></div>
-  </script>
-  <script type="text/template" id="pricesTmpl">
-  <% _.forIn(item, function(price) { %>
-  <div class="sh-cell"><%-price.value+" "+price.currency%></div>
-  <%}) %>
-  </script>
-
   <script>
     document.addEventListener("DOMContentLoaded", init);
 
@@ -35,27 +25,23 @@
         dataSupplier = new BackpacktfDataSupplier();
         rawPrices = dataSupplier.getPrices();
         parser = new PricesApiParser(rawPrices);
-        items = parser.getAllItems();
+        items = parser.parseAllItems();
       } catch (e) {
         console.log('Error in attempt to get data from server. ' + e.name + ": " + e.message);
       }
 
-      var input, spreadsheet;
+      var spreadsheet, templates = new SpreadsheetTmpl();
       try {
         spreadsheet = new Spreadsheet({
-          containerClass: "sh",
-          titleTmpl: _.template(document.getElementById('titleTmpl').innerHTML, {sourceURL: '/titleTmpl'}),
-          pricesTmpl: _.template(document.getElementById('pricesTmpl').innerHTML, {sourceURL: '/pricesTmpl'}),
+          styles: {
+            container: "sh",
+            row: "sh__row"
+          },
+          rowTitle: _.template(templates.rowTitle),
+          rowCell: _.template(templates.rowCell),
           items: items
         });
-        input = new Input({
-          inputTmpl: _.template(document.getElementById('inputTmpl').innerHTML, {sourceURL: '/inputTmpl'}),
-          labelText: "label",
-          buttonText: "button",
-          buttonFunc: spreadsheet.filter
-        });
 
-        document.body.appendChild(input.getElem());
         document.body.appendChild(spreadsheet.getElem());
       } catch (e) {
         console.log("Error in rendering page content. "+e.name+": "+e.message)

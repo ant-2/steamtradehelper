@@ -1,14 +1,17 @@
 // Collection
 function Collection() {
-  this._size = 0;
+  Object.defineProperty(this, 'size', {
+    value: 0,
+    writable: true
+  })
 }
 Collection.prototype.addProperty = function (key, value) {
   this[key] = value;
-  this._size++;
+  this.size++;
 };
 Collection.prototype.removeProperty = function (key) {
   delete this[key];
-  this._size--;
+  this.size--;
 };
 Collection.prototype.getProperty = function (key) {
   return this[key];
@@ -16,9 +19,6 @@ Collection.prototype.getProperty = function (key) {
 Collection.prototype.hasProperty = function (key, value) {
   if (!this.hasOwnProperty(key)) return false;
   return (this[key] === value);
-};
-Collection.prototype.size = function () {
-  return this._size;
 };
 
 // Item object
@@ -29,7 +29,6 @@ function Item(name) {
   this._craftable = undefined;
   this._price = undefined;
 }
-// Item.prototype = Object.create(Collection.prototype);
 Item.prototype = {};
 Item.prototype.constructor = Item;
 // Item getters & setters
@@ -71,7 +70,7 @@ Item.prototype.price = function (price) {
 Item.prototype.getBackpackUri = function () {
   var baseuri = 'http://backpack.tf/stats/', uri;
   // http://backpack.tf/stats/Unique/Anger/Tradable/Craftable/0
-  uri = baseuri+this.getQualityName()+'/'+this.name()+'/'+this.getTradeStatus()+'/'+this.getCraftStatus()+'/'+this.price().id();
+  uri = baseuri + this.getQualityName() + '/' + this.name() + '/' + this.getTradeStatus() + '/' + this.getCraftStatus() + '/' + this.price().id();
   return uri.toLowerCase();
 };
 Item.prototype.getQualityName = function () {
@@ -124,7 +123,7 @@ Price.prototype.currency = function (currency) {
   this._currency = currency;
 };
 Price.prototype.value = function (value) {
-  if (!arguments.length)  return this._currency;
+  if (!arguments.length)  return this._value;
 
   if (typeof value !== 'number') throw new Error('Price value should be a number.');
   this._value = value;
@@ -146,35 +145,9 @@ function PricesApiParser(prices) {
   };
 
   /**
-   * @param {string} item
-   * @return [Item] for an specific item or {null} if there is no such item
-   * */
-  function parseItem(item) {
-    var resultArr = [], qualities, qualityID, tempArr;
-    resultArr = [];
-
-    try {
-      qualities = getQualitiesForItem(item);
-      for (qualityID in qualities) {
-        if (!qualities.hasOwnProperty(qualityID)) continue;
-        tempArr = parsePricesForQuality(qualities[qualityID]);
-        //adds item name and qualityID to all items
-        for (var i = 0; i < tempArr.length; i++) {
-          tempArr[i].quality(qualityID * 1);  // converts string to number
-        }
-        resultArr = resultArr.concat(tempArr);
-      }
-    } catch (e) {
-      throw new Error("In PricesApiParser.parseItem(). " + e.name + ": " + e.message);
-    }
-
-    return resultArr;
-  }
-
-  /**
    * @return {Collection} contains {Item} objects
    * */
-  this.getAllItems = function () {
+  this.parseAllItems = function () {
     var item, arr, i, col = new Collection();
     for (item in items) {
       if (!items.hasOwnProperty(item))    continue;
@@ -188,38 +161,29 @@ function PricesApiParser(prices) {
     return col;
   };
 
-  /* private util functions */
   /**
-   * @param {object} item
-   * @return {object} containing qualities for the given item
+   * @param {string} item
+   * @return [Item] for an specific price or {null} if there is no such price
    * */
-  function getQualitiesForItem(item) {
-    return item["prices"];
-  }
+  function parseItem(item) {
+    var resultArr = [], qualities, qualityID, tempArr;
 
-  /**
-   * @param {string} itemName
-   * @return [string]
-   * */
-  function getQualitiesForItemName(itemName) {
-    return items[itemName]["prices"];
-  }
-
-  /**
-   * @param {string} itemName
-   * @return [string] containing qualities names for a specific item
-   * */
-  function parseQualitiesNames(itemName) {
-
-    var qualities = getQualitiesForItemName(itemName);
-    var qualitiesIDs = Object.keys(qualities);
-
-    var i, arr = [];
-    for (i = 0; i < qualitiesIDs.length; i++) {
-      arr.push(convertQualityIdToQualityName(qualitiesIDs[i]));
+    try {
+      qualities = getQualitiesForItem(item);
+      for (qualityID in qualities) {
+        if (!qualities.hasOwnProperty(qualityID)) continue;
+        tempArr = parsePricesForQuality(qualities[qualityID]);
+        //adds price name and qualityID to all items
+        for (var i = 0; i < tempArr.length; i++) {
+          tempArr[i].quality(qualityID * 1);  // converts string to number
+        }
+        resultArr = resultArr.concat(tempArr);
+      }
+    } catch (e) {
+      throw new Error("In PricesApiParser.parseItem(). " + e.name + ": " + e.message);
     }
 
-    return arr;
+    return resultArr;
   }
 
   /**
@@ -245,10 +209,7 @@ function PricesApiParser(prices) {
             var item = new Item();
             item.tradable((tradeSt == 'Tradable'));
             item.craftable((craftSt == 'Craftable'));
-            var price = new Price();
-            price.id(priceID * 1);
-            price.currency(currencyName);
-            price.value(currencyValue);
+            var price = new Price(priceID * 1, currencyName, currencyValue);
             item.price(price);
             resultArr.push(item);
           }
@@ -259,6 +220,39 @@ function PricesApiParser(prices) {
     }
 
     return resultArr;
+  }
+
+  /**
+   * @param {object} item
+   * @return {object} containing qualities for the given price
+   * */
+  function getQualitiesForItem(item) {
+    return item["prices"];
+  }
+
+  /**
+   * @param {string} itemName
+   * @return [string]
+   * */
+  function getQualitiesForItemName(itemName) {
+    return items[itemName]["prices"];
+  }
+
+  /**
+   * @param {string} itemName
+   * @return [string] containing qualities names for a specific price
+   * */
+  function parseQualitiesNames(itemName) {
+
+    var qualities = getQualitiesForItemName(itemName);
+    var qualitiesIDs = Object.keys(qualities);
+
+    var i, arr = [];
+    for (i = 0; i < qualitiesIDs.length; i++) {
+      arr.push(convertQualityIdToQualityName(qualitiesIDs[i]));
+    }
+
+    return arr;
   }
 
   function convertQualityIdToQualityName() {

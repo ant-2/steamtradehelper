@@ -42,19 +42,19 @@ describe('prices.js', function () {
     var parser = new PricesApiParser(prices);
     
     it("All items are parsed", function () {
-      var items = parser.getAllItems();
+      var items = parser.parseAllItems();
       assert(items.size() === 1, 'Size: '+items.size());
       var arr = items.getProperty('A Distinctive Lack of Hue');
       assert(arr.length === 2, 'items array length are not match with expected');
     });
 
     it("Parsed items are in valid state, all properties are filled", function () {
-      var items = parser.getAllItems();
+      var items = parser.parseAllItems();
       var arr = items.getProperty('A Distinctive Lack of Hue');
 
       for (var i = 0; i < arr.length; i++) {
         var item = arr[i];
-        var msg = 'one of the returned Items are not in valid state. arr[i]: '+i+', item name: '+arr[i].name();
+        var msg = 'one of the returned Items are not in valid state. arr[i]: '+i+', price name: '+arr[i].name();
         assert(item.name != undefined);
         assert(item.quality() != undefined);
         assert(item.tradable() != undefined);

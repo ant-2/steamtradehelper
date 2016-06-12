@@ -6,6 +6,8 @@
   <style type="text/css">@import url(/modules/spreadsheet.css);</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
   <script src="/modules/spreadsheet.js"></script>
+  <script src="/js/prices.js"></script>
+  <script src="/js/data.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', init);
@@ -20,23 +22,25 @@
         console.error("Something wrong with templates. "+e.name+": "+e.message);
       }
 
+      var collection = new Collection();
+      var arr = [];
+      arr.push(new Item({
+        name: "A random craft hat",
+        qualityID: 6,
+        tradable: true,
+        craftable: true,
+        price: new Price(0, "ref", 1.33)
+      }));
+      collection.addProperty('A random craft hat', arr);
+
       var sh = new Spreadsheet({
         styles: {
           container: "sh",
           row: "sh__row"
         },
-        title: title,
-        price: price,
-        items: {
-          "A random craft hat": [
-            {value: 10, currency: "ref"},
-            {value: 2, currency: "keys"}
-          ],
-          "Anger": [
-            {value: 10, currency: "ref"},
-            {value: 2, currency: "keys"}
-          ]
-        }
+        rowTitleTemplate: title,
+        rowPriceCellTemplate: price,
+        items: collection
       });
       document.body.appendChild(sh.getElem());
 
