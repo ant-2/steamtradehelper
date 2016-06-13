@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <style type="text/css">@import url(/modules/spreadsheet.css);</style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+  <script src="http://underscorejs.org/underscore.js"></script>
   <script src="/modules/spreadsheet.js"></script>
   <script src="/js/prices.js"></script>
   <script src="/js/data.js"></script>
@@ -143,13 +143,12 @@
     }
 
     function init() {
-      var items, templates;
+      var items;
       items = getItems();
-      templates = new Spreadsheet_tmpl(getSpreadsheetStyles());
 
       var sh = new Spreadsheet({
-        templates: templates,
-        items: items
+        items: items,
+        styles: new SpreadsheetStyles()
       });
       document.body.appendChild(sh.getElem());
 
