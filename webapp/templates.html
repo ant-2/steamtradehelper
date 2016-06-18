@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">@import url(modules/spreadsheet.css);</style>
+  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="http://underscorejs.org/underscore.js"></script>
+  <script src="js/classes.js"></script>
+  <script src="js/common.js"></script>
+  <script src="modules/spreadsheet.js"></script>
+
+  <!--Templates-->
+  <script type="text/template" id="sh-template">
+    <section class="b-sh">
+      <%_.each(col, function(item) {%>
+      <div class="b-sh__row">
+        <div class="b-sh__row-cell b-sh__row-cell_title"><%=item.name()%></div>
+        <%_.each(item, function(price) {
+        <div class="b-sh__row-cell b-sh__row-cell_price"><%=price.value()+" "+price.currency()%></div>
+        <%})%>
+      </div>
+      <%})%>
+    </section>
+  </script>
+</head>
+
+<body>
+  <script>
+    function loadItems() {
+      var unParsedItems = {
+        "response": {
+          "success": 1,
+          "current_time": 1466234892,
+          "raw_usd_value": 0.105,
+          "usd_currency": "metal",
+          "usd_currency_index": 5002,
+          "items": {
+            "A Brush with Death": {
+              "defindex": [
+                30186
+              ],
+              "prices": {
+                "14": {
+                  "Tradable": {
+                    "Craftable": [
+                      {
+                        "value": 100,
+                        "currency": "keys",
+                        "difference": 1800,
+                        "last_update": 1459344639
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "A Color Similar to Slate": {
+              "defindex": [
+                5052
+              ],
+              "prices": {
+                "6": {
+                  "Tradable": {
+                    "Non-Craftable": [
+                      {
+                        "value": 10,
+                        "currency": "metal",
+                        "difference": 10,
+                        "last_update": 1462210286
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+      var parser = new PricesApiParser(unParsedItems);
+      return parser.parseAllItems();
+    }
+
+    function job() {
+      var template = document.getElementById('sh-template');
+      var compiled = compileTemplate(template.innerHTML);
+      var items = loadItems();
+      var renderedSh = render(compiled, items);
+      document.appendChild(renderedSh);
+    }
+
+    function render(template, items) {
+      try {
+        return template(items);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    function compileTemplate(templateText) {
+      try {
+        var compiled = _.template(templateText).source;
+      } catch (e) {
+        console.log(e);
+      }
+      return compiled;
+    }
+
+    document.addEventListener('DOMContentLoaded', job);
+  </script>
+</body>
+</html>

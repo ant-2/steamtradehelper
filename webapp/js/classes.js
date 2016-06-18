@@ -1,20 +1,14 @@
 // Collection
-function Collection() {
-  Object.defineProperty(this, 'size', {
-    value: 0,
-    writable: true
-  })
-}
-Collection.prototype.addProperty = function (key, value) {
-  this[key] = value;
-  this.size++;
+function Collection() {}
+Collection.prototype.property = function (key, value) {
+  if (value == undefined) {
+    return this[key];
+  } else {
+    this[key] = value;
+  }
 };
-Collection.prototype.removeProperty = function (key) {
-  delete this[key];
-  this.size--;
-};
-Collection.prototype.getProperty = function (key) {
-  return this[key];
+Collection.prototype.deleteProperty = function (key) {
+  delete  this[key];
 };
 Collection.prototype.hasProperty = function (key, value) {
   if (!this.hasOwnProperty(key)) return false;
@@ -155,7 +149,7 @@ function PricesApiParser(prices) {
       for (i = 0; i < arr.length; i++) {
         arr[i].name(item);
       }
-      col.addProperty(item, arr);
+      col.property(item, arr);
     }
 
     return col;
@@ -182,7 +176,6 @@ function PricesApiParser(prices) {
     } catch (e) {
       throw new Error("In PricesApiParser.parseItem(). " + e.name + ": " + e.message);
     }
-
     return resultArr;
   }
 
@@ -209,8 +202,7 @@ function PricesApiParser(prices) {
             var item = new Item();
             item.tradable((tradeSt == 'Tradable'));
             item.craftable((craftSt == 'Craftable'));
-            var price = new Price(priceID * 1, currencyName, currencyValue);
-            item.price(price);
+            item.price(new Price(priceID * 1, currencyName, currencyValue));
             resultArr.push(item);
           }
         }
@@ -282,5 +274,29 @@ function PricesApiParser(prices) {
 
       return possibleQualities[qualityID];
     }
+  }
+}
+
+function BackpacktfDataSupplier() {
+  "use strict";
+  var dataLoader = new UtilsData();
+  /**
+   * @returns {prices} object from the server
+   * */
+  this.getPrices = function() {
+    var json, result,
+        uri = "/rest/raw/prices";
+    try {
+      json = dataLoader.loadResource(uri);
+    } catch (e) {
+      throw new Error("Can't get prices object from server. "+e.name+": "+e.message);
+    }
+
+    try {
+      result = JSON.parse(json);
+    } catch (e) {
+      throw new Error("Can't parse prices object. "+e.name+": "+e.message)
+    }
+    return result;
   }
 }

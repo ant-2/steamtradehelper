@@ -1,18 +1,18 @@
-.sh {
+.b-sh {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
-.sh__row {
+.b-sh__row {
     height: 2em;
     display: table-row;
 }
 
-.sh__row_hidden {
+.b-sh__row_hidden {
     display: none;
 }
 
-.sh__row-cell {
+.b-sh__row-cell {
     display: table-cell;
     vertical-align: middle;
     padding: 3pt;
@@ -20,12 +20,11 @@
     border-bottom: 1px solid black;
 }
 
-.sh__row-cell_title {
+.b-sh__row-cell_title {
     width: 150px;
     background-color: deepskyblue;
 }
 
-.sh__row-cell_price {
+.b-sh__row-cell_price {
     width: 100px;
-    /*NOP*/
 }

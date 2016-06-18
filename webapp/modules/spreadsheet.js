@@ -133,17 +133,19 @@ function Element(type, styles) {
 }
 
 function SpreadsheetStyles() {
-  this.container = 'sh';
-  this.row = 'sh__row';
   var styles = {
-    container: "sh",
-    row: "sh__row",
-    cell: "sh__row-cell",
-    title: "sh__row-cell_title",
-    price: "sh__row-cell_price"
+    container: "b-sh",
+    row: "b-sh__row",
+    cell: "b-sh__row-cell",
+    title: "b-sh__row-cell_title",
+    price: "b-sh__row-cell_price"
   };
 
   this.getStyles = function () {
     return styles;
   }
+}
+
+function SpreadsheetElements(template, data) {
+
 }

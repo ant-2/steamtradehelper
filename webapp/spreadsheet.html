@@ -6,11 +6,15 @@
   <style type="text/css">@import url(modules/spreadsheet.css);</style>
   <!-- External libs -->
   <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://www.jsviews.com/download/jsrender.js"></script>
   <!-- Internal libs -->
   <script src="js/common.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/prices.js"></script>
+  <script src="js/common.js"></script>
   <script src="modules/spreadsheet.js"></script>
+
+  <script id="myTemplate" type="text/x-jsrender">
+    Name: {{:name}}
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", init);
@@ -39,7 +43,7 @@
         document.body.appendChild(spreadsheet.getElem());
         console.timeEnd("render");
       } catch (e) {
-        console.log("Error in rendering page content. "+e.name+": "+e.message)
+        console.log("Error in rendering page content. " + e.name + ": " + e.message)
       }
     }
   </script>

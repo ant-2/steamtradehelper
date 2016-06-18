@@ -1,5 +1,4 @@
 describe('data.js', function () {
-
   var dataSupplier = new BackpacktfDataSupplier();
 
   describe('Интеграционный тест на доступ к данным с сервера', function () {
