@@ -1,6 +1,4 @@
-package eu.mosov.steamtradehelper.data;
-
-import org.springframework.stereotype.Repository;
+package eu.mosov.steamTradeHelper.data;
 
 import javax.json.JsonObject;
 import java.util.HashMap;

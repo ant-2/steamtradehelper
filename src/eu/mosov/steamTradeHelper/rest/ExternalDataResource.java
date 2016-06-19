@@ -1,7 +1,7 @@
-package eu.mosov.steamtradehelper.rest;
+package eu.mosov.steamTradeHelper.rest;
 
-import eu.mosov.steamtradehelper.client.BackpacktfApiAccessor;
-import eu.mosov.steamtradehelper.data.InMemoryDataRepo;
+import eu.mosov.steamTradeHelper.client.BackpacktfApiAccessor;
+import eu.mosov.steamTradeHelper.data.InMemoryDataRepo;
 
 import javax.json.JsonObject;
 import javax.ws.rs.GET;
@@ -16,6 +16,12 @@ import javax.ws.rs.Produces;
 @Produces({"application/json", "application/javascript"})
 public class ExternalDataResource extends SpringAwareResource {
   private static InMemoryDataRepo repo = Init.getRepoInstance();
+
+  @GET
+  @Path("hello")
+  public String get() {
+    return "Hello";
+  }
 
   @GET
   @Path("prices")

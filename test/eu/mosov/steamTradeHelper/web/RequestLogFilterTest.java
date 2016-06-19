@@ -1,4 +1,4 @@
-package eu.mosov.steamtradehelper.web;
+package eu.mosov.steamTradeHelper.web;
 
 import org.junit.Test;
 

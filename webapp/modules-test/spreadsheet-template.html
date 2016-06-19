@@ -12,12 +12,12 @@
 
   <!--Templates-->
   <script type="text/template" id="sh-template">
-    <section class="b-sh">
-      <%_.each(col, function(item) {%>
-      <div class="b-sh__row">
-        <div class="b-sh__row-cell b-sh__row-cell_title"><%=item.name()%></div>
-        <%_.each(item, function(price) {
-        <div class="b-sh__row-cell b-sh__row-cell_price"><%=price.value()+" "+price.currency()%></div>
+    <section class="sh">
+      <%_.each(data, function(value, key) {%>
+      <div class="sh__row">
+        <div class="sh__row-cell sh__row-cell_title"><%=key%></div>
+        <%_.each(value, function(item) { %>
+        <div class="sh__row-cell sh__row-cell_price"><%=item.price().value()+" "+item.price().currency()%></div>
         <%})%>
       </div>
       <%})%>
@@ -26,6 +26,8 @@
 </head>
 
 <body>
+  <div id="con"></div>
+
   <script>
     function loadItems() {
       var unParsedItems = {
@@ -82,28 +84,11 @@
     }
 
     function job() {
-      var template = document.getElementById('sh-template');
-      var compiled = compileTemplate(template.innerHTML);
+      var text = $('#sh-template').html();
+      var compiled = new Template(text, 'data');
       var items = loadItems();
-      var renderedSh = render(compiled, items);
-      document.appendChild(renderedSh);
-    }
-
-    function render(template, items) {
-      try {
-        return template(items);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    function compileTemplate(templateText) {
-      try {
-        var compiled = _.template(templateText).source;
-      } catch (e) {
-        console.log(e);
-      }
-      return compiled;
+      var renderedSh = compiled.render(items);
+      $("#con").html(renderedSh);
     }
 
     document.addEventListener('DOMContentLoaded', job);

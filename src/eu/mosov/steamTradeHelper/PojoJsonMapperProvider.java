@@ -1,4 +1,4 @@
-package eu.mosov.steamtradehelper;
+package eu.mosov.steamTradeHelper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

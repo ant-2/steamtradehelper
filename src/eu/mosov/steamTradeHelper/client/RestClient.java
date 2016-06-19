@@ -1,4 +1,4 @@
-package eu.mosov.steamtradehelper.client;
+package eu.mosov.steamTradeHelper.client;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;

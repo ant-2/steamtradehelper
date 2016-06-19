@@ -1,6 +1,6 @@
-package eu.mosov.steamtradehelper.client;
+package eu.mosov.steamTradeHelper.client;
 
-import eu.mosov.steamtradehelper.ConfigReader;
+import eu.mosov.steamTradeHelper.ConfigReader;
 
 import javax.json.JsonObject;
 

@@ -1,4 +1,4 @@
-package eu.mosov.steamtradehelper;
+package eu.mosov.steamTradeHelper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
