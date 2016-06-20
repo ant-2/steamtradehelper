@@ -78,14 +78,13 @@
           }
         }
       };
-      return new PricesApi().getItems(raw);
+      return new PricesApi(raw).getItems();
     }
 
     function job() {
       var text = $('#sh-template').html();
       var template = new Template(text, 'data');
-      var items = new BackpacktfApi().items(true);
-//      var items = mockItems();
+      var items = mockItems();
       $("#con").html(template.render(items));
     }
   </script>

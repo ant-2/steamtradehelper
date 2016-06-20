@@ -28,6 +28,7 @@ public class ExternalDataResource extends SpringAwareResource {
       BackpacktfApi api = new BackpacktfApi();
       InMemoryDataRepo repo = new InMemoryDataRepo();
       repo.putResource("prices", api.getPrices());
+      repo.putResource("mock", api.getPrices());
       return repo;
     }
   }

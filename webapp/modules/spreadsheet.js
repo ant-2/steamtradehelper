@@ -1,13 +1,11 @@
 function Spreadsheet(items, template) {
   "use strict";
-  var html, _items = items;
+  var html;
 
-  this.html = getHtml;
-
-  function getHtml() {
-    if (!html) {html = renderItems(_items)}
+  this.html = function() {
+    if (!html) {html = renderItems(items)}
     return html;
-  }
+  };
 
   function renderItems(items) {
     return template.render(items);

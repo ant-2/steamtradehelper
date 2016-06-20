@@ -1,5 +1,4 @@
 describe('common.js', function () {
-
   describe('Класс Collection', function () {
     it('Set new property', function () {
       var col = new Collection();
@@ -21,6 +20,15 @@ describe('common.js', function () {
       col.property('key', 'value');
       col.deleteProperty('key');
       assert(col['key'] == undefined);
+    });
+  });
+
+  describe('Класс RestClient', function () {
+    it('loadResource()', function () {
+      var client = new RestClient();
+      var prices = client.loadResource('/rest/raw/prices');
+
+      assert(prices != undefined);
     });
   });
 });

@@ -106,29 +106,6 @@ Price.prototype.value = function (value) {
   this._value = value;
 };
 
-function RestClient() {
-  "use strict";
-  var dataLoader = new UtilsData();
-
-  /**
-   * @returns {items} object from the server
-   * */
-  this.loadResource = function(uri) {
-    var json, result;
-    try {
-      json = dataLoader.loadResource(uri);
-    } catch (e) {
-      throw new Error("Can't get items object from server. "+e.name+": "+e.message);
-    }
-    try {
-      result = JSON.parse(json);
-    } catch (e) {
-      throw new Error("Can't parse items object. "+e.name+": "+e.message)
-    }
-    return result;
-  }
-}
-
 /**
  * Data holder and data extractor for backpack.tf items API
  * @param {object} data, an object from backpack.tf API response
@@ -263,7 +240,7 @@ function BackpacktfApi() {
   this.items = function(isNeedUpdate) {
     if(isNeedUpdate || !prices) {
       prices = load(PRICES_URI);
-      pricesParsed = new PricesApi.getItems(prices)
+      pricesParsed = new PricesApi(prices).getItems();
     }
     return pricesParsed;
   };

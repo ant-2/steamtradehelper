@@ -6,8 +6,8 @@
   <script src="/js/jquery-1.12.4.min.js"></script>
   <script src="/js/underscore-1.8.3.min.js"></script>
   <!--Internal libs-->
-  <script src="/js/backpacktf.js"></script>
   <script src="/js/common.js"></script>
+  <script src="/js/backpacktf.js"></script>
   <script src="/modules/spreadsheet.js"></script>
   <style type="text/css">@import url(modules/spreadsheet.css);</style>
 
@@ -17,24 +17,36 @@
       <%_.each(data, function(value, key) {%>
       <div class="sh__row">
         <div class="sh__row-cell sh__row-cell_title"><%=key%></div>
-        <%_.each(value, function(item) { %>
-        <div class="sh__row-cell sh__row-cell_price"><%=item.price().value()+" "+item.price().currency()%></div>
-        <%})%>
+        <% var item;%>
+        <% for(var i = 0; i < value.length; i++) { %>
+        <% item = value[i];%>
+        <% if (item.price().id() != 0) continue; %>
+        <div class="sh__row-cell sh__row-cell_price"><%=item.getQualityName()+" "+item.price().value()+" "+item.price().currency()%></div>
+        <%}%>
       </div>
       <%})%>
     </section>
+
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", render);
 
     function render() {
       // retrieves data from a server
-      var items, spreadsheet;
-      items = loadDataFromServer();
-      spreadsheet = new Spreadsheet();
-//      spreadsheet = new Spreadsheet(items, $('#sh-template').html());
-//      $("#container").html(spreadsheet.html());
+      var
+          items = loadDataFromServer(),
+          spreadsheet = createSpreadsheet(items);
+      document.getElementById('container').innerHTML = spreadsheet.html();
       console.log('done');
+    }
+
+    function createSpreadsheet(items) {
+      var result, template;
+      console.time('createSpreadsheet');
+      template = new Template(document.getElementById('sh-template').innerHTML, 'data');
+      result =  new Spreadsheet(items, template);
+      console.timeEnd('createSpreadsheet');
+      return result;
     }
 
     function loadDataFromServer() {
