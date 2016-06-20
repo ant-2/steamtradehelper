@@ -1,5 +1,17 @@
-describe('prices.js', function () {
+describe('Доступ к данным на сервере', function () {
 
+  describe('Интеграционный тест на доступ к данным с сервера', function () {
+    it('loadResource()', function () {
+      var dataSupplier = new RestClient();
+      var uri = '/rest/raw/prices';
+      var data = dataSupplier.loadResource(uri);
+      assert(data !== undefined && data !== null);
+    });
+  });
+});
+
+describe('Тестирование Backpack.tf API', function () {
+  
   describe('Parsing items from Backpack.tf API', function () {
     var prices = {
       "response": {
@@ -39,33 +51,33 @@ describe('prices.js', function () {
         }
       }
     };
-    var parser = new PricesApiParser(prices);
-
+    var api = new PricesApi(prices);
+    
     it("Parsed items are in valid state, all properties are filled", function () {
-      var items = parser.parseAllItems();
-
+      var items = api.getItems();
+      
       var arr = items.property('A Distinctive Lack of Hue');
       assert(arr.length == 2);
-
+      
       var item = arr[0];
       assert(item.name() == 'A Distinctive Lack of Hue');
       assert(item.quality() === 6);
       assert(item.tradable() === true);
       assert(item.craftable() === true);
-
+      
       var price = item.price();
       assert(price.id() === 0);
       assert(price.currency() === 'keys');
       assert(price.value() === 1);
     });
-
+    
     describe('Методы класса Item', function () {
       var item = new Item('anger');
       item.quality(6);
       item.tradable(true);
       item.craftable(true);
       item.price(new Price(0, 'refined', 4.66));
-
+      
       it('Генерация URI на Backpack.tf', function () {
         var expected = 'http://backpack.tf/stats/Unique/Anger/Tradable/Craftable/0'.toLowerCase();
         var uri = item.getBackpackUri();
@@ -74,7 +86,7 @@ describe('prices.js', function () {
         assert(uri.toLowerCase() == expected, 'Returned URI doesn\'t match expected URI. Current URI: ' + uri + '. Expected: ' + expected);
       })
     });
-
+    
     describe('Class Collection', function () {
       it('Set new property', function () {
         var col = new Collection();
@@ -82,7 +94,7 @@ describe('prices.js', function () {
         assert(col['key'] != undefined);
         assert(col['key'] == 'value');
       });
-
+      
       it('Get a property value', function () {
         var col = new Collection();
         col.property('key', 'value');
@@ -90,7 +102,7 @@ describe('prices.js', function () {
         assert(value != undefined);
         assert(value == 'value');
       });
-
+      
       it('Delete a property', function () {
         var col = new Collection();
         col.property('key', 'value');

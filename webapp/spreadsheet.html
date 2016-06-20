@@ -3,52 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Trade helper</title>
+  <script src="/js/jquery-1.12.4.min.js"></script>
+  <script src="/js/underscore-1.8.3.min.js"></script>
+  <!--Internal libs-->
+  <script src="/js/backpacktf.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/modules/spreadsheet.js"></script>
   <style type="text/css">@import url(modules/spreadsheet.css);</style>
-  <!-- External libs -->
-  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script src="https://www.jsviews.com/download/jsrender.js"></script>
-  <!-- Internal libs -->
-  <script src="js/common.js"></script>
-  <script src="js/common.js"></script>
-  <script src="modules/spreadsheet.js"></script>
 
-  <script id="myTemplate" type="text/x-jsrender">
-    Name: {{:name}}
+  <!--Templates-->
+  <script type="text/template" id="sh-template">
+    <section class="sh">
+      <%_.each(data, function(value, key) {%>
+      <div class="sh__row">
+        <div class="sh__row-cell sh__row-cell_title"><%=key%></div>
+        <%_.each(value, function(item) { %>
+        <div class="sh__row-cell sh__row-cell_price"><%=item.price().value()+" "+item.price().currency()%></div>
+        <%})%>
+      </div>
+      <%})%>
+    </section>
   </script>
-
   <script>
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", render);
 
-    function init() {
+    function render() {
       // retrieves data from a server
-      var items, dataSupplier, parser, rawPrices;
-      try {
-        dataSupplier = new BackpacktfDataSupplier();
-        rawPrices = dataSupplier.getPrices();
-        parser = new PricesApiParser(rawPrices);
-        items = parser.parseAllItems();
-      } catch (e) {
-        console.log('Error in attempt to get data from server. ' + e.name + ": " + e.message);
-      }
+      var items, spreadsheet;
+      items = loadDataFromServer();
+      spreadsheet = new Spreadsheet();
+//      spreadsheet = new Spreadsheet(items, $('#sh-template').html());
+//      $("#container").html(spreadsheet.html());
+      console.log('done');
+    }
 
-      console.time("render");
-      var spreadsheet, templates;
-      templates = new Spreadsheet_tmpl(getSpreadsheetStyles());
-      try {
-        spreadsheet = new Spreadsheet({
-          templates: templates,
-          items: items
-        });
-
-        document.body.appendChild(spreadsheet.getElem());
-        console.timeEnd("render");
-      } catch (e) {
-        console.log("Error in rendering page content. " + e.name + ": " + e.message)
-      }
+    function loadDataFromServer() {
+      console.time('loadData');
+      var
+          result = new BackpacktfApi().items(false);
+      console.timeEnd('loadData');
+      return result;
     }
   </script>
 </head>
 
 <body>
+  <section id="container">Container</section>
 </body>
 </html>

@@ -4,12 +4,12 @@ import eu.mosov.steamTradeHelper.ConfigReader;
 
 import javax.json.JsonObject;
 
-public class BackpacktfApiAccessor {
+public class BackpacktfApi {
   private static final String PRICES = "http://backpack.tf/api/IGetPrices/v4";
   private static RestClient restClient;
   private ConfigReader configReader;
 
-  public BackpacktfApiAccessor() {
+  public BackpacktfApi() {
     restClient = RestClient.getInstance();
     configReader = new ConfigReader("src/config.properties");
   }

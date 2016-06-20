@@ -1,20 +1,3 @@
-// Collection
-function Collection() {}
-Collection.prototype.property = function (key, value) {
-  if (value == undefined) {
-    return this[key];
-  } else {
-    this[key] = value;
-  }
-};
-Collection.prototype.deleteProperty = function (key) {
-  delete  this[key];
-};
-Collection.prototype.hasProperty = function (key, value) {
-  if (!this.hasOwnProperty(key)) return false;
-  return (this[key] === value);
-};
-
 // Item object
 function Item(name) {
   this._name = name;
@@ -123,25 +106,44 @@ Price.prototype.value = function (value) {
   this._value = value;
 };
 
-/**
- * Data holder and data extractor for backpack.tf prices API
- * @param {object} prices, an object from backpack.tf API response
- * */
-function PricesApiParser(prices) {
-  var items = prices["response"]["items"];
-  var qualityConverter = convertQualityIdToQualityName();
+function RestClient() {
+  "use strict";
+  var dataLoader = new UtilsData();
 
   /**
-   * @return [string]
+   * @returns {items} object from the server
    * */
-  this.getItemsNames = function () {
-    return Object.keys(items);
+  this.loadResource = function(uri) {
+    var json, result;
+    try {
+      json = dataLoader.loadResource(uri);
+    } catch (e) {
+      throw new Error("Can't get items object from server. "+e.name+": "+e.message);
+    }
+    try {
+      result = JSON.parse(json);
+    } catch (e) {
+      throw new Error("Can't parse items object. "+e.name+": "+e.message)
+    }
+    return result;
+  }
+}
+
+/**
+ * Data holder and data extractor for backpack.tf items API
+ * @param {object} data, an object from backpack.tf API response
+ * */
+function PricesApi(data) {
+  var items = data["response"]["items"];
+
+  /**
+   * @return {Collection} contains {itemName: {Item}} objects
+   * */
+  this.getItems = function() {
+    return parseItems(items)
   };
 
-  /**
-   * @return {Collection} contains {Item} objects
-   * */
-  this.parseAllItems = function () {
+  function parseItems(items) {
     var item, arr, i, col = new Collection();
     for (item in items) {
       if (!items.hasOwnProperty(item))    continue;
@@ -153,7 +155,7 @@ function PricesApiParser(prices) {
     }
 
     return col;
-  };
+  }
 
   /**
    * @param {string} item
@@ -174,7 +176,7 @@ function PricesApiParser(prices) {
         resultArr = resultArr.concat(tempArr);
       }
     } catch (e) {
-      throw new Error("In PricesApiParser.parseItem(). " + e.name + ": " + e.message);
+      throw new Error("In PricesApi.parseItem(). " + e.name + ": " + e.message);
     }
     return resultArr;
   }
@@ -208,7 +210,7 @@ function PricesApiParser(prices) {
         }
       }
     } catch (e) {
-      throw new Error("Error during parsing a prices for Item quality object. " + e.name + ": " + e.message);
+      throw new Error("Error during parsing a items for Item quality object. " + e.name + ": " + e.message);
     }
 
     return resultArr;
@@ -220,31 +222,6 @@ function PricesApiParser(prices) {
    * */
   function getQualitiesForItem(item) {
     return item["prices"];
-  }
-
-  /**
-   * @param {string} itemName
-   * @return [string]
-   * */
-  function getQualitiesForItemName(itemName) {
-    return items[itemName]["prices"];
-  }
-
-  /**
-   * @param {string} itemName
-   * @return [string] containing qualities names for a specific price
-   * */
-  function parseQualitiesNames(itemName) {
-
-    var qualities = getQualitiesForItemName(itemName);
-    var qualitiesIDs = Object.keys(qualities);
-
-    var i, arr = [];
-    for (i = 0; i < qualitiesIDs.length; i++) {
-      arr.push(convertQualityIdToQualityName(qualitiesIDs[i]));
-    }
-
-    return arr;
   }
 
   function convertQualityIdToQualityName() {
@@ -277,26 +254,21 @@ function PricesApiParser(prices) {
   }
 }
 
-function BackpacktfDataSupplier() {
-  "use strict";
-  var dataLoader = new UtilsData();
-  /**
-   * @returns {prices} object from the server
-   * */
-  this.getPrices = function() {
-    var json, result,
-        uri = "/rest/raw/prices";
-    try {
-      json = dataLoader.loadResource(uri);
-    } catch (e) {
-      throw new Error("Can't get prices object from server. "+e.name+": "+e.message);
-    }
+function BackpacktfApi() {
+  var
+      PRICES_URI = '/rest/raw/prices',
+      restClient = new RestClient(new UtilsData()),
+      prices, pricesParsed;
 
-    try {
-      result = JSON.parse(json);
-    } catch (e) {
-      throw new Error("Can't parse prices object. "+e.name+": "+e.message)
+  this.items = function(isNeedUpdate) {
+    if(isNeedUpdate || !prices) {
+      prices = load(PRICES_URI);
+      pricesParsed = new PricesApi.getItems(prices)
     }
-    return result;
+    return pricesParsed;
+  };
+
+  function load(uri) {
+    return restClient.loadResource(uri);
   }
 }

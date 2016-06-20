@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <style type="text/css">@import url(modules/spreadsheet.css);</style>
-  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script src="http://underscorejs.org/underscore.js"></script>
-  <script src="js/classes.js"></script>
-  <script src="js/common.js"></script>
-  <script src="modules/spreadsheet.js"></script>
+  <script src="/js/jquery-1.12.4.min.js"></script>
+  <script src="/js/underscore-1.8.3.min.js"></script>
 
+  <!--Internal libs-->
+  <script src="/js/backpacktf.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/modules/spreadsheet.js"></script>
+  <style type="text/css">@import url(/modules/spreadsheet.css);</style>
   <!--Templates-->
   <script type="text/template" id="sh-template">
     <section class="sh">
@@ -23,14 +24,12 @@
       <%})%>
     </section>
   </script>
-</head>
-
-<body>
-  <div id="con"></div>
 
   <script>
-    function loadItems() {
-      var unParsedItems = {
+    document.addEventListener('DOMContentLoaded', job);
+
+    function mockItems() {
+      var raw = {
         "response": {
           "success": 1,
           "current_time": 1466234892,
@@ -79,19 +78,20 @@
           }
         }
       };
-      var parser = new PricesApiParser(unParsedItems);
-      return parser.parseAllItems();
+      return new PricesApi().getItems(raw);
     }
 
     function job() {
       var text = $('#sh-template').html();
-      var compiled = new Template(text, 'data');
-      var items = loadItems();
-      var renderedSh = compiled.render(items);
-      $("#con").html(renderedSh);
+      var template = new Template(text, 'data');
+      var items = new BackpacktfApi().items(true);
+//      var items = mockItems();
+      $("#con").html(template.render(items));
     }
-
-    document.addEventListener('DOMContentLoaded', job);
   </script>
+</head>
+
+<body>
+  <div id="con"></div>
 </body>
 </html>

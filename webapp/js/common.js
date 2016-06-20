@@ -8,7 +8,6 @@ $(function () {
     });
 });
 
-
 function UtilsData() {
   this.loadResource = function (resourceUrl) {
     var xhr = new XMLHttpRequest();
@@ -20,7 +19,7 @@ function UtilsData() {
     } else {
       return xhr.responseText;
     }
-  }
+  };
   
   //doesn't work //todo fix async loadResource()
   this.loadResourceAsync = function (resourceUrl) {
@@ -63,3 +62,20 @@ function UtilsError() {
     return result;
   }
 }
+
+// Collection
+function Collection() {}
+Collection.prototype.property = function (key, value) {
+  if (value == undefined) {
+    return this[key];
+  } else {
+    this[key] = value;
+  }
+};
+Collection.prototype.deleteProperty = function (key) {
+  delete  this[key];
+};
+Collection.prototype.hasProperty = function (key, value) {
+  if (!this.hasOwnProperty(key)) return false;
+  return (this[key] === value);
+};
