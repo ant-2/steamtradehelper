@@ -1,0 +1,84 @@
+.page {
+    font-family: Helvtica, Arial, sans-serif;
+    font-size: 14px;
+    background-color: white;
+}
+.header {
+    padding: 0 20px;
+}
+
+.header__title {
+    font-size: 24px;
+}
+
+.header p {
+    padding: 0 0 10px 0;
+    line-height: 130%;
+}
+.link {
+
+}
+.content {
+    padding: 0 20px;
+}
+.search-block {
+
+}
+
+.search-block__header {
+
+}
+
+.search-block__content {
+
+}
+.form {
+
+}
+
+.form__input {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 16px;
+}
+.button {
+    padding: 5px 10px;
+}
+.spreadsheet {
+
+}
+
+.spreadsheet__content {
+    padding: 20px 0;
+}
+.row {
+    height: 2em;
+    display: table-row;
+}
+
+.row_hidden {
+    display: none;
+}
+
+.row__cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 6px 10px;
+    background-color: lightpink;
+    border-bottom: 1px solid black;
+}
+
+.row__cell__title {
+    width: 150px;
+    background-color: deepskyblue;
+}
+
+.row__cell__price {
+
+}
+
+.row__link {
+
+}

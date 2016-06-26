@@ -3,6 +3,7 @@ logs
 lib
 *.iml
 .idea
-*.db
 todo.md
 bem/node_modules
+webapp/
+!webapp/WEB-INF
