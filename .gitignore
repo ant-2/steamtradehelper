@@ -5,3 +5,4 @@ lib
 .idea
 *.db
 todo.md
+bem/node_modules
