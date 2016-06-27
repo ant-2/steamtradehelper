@@ -4,6 +4,6 @@ lib
 *.iml
 .idea
 todo.md
-bem/node_modules
+bem-old/node_modules
 webapp/
 !webapp/WEB-INF
