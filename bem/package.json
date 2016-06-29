@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "bower": "^1.7.9",
-    "enb-beautify": "0.0.3"
+    "enb-beautify": "0.0.3",
+    "html2bemjson": "^1.9.0"
   },
   "devDependencies": {
     "bem": "^0.10.2",
@@ -20,7 +21,8 @@
     "enb-bemxjst": "^6.4.1",
     "enb-borschik": "^2.4.0",
     "enb-js": "^1.1.0",
-    "enb-stylus": "^2.3.2"
+    "enb-stylus": "^2.3.2",
+    "ym": "^0.1.2"
   },
   "scripts": {
     "start": "enb server",
