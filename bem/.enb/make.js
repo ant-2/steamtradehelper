@@ -13,11 +13,15 @@ var techs = {
         browserJs: require('enb-js/techs/browser-js'),
 
         // bemtree
-        // bemtree: require('enb-bemxjst/techs/bemtree'),
+        bemtree: require('enb-bemxjst/techs/bemtree'),
 
         // bemhtml
         bemhtml: require('enb-bemxjst/techs/bemhtml'),
-        bemjsonToHtml: require('enb-bemxjst/techs/bemjson-to-html')
+        bemjsonToHtml: require('enb-bemxjst/techs/bemjson-to-html'),
+
+        // pretty printing
+        htmlBeautify: require('enb-beautify/techs/enb-beautify-html'),
+        cssBeautify: require('enb-beautify/techs/enb-beautify-css')
     },
     enbBemTechs = require('enb-bem-techs'),
     levels = [
@@ -94,9 +98,16 @@ module.exports = function(config) {
 
             // borschik
             [techs.borschik, { source: '?.js', target: '?.min.js', minify: isProd }],
-            [techs.borschik, { source: '?.css', target: '?.min.css', minify: isProd }]
+            [techs.borschik, { source: '?.css', target: '?.min.css', minify: isProd }],
+
+            // pretty printing
+            [techs.htmlBeautify],
+            [techs.cssBeautify]
         ]);
 
-        nodeConfig.addTargets([/* '?.bemtree.js', */ '?.html', '?.min.css', '?.min.js']);
+        nodeConfig.addTargets([/* '?.bemtree.js', */ '?.html', '?.min.css', '?.min.js', '?.beauty.html', '?.beauty.css'])
+        // pretty printing
+        /*nodeConfig.addTargets.push('?.beauty.html');
+        nodeConfig.addTargets.push('?.beauty.css');*/
     });
 };
