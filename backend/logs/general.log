@@ -1,0 +1,72 @@
+2016.06.26 16:10:41,842 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @8370ms
+2016.06.26 16:10:42,195 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 16:10:42,714 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 16:10:42,883 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 16:10:42,883 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 16:10:43,240 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:10:43 YEKT 2016]; root of context hierarchy
+2016.06.26 16:10:43,360 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 16:10:44,278 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 16:10:44,476 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1592 ms
+2016.06.26 16:10:46,376 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@151bf776{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 16:10:46,422 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@2f897dab{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 16:10:46,427 [main] INFO  org.eclipse.jetty.server.Server - Started @12967ms
+2016.06.26 16:13:07,121 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1889ms
+2016.06.26 16:13:07,577 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 16:13:08,129 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 16:13:08,201 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 16:13:08,201 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 16:13:08,419 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:13:08 YEKT 2016]; root of context hierarchy
+2016.06.26 16:13:08,504 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 16:13:08,897 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 16:13:09,027 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 826 ms
+2016.06.26 16:13:10,474 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@59072e9d{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 16:13:10,508 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@378cfecf{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 16:13:10,510 [main] INFO  org.eclipse.jetty.server.Server - Started @5296ms
+2016.06.26 16:14:33,856 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @2092ms
+2016.06.26 16:14:34,261 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 16:14:34,781 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 16:14:34,858 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 16:14:34,858 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 16:14:35,101 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:14:35 YEKT 2016]; root of context hierarchy
+2016.06.26 16:14:35,195 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 16:14:35,614 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 16:14:35,743 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 882 ms
+2016.06.26 16:14:37,177 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@59072e9d{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 16:14:37,210 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@378cfecf{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 16:14:37,212 [main] INFO  org.eclipse.jetty.server.Server - Started @5464ms
+2016.06.26 16:27:43,301 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1822ms
+2016.06.26 16:27:43,712 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 16:27:44,330 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 16:27:44,413 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 16:27:44,414 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 16:27:44,632 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:27:44 YEKT 2016]; root of context hierarchy
+2016.06.26 16:27:44,722 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 16:27:45,132 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 16:27:45,271 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 857 ms
+2016.06.26 16:27:46,722 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@7bc44ce8{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 16:27:46,761 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@41eb94bc{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 16:27:46,764 [main] INFO  org.eclipse.jetty.server.Server - Started @5318ms
+2016.06.26 16:46:17,530 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1729ms
+2016.06.26 16:46:17,947 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 16:46:18,526 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 16:46:18,595 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 16:46:18,595 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 16:46:18,809 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:46:18 YEKT 2016]; root of context hierarchy
+2016.06.26 16:46:18,905 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 16:46:19,364 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 16:46:19,499 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 904 ms
+2016.06.26 16:46:20,970 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@7bc44ce8{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 16:46:21,006 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@41eb94bc{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 16:46:21,010 [main] INFO  org.eclipse.jetty.server.Server - Started @5223ms
+2016.06.26 19:26:36,561 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @8889ms
+2016.06.26 19:26:37,037 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
+2016.06.26 19:26:38,618 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.06.26 19:26:38,905 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.06.26 19:26:38,905 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.06.26 19:26:39,537 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 19:26:39 YEKT 2016]; root of context hierarchy
+2016.06.26 19:26:39,783 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.06.26 19:26:41,170 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.06.26 19:26:41,399 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2494 ms
+2016.06.26 19:26:43,148 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@151bf776{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
+2016.06.26 19:26:43,205 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@2f897dab{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2016.06.26 19:26:43,208 [main] INFO  org.eclipse.jetty.server.Server - Started @15558ms

@@ -1,9 +1,0 @@
-{
-  "name": "steam-trade-helper-components",
-  "version": "0.0.1",
-  "author": "ant",
-  "description": "Components and instuments to assembly them",
-  "dependencies": {
-    "html2bemjson": "^1.9.0"
-  }
-}
