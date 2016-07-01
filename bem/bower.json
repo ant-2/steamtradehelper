@@ -9,6 +9,7 @@
     "libs"
   ],
   "dependencies": {
-    "bem-components": "3.0.0"
+    "bem-components": "3.0.0",
+    "j": "git://github.com/innabelaya/j.git#695d479fbdd7c97e61bd89953ef095e2e567e70e"
   }
 }
