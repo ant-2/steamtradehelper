@@ -33,7 +33,8 @@ var techs = {
         { path: 'libs/bem-components/design/desktop.blocks', check: false },
         { path: 'libs/j/blocks', check: false },
         'common.blocks',
-        'desktop.blocks'
+        'desktop.blocks',
+        'simple.blocks'
     ];
 
 module.exports = function(config) {
