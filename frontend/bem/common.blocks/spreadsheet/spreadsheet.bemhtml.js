@@ -1,3 +1,0 @@
-block('spreadsheet')(
-    tag()('section')
-);

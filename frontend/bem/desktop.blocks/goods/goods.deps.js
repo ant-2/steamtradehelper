@@ -1,6 +1,0 @@
-({
-    shouldDeps: [
-        'link',
-        'box'
-    ]
-})
