@@ -1,8 +1,12 @@
 block('page')(
-    content()(function() {
-        return {
-            elem: 'inner',
-            content: applyNext()
-        };
-    })
+    // content()(function() {
+    //     return {
+    //         elem: 'inner',
+    //         content: applyNext()
+    //     };
+    // }),
+
+    elem('inner')(
+        
+    )
 );
