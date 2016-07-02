@@ -1,23 +1,139 @@
-2016.06.26 16:11:05,435 [fe-1] INFO  requestLogger - 127.0.0.1 GET / 
-2016.06.26 16:11:05,874 [fe-2] INFO  requestLogger - 127.0.0.1 GET /favicon.ico 
-2016.06.26 16:11:09,654 [fe-3] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:15,904 [67-1] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:18,573 [67-2] INFO  requestLogger - 127.0.0.1 GET /favicon.ico 
-2016.06.26 16:13:23,668 [67-3] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:56,128 [67-4] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:56,691 [67-5] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:57,129 [67-6] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:57,305 [67-7] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:57,502 [67-8] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:57,688 [67-9] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:13:57,906 [67-10] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:14:19,932 [67-11] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:14:20,965 [67-12] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:15:00,758 [5d-1] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:15:01,681 [5d-2] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:15:02,365 [5d-3] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:28:14,535 [3c-1] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:28:24,456 [3c-2] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:46:25,947 [7b-1] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 16:46:27,051 [7b-2] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
-2016.06.26 19:31:00,987 [a5-1] INFO  requestLogger - 127.0.0.1 GET /spreadsheet.html 
+2016.07.02 22:09:33,935 [a-1] INFO  requestLogger - 127.0.0.1 GET / 
+2016.07.02 22:09:34,101 [a-2] INFO  requestLogger - 127.0.0.1 GET /favicon.ico 
+2016.07.02 22:09:35,865 [a-3] INFO  requestLogger - 127.0.0.1 GET /rest/raw/prices 
+2016.07.02 22:09:36,490 [a-3] ERROR requestLogger - Some error in RequestLogFilter
+javax.servlet.ServletException: A MultiException has 2 exceptions.  They are:
+1. java.lang.ExceptionInInitializerError
+2. java.lang.IllegalStateException: Unable to perform operation: create on eu.mosov.steamTradeHelper.rest.ExternalDataResource
+
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:489) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:812) ~[jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) ~[jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at eu.mosov.steamTradeHelper.web.RequestLogFilter.doFilter(RequestLogFilter.java:37) [tradeHelperBackend/:?]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577) [jetty-security-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.Server.handle(Server.java:499) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544) [jetty-io-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635) [jetty-util-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555) [jetty-util-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_91]
+Caused by: org.glassfish.hk2.api.MultiException: A MultiException has 2 exceptions.  They are:
+1. java.lang.ExceptionInInitializerError
+2. java.lang.IllegalStateException: Unable to perform operation: create on eu.mosov.steamTradeHelper.rest.ExternalDataResource
+
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:391) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2022) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:765) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:704) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:172) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:284) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:318) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	... 25 more
+Caused by: java.lang.ExceptionInInitializerError
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_91]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_91]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_91]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_91]
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1350) ~[hk2-utils-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:271) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:365) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2022) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:765) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:704) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:172) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:284) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:318) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	... 25 more
+Caused by: java.lang.NullPointerException
+	at eu.mosov.steamTradeHelper.rest.ExternalDataResource.createRepo(ExternalDataResource.java:30) ~[tradeHelperBackend/:?]
+	at eu.mosov.steamTradeHelper.rest.ExternalDataResource.<clinit>(ExternalDataResource.java:19) ~[tradeHelperBackend/:?]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_91]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_91]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_91]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_91]
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1350) ~[hk2-utils-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:271) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:365) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2022) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:765) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:704) ~[hk2-locator-2.4.0-b34.jar:?]
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:172) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:284) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:318) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473) ~[jersey-container-servlet-core-2.22.2.jar:?]
+	... 25 more
+2016.07.02 22:10:51,680 [9f-1] INFO  requestLogger - 127.0.0.1 GET /rest/raw/prices 

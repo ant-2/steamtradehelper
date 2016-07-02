@@ -1,72 +1,241 @@
-2016.06.26 16:10:41,842 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @8370ms
-2016.06.26 16:10:42,195 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 16:10:42,714 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 16:10:42,883 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 16:10:42,883 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 16:10:43,240 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:10:43 YEKT 2016]; root of context hierarchy
-2016.06.26 16:10:43,360 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 16:10:44,278 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 16:10:44,476 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1592 ms
-2016.06.26 16:10:46,376 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@151bf776{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 16:10:46,422 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@2f897dab{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 16:10:46,427 [main] INFO  org.eclipse.jetty.server.Server - Started @12967ms
-2016.06.26 16:13:07,121 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1889ms
-2016.06.26 16:13:07,577 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 16:13:08,129 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 16:13:08,201 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 16:13:08,201 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 16:13:08,419 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:13:08 YEKT 2016]; root of context hierarchy
-2016.06.26 16:13:08,504 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 16:13:08,897 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 16:13:09,027 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 826 ms
-2016.06.26 16:13:10,474 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@59072e9d{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 16:13:10,508 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@378cfecf{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 16:13:10,510 [main] INFO  org.eclipse.jetty.server.Server - Started @5296ms
-2016.06.26 16:14:33,856 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @2092ms
-2016.06.26 16:14:34,261 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 16:14:34,781 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 16:14:34,858 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 16:14:34,858 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 16:14:35,101 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:14:35 YEKT 2016]; root of context hierarchy
-2016.06.26 16:14:35,195 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 16:14:35,614 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 16:14:35,743 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 882 ms
-2016.06.26 16:14:37,177 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@59072e9d{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 16:14:37,210 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@378cfecf{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 16:14:37,212 [main] INFO  org.eclipse.jetty.server.Server - Started @5464ms
-2016.06.26 16:27:43,301 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1822ms
-2016.06.26 16:27:43,712 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 16:27:44,330 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 16:27:44,413 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 16:27:44,414 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 16:27:44,632 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:27:44 YEKT 2016]; root of context hierarchy
-2016.06.26 16:27:44,722 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 16:27:45,132 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 16:27:45,271 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 857 ms
-2016.06.26 16:27:46,722 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@7bc44ce8{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 16:27:46,761 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@41eb94bc{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 16:27:46,764 [main] INFO  org.eclipse.jetty.server.Server - Started @5318ms
-2016.06.26 16:46:17,530 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1729ms
-2016.06.26 16:46:17,947 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 16:46:18,526 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 16:46:18,595 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 16:46:18,595 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 16:46:18,809 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 16:46:18 YEKT 2016]; root of context hierarchy
-2016.06.26 16:46:18,905 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 16:46:19,364 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 16:46:19,499 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 904 ms
-2016.06.26 16:46:20,970 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@7bc44ce8{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 16:46:21,006 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@41eb94bc{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 16:46:21,010 [main] INFO  org.eclipse.jetty.server.Server - Started @5223ms
-2016.06.26 19:26:36,561 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @8889ms
-2016.06.26 19:26:37,037 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.3.9.M1
-2016.06.26 19:26:38,618 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
-2016.06.26 19:26:38,905 [main] INFO  / - Initializing Spring root WebApplicationContext
-2016.06.26 19:26:38,905 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2016.06.26 19:26:39,537 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sun Jun 26 19:26:39 YEKT 2016]; root of context hierarchy
-2016.06.26 19:26:39,783 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
-2016.06.26 19:26:41,170 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-2016.06.26 19:26:41,399 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2494 ms
-2016.06.26 19:26:43,148 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@151bf776{/,file:///D:/git.repositories/steamTradeHelper/webapp/,AVAILABLE}{webapp}
-2016.06.26 19:26:43,205 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@2f897dab{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-2016.06.26 19:26:43,208 [main] INFO  org.eclipse.jetty.server.Server - Started @15558ms
+2016.07.02 21:30:14,974 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1616ms
+2016.07.02 21:30:15,167 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 21:30:15,642 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 21:30:15,715 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 21:30:15,716 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 21:30:15,955 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 21:30:15 YEKT 2016]; root of context hierarchy
+2016.07.02 21:30:16,049 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 21:30:16,627 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 21:30:16,803 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1087 ms
+2016.07.02 21:35:22,776 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1690ms
+2016.07.02 21:35:22,963 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 21:35:23,519 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 21:35:23,603 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 21:35:23,603 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 21:35:23,921 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 21:35:23 YEKT 2016]; root of context hierarchy
+2016.07.02 21:35:24,003 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 21:35:24,406 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 21:35:24,545 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 941 ms
+2016.07.02 21:35:26,102 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@35d5ac51{/,file:/D:/git.repositories/tradeHelperBackend/webapp/,AVAILABLE}{webapp}
+2016.07.02 21:35:26,220 [main] INFO  org.eclipse.jetty.server.NetworkTrafficServerConnector - Started NetworkTrafficServerConnector@121bb45b{HTTP/1.1}{0.0.0.0:8090}
+2016.07.02 21:35:26,222 [main] INFO  org.eclipse.jetty.server.Server - Started @5152ms
+2016.07.02 21:38:42,861 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1889ms
+2016.07.02 21:38:43,090 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 21:38:43,635 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 21:38:43,721 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 21:38:43,722 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 21:38:43,934 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 21:38:43 YEKT 2016]; root of context hierarchy
+2016.07.02 21:38:44,016 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 21:38:44,468 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 21:38:44,599 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 877 ms
+2016.07.02 21:38:46,657 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1778ms
+2016.07.02 21:47:55,913 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1520ms
+2016.07.02 21:47:56,097 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 21:47:56,596 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 21:47:56,680 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 21:47:56,681 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 21:47:56,907 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 21:47:56 YEKT 2016]; root of context hierarchy
+2016.07.02 21:47:56,989 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 21:47:57,379 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 21:47:57,539 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 858 ms
+2016.07.02 22:09:09,315 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1486ms
+2016.07.02 22:09:09,509 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 22:09:09,956 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 22:09:10,036 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 22:09:10,037 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 22:09:10,325 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 22:09:10 YEKT 2016]; root of context hierarchy
+2016.07.02 22:09:10,407 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 22:09:10,779 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 22:09:10,911 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 874 ms
+2016.07.02 22:09:12,777 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@360bc645{/,file:/D:/git.repositories/tradeHelperBackend/webapp/,AVAILABLE}{webapp}
+2016.07.02 22:09:12,910 [main] INFO  org.eclipse.jetty.server.NetworkTrafficServerConnector - Started NetworkTrafficServerConnector@5fa23c{HTTP/1.1}{0.0.0.0:8090}
+2016.07.02 22:09:12,912 [main] INFO  org.eclipse.jetty.server.Server - Started @5100ms
+2016.07.02 22:09:36,479 [a-3] WARN  org.glassfish.jersey.internal.Errors - The following warnings have been detected: WARNING: Unknown HK2 failure detected:
+MultiException stack 1 of 2
+java.lang.ExceptionInInitializerError
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1350)
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:271)
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:365)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2022)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:765)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:704)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:172)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:284)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:318)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154)
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:812)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+	at eu.mosov.steamTradeHelper.web.RequestLogFilter.doFilter(RequestLogFilter.java:37)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eu.mosov.steamTradeHelper.rest.ExternalDataResource.createRepo(ExternalDataResource.java:30)
+	at eu.mosov.steamTradeHelper.rest.ExternalDataResource.<clinit>(ExternalDataResource.java:19)
+	... 58 more
+MultiException stack 2 of 2
+java.lang.IllegalStateException: Unable to perform operation: create on eu.mosov.steamTradeHelper.rest.ExternalDataResource
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:392)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2022)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:765)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:704)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:172)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:284)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:318)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154)
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:812)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+	at eu.mosov.steamTradeHelper.web.RequestLogFilter.doFilter(RequestLogFilter.java:37)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:499)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+2016.07.02 22:10:38,733 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1865ms
+2016.07.02 22:10:38,946 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.17.v20160517
+2016.07.02 22:10:39,506 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2016.07.02 22:10:39,588 [main] INFO  / - Initializing Spring root WebApplicationContext
+2016.07.02 22:10:39,588 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2016.07.02 22:10:39,809 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat Jul 02 22:10:39 YEKT 2016]; root of context hierarchy
+2016.07.02 22:10:39,891 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from ServletContext resource [/WEB-INF/spring.xml]
+2016.07.02 22:10:40,295 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016.07.02 22:10:40,458 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 869 ms
+2016.07.02 22:10:42,011 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@1e8ab90f{/,file:/D:/git.repositories/tradeHelperBackend/webapp/,AVAILABLE}{webapp}
+2016.07.02 22:10:42,125 [main] INFO  org.eclipse.jetty.server.NetworkTrafficServerConnector - Started NetworkTrafficServerConnector@a098d76{HTTP/1.1}{0.0.0.0:8080}
+2016.07.02 22:10:42,127 [main] INFO  org.eclipse.jetty.server.Server - Started @5276ms
+2016.07.02 22:11:06,933 [9f-1] ERROR org.glassfish.jersey.server.ServerRuntime$Responder - An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: javax.json.stream.JsonGenerationException: Generating incomplete JSON
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:92) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1130) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:711) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:444) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:434) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:329) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317) [jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154) [jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473) [jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427) [jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388) [jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341) [jersey-container-servlet-core-2.22.2.jar:?]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228) [jersey-container-servlet-core-2.22.2.jar:?]
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:812) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at eu.mosov.steamTradeHelper.web.RequestLogFilter.doFilter(RequestLogFilter.java:37) [tradeHelperBackend/:?]
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577) [jetty-security-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [jetty-servlet-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.Server.handle(Server.java:499) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:311) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257) [jetty-server-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544) [jetty-io-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635) [jetty-util-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555) [jetty-util-9.2.17.v20160517.jar:9.2.17.v20160517]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_91]
+Caused by: javax.json.stream.JsonGenerationException: Generating incomplete JSON
+	at org.glassfish.json.JsonGeneratorImpl.close(JsonGeneratorImpl.java:509) ~[javax.json-1.0.4.jar:1.0.4]
+	at org.glassfish.json.JsonPrettyGeneratorImpl.close(JsonPrettyGeneratorImpl.java:53) ~[javax.json-1.0.4.jar:1.0.4]
+	at org.glassfish.json.JsonWriterImpl.close(JsonWriterImpl.java:150) ~[javax.json-1.0.4.jar:1.0.4]
+	at org.glassfish.json.jaxrs.JsonStructureBodyWriter.writeTo(JsonStructureBodyWriter.java:119) ~[jsonp-jaxrs-1.0.jar:?]
+	at org.glassfish.json.jaxrs.JsonStructureBodyWriter.writeTo(JsonStructureBodyWriter.java:69) ~[jsonp-jaxrs-1.0.jar:?]
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:265) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:250) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:106) ~[jersey-server-2.22.2.jar:?]
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:162) ~[jersey-common-2.22.2.jar:?]
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:86) ~[jersey-server-2.22.2.jar:?]
+	... 40 more
