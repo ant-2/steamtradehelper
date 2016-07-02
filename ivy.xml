@@ -9,10 +9,10 @@
 
     <dependencies defaultconf="default->default">
 
-        <dependency org="org.eclipse.jetty" name="jetty-server" rev="9.3+"/>
-        <dependency org="org.eclipse.jetty" name="jetty-webapp" rev="9.3+"/>
-        <dependency org="org.eclipse.jetty" name="jetty-plus" rev="9.3+"/>
-        <dependency org="org.eclipse.jetty" name="jetty-annotations" rev="9.3+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-server" rev="9.2+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-webapp" rev="9.2+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-plus" rev="9.2+"/>
+        <dependency org="org.eclipse.jetty" name="jetty-annotations" rev="9.2+"/>
 
         <dependency org="junit" name="junit" rev="4.12+" conf="test->default"/>
         <dependency org="org.mockito" name="mockito-all" rev="1.10+" conf="test->default"/>
@@ -27,9 +27,9 @@
         <dependency org="org.slf4j" name="slf4j-api" rev="1.7+"/>
         <dependency org="org.slf4j" name="jcl-over-slf4j" rev="1.7+"/>
         <dependency org="org.slf4j" name="jul-to-slf4j" rev="1.7+"/>
-        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.5"/>
-        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.5"/>
-        <dependency org="org.apache.logging.log4j" name="log4j-slf4j-impl" rev="2.5"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.6+"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.6+"/>
+        <dependency org="org.apache.logging.log4j" name="log4j-slf4j-impl" rev="2.6+"/>
 
         <dependency org="org.springframework" name="spring-beans" rev="4.2+"/>
         <dependency org="org.springframework" name="spring-web" rev="4.2+"/>

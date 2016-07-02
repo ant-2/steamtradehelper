@@ -1,5 +1,6 @@
 package eu.mosov.steamTradeHelper.rest;
 
+import eu.mosov.steamTradeHelper.Config;
 import eu.mosov.steamTradeHelper.client.BackpacktfApi;
 import eu.mosov.steamTradeHelper.data.InMemoryDataRepo;
 
@@ -15,7 +16,7 @@ import javax.ws.rs.Produces;
 @Path("raw")
 @Produces({"application/json", "application/javascript"})
 public class ExternalDataResource extends SpringAwareResource {
-  private static InMemoryDataRepo repo = Init.createRepo();
+  private static InMemoryDataRepo repo = createRepo();
 
   @GET
   @Path("prices")
@@ -23,13 +24,11 @@ public class ExternalDataResource extends SpringAwareResource {
     return repo.getResource("prices");
   }
 
-  private static class Init {
-    private static InMemoryDataRepo createRepo() {
-      BackpacktfApi api = new BackpacktfApi();
-      InMemoryDataRepo repo = new InMemoryDataRepo();
-      repo.putResource("prices", api.getPrices());
-      repo.putResource("mock", api.getPrices());
-      return repo;
-    }
+  private static InMemoryDataRepo createRepo() {
+    BackpacktfApi api = new BackpacktfApi(new Config("config\\config.properties").apiKey());
+    InMemoryDataRepo repo = new InMemoryDataRepo();
+    repo.putResource("prices", api.getPrices());
+    repo.putResource("mock", api.getPrices());
+    return repo;
   }
 }

@@ -1,29 +1,14 @@
-import org.eclipse.jetty.server.NetworkTrafficServerConnector;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppContext;
+import eu.mosov.steamTradeHelper.App;
+import eu.mosov.steamTradeHelper.Config;
+import eu.mosov.steamTradeHelper.Logging;
 
 public class Launcher {
   public static void main(String[] args) throws Exception {
-    log4j2Config("backend\\config\\log4j2.xml");
+    // logging must be configured before all other classes, cause some classes may already use loggers and may accidentally initialize log4j container without a log4j configuration file
+    new Logging("config\\log4j2.xml").configure();
 
-    Server server = new Server();
-
-    NetworkTrafficServerConnector connector = new NetworkTrafficServerConnector(server);
-    connector.setPort(8080);
-    server.addConnector(connector);
-
-    WebAppContext context = new WebAppContext("backend\\webapp", "/");
-
-    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-      // fix for Windows, so Jetty doesn't lock files
-      context.getInitParams().put("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
-    }
-
-    server.setHandler(context);
-    server.start();
-  }
-
-  static void log4j2Config(String path) {
-    System.setProperty("log4j.configurationFile", path);
+    Config config = new Config("config\\config.properties");
+    App app = new App(config);
+    app.startApplication();
   }
 }

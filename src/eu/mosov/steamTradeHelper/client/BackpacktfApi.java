@@ -1,20 +1,19 @@
 package eu.mosov.steamTradeHelper.client;
 
-import eu.mosov.steamTradeHelper.ConfigReader;
-
 import javax.json.JsonObject;
 
 public class BackpacktfApi {
-  private static final String PRICES = "http://backpack.tf/api/IGetPrices/v4";
-  private static RestClient restClient;
-  private ConfigReader configReader;
+  private final String PRICES = "http://backpack.tf/api/IGetPrices/v4";
+  private RestClient restClient;
+  private String apiKey;
 
-  public BackpacktfApi() {
+  // todo инжектит RestClient
+  public BackpacktfApi(String apiKey) {
     restClient = RestClient.getInstance();
-    configReader = new ConfigReader("src/config.properties");
+    this.apiKey = apiKey;
   }
 
   public JsonObject getPrices() {
-    return restClient.getResourceAsType(PRICES+"/?key="+configReader.getBackpackApiKey(), JsonObject.class);
+    return restClient.getResourceAsType(PRICES+"/?key="+ apiKey, JsonObject.class);
   }
 }
