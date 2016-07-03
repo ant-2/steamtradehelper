@@ -6,18 +6,13 @@ import javax.ws.rs.client.ClientBuilder;
 
 public class RestClient {
   private Client client;
-  private static RestClient INSTANCE = null;
-
-  static {
-    INSTANCE = new RestClient();
-  }
 
   private RestClient() {
     client = ClientBuilder.newClient();
   }
 
   public <T> T getResourceAsType(String uri, Class<T> type) {
-    T result = null;
+    T result;
     try {
       result = client.target(uri).request().get().readEntity(type);
     } catch (ProcessingException e) {
@@ -28,10 +23,5 @@ public class RestClient {
       throw new RuntimeException("Failure in attempt to access external data resource. Can't get resource: "+uri, e);
     }
     return result;
-  }
-
-  public static RestClient getInstance() {
-    if (INSTANCE == null) throw new IllegalStateException("Some how RestClient.INSTANCE field are null.");
-    return INSTANCE;
   }
 }

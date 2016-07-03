@@ -7,11 +7,11 @@ import java.util.Map;
 public class InMemoryDataRepo {
   private Map<String, JsonObject> mem = new HashMap<>();
 
-  public void putResource(String key, JsonObject value) {
+  public void put(String key, JsonObject value) {
     mem.put(key, value);
   }
 
-  public JsonObject getResource(String key) {
+  public JsonObject get(String key) {
     return mem.get(key);
   }
 }
