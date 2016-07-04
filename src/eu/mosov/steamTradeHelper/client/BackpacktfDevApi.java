@@ -13,7 +13,7 @@ public class BackpacktfDevApi {
   private String apiKey;  //todo добавить проверку надействительность апи ключа
   private HashMap<String, JsonObject> repo = new HashMap<>();
 
-  public BackpacktfDevApi() {}  // todo разобраться, почему не будет работать если убрать пустой конструктор
+  private BackpacktfDevApi() {}  // private constructor for Spring IoC
 
   public BackpacktfDevApi(Config config, RestClient client) {
     this.apiKey = config.apiKey();

@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 @Produces({"application/json", "application/javascript"})
 public class BackpacktfApiResource extends SpringAwareResource {
   @Autowired private BackpacktfDevApi repo;
+  //todo попробовать пофиксить ошибку с IncompleteJson, возникающую если закрыть вкладку браузера недожидаясь полной загрузки загружаемого ресурса
 
   @GET
   @Path("prices")
