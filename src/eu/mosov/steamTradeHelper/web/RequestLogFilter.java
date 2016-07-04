@@ -17,7 +17,7 @@ public class RequestLogFilter implements Filter {
   private Logger logger = LoggerFactory.getLogger("requestLogger");
   private String nodeId = Integer.toHexString((int) (Math.random() * 256)) + "-";
   private AtomicInteger requestId = new AtomicInteger(0);
-  static final Pattern noNeedToLogPattern = Pattern.compile("(.+\\.js)|(.+\\.css)"); // doesn't loq request for javascript files and etc
+  static final Pattern noNeedToLogPattern = Pattern.compile("(.+\\.js)|(.+\\.css)"); // doesn't loq request for javascript files and css files
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
